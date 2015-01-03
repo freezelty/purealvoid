@@ -11,4 +11,299 @@ c
   alert(message);
 </script>
 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Jerkwin" />
+	<title>八面体与截角八面体团簇在线创建工具 | Jerkwin</title>
+	<link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAD/APr59wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIiIiIiIiAAAiIiIiIiIAACIiIiIiIgERERERERIiAREREREREiIBERERERESIgERIiIiERIiAREiIiIREiIBESIhERESIgERIiERERIiAREiIiIiIiIBESIiIiIiIgERIiIiIiIiAREREREREAABEREREREQAAERERERERAADgAQAA4AEAAOABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAA8AAAAPAAAADwAA" rel="icon" type="image/x-icon" />
+	<link href="/feed/" rel="alternate" title="Jerkwin" type="application/atom+xml" />
+
+	<link rel="stylesheet" href="/media/MD.css" >
+	<link rel="stylesheet" href="/media/prism.css">
+
+	<script src="/media/prism.js"></script>
+	<script src="/media/js/jquery-1.7.1.min.js"></script>
+	<script src="/media/raphael-min.js"></script>
+	<script src="/media/flowchart-min.js"></script>
+
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				processEscapes: true,
+				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			}
+		});
+		MathJax.Hub.Config({
+			TeX: {
+				extensions: ["cancel.js", "enclose.js"],
+				Macros: {
+					a:"\\alpha",b:"\\beta",c:"\\chi",d:"\\delta",e:"\\epsilon",f:"\\phi",g:"\\gamma",h:"\\eta",i:"\\iota",j:"\\varphi",k:"\\kappa",l:"\\lambda",m:"\\mu",n:"\\nu",o:"\\omicron",p:"\\pi",q:"\\theta",r:"\\rho",s:"\\sigma",t:"\\tau",u:"\\upsilon",v:"\\varpi",w:"\\omega",x:"\\xi",y:"\\psi",z:"\\zeta",
+					D:"\\Delta",F:"\\Phi",G:"\\Gamma",J:"\\vartheta",L:"\\Lambda",P:"\\Pi",Q:"\\Theta",S:"\\Sigma",U:"\\Upsilon",V:"\\varsigma",W:"\\Omega",X:"\\Xi",Y:"\\Psi",
+					ve:"\\varepsilon",vk:"\\varkappa",vq:"\\vartheta",vp:"\\varpi",vr:"\\varrho",vs:"\\varsigma",vf:"\\varphi",
+					alg:"\\begin{align}", ealg:"\\end{align}",
+					bmat:"\\begin{bmatrix}", Bmat:"\\begin{Bmatrix}", pmat:"\\begin{pmatrix}", Pmat:"\\begin{Pmatrix}", vmat:"\\begin{vmatrix}", Vmat:"\\begin{Vmatrix}",
+					ebmat:"\\end{bmatrix}", eBmat:"\\end{Bmatrix}",  epmat:"\\end{pmatrix}",  ePmat:"\\end{Pmatrix}",  evmat:"\\end{vmatrix}",  eVmat:"\\end{Vmatrix}",
+					AA:"\\unicode{x212B}",  abs:['\\lvert #1\\rvert',1], rmd:['\\mathop{\\mathrm{d}#1}',1],
+					bi:['\\boldsymbol{#1}', 1], obar:['0\\!\\!\\!\\raise{.05em}{-}'],
+					opar:['\\frac{\\partial #1}{\\partial #2}', 2], oppar:['\\frac{\\partial^2 #1}{\\partial #2^2}', 2]
+				}
+			}
+		});
+		MathJax.Hub.Queue(function() {
+			var all = MathJax.Hub.getAllJax(), i;
+			for(i=0; i < all.length; i += 1) {
+				all[i].SourceElement().parentNode.className += ' has-jax';
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<div id="container">
+	<div id="main" role="main">
+		<header>
+		<div class="buttons">
+			<a href="/" title="Go to homepage">主页</a>
+			<a href="/categories" title="Category" >类别</a>
+			<a href="/tags" title="Tag Cloud" >标签</a>
+			<a href="/guestbook" title="Guest Book" >留言</a>
+			<a href="/links" title="Links" >链接</a>
+			<a href="/about" title="About" >关于</a>
+			<a href="/feed" title="Subscribe by RSS" >订阅</a>
+		</div>
+		<h1>八面体与截角八面体团簇在线创建工具</h1>
+		</header>
+		<hr>
+		<article class="content">
+			<script src="/media/TOC.js"></script>
+
+<section class="post"> <h2 id="section">2014-12-15 17:14:38</h2>
+
+<p>团簇类型：
+<input type="radio" name="clsType" id="oct" checked="checked" />八面体     
+<input type="radio" name="clsType" id="trc" />截角八面体 <br /></p>
+
+<p>晶胞类型：
+<input type="radio" name="cubType" id="sc" checked="checked" />简单立方(SC)     
+<input type="radio" name="cubType" id="bcc" />体心立方(BCC)     
+<input type="radio" name="cubType" id="fcc" />面心立方(FCC) <br /></p>
+
+<p>晶胞参数(Å)：
+a <input type="box" id="a" value="1" />     
+b <input type="box" id="b" value="1" />     
+c <input type="box" id="c" value="1" /> <br /></p>
+
+<p>多边形边长(原子数)：
+四边形 <input type="box" id="recNO" value="3" />     
+六边形 <input type="box" id="hexNO" value="3" /> <br /></p>
+
+<p><input type="button" value="创建" onclick="genCoor()" style="width:100px; height:30px" /> <br /></p>
+
+<table><tr>
+<td>
+	团簇结构XYZ文件(C:正常位点; B:体心位点; F面心位点)<br /><textarea id="xyzCoor" style="width:400px; height:500px; resize: none"></textarea></td>
+<td>
+	<figure><figurecaption>团簇结构</figurecaption><br />
+	<script>
+		var Mol=new ChemDoodle.TransformCanvas3D('Mol-1', 400,500);
+		Mol.specs.backgroundColor='black';
+		Mol.specs.set3DRepresentation('Ball and Stick');
+		Mol.specs.projectionPerspective_3D = false;
+		Mol.loadMolecule(ChemDoodle.readXYZ("", 1));
+	</script></figure></td>
+</tr></table>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+
+function genCoor() {
+	var YesCut=$("trc").checked,
+		YesBCC=$("bcc").checked, YesFCC=$("fcc").checked,
+		Nrec=parseInt($("recNO").value), Nhex=parseInt($("hexNO").value),  // Nhex=N-2*Ntop; Nrec=Ntop+1
+		a=parseFloat($("a").value), b=parseFloat($("b").value), c=parseFloat($("c").value)
+
+	var Ntop=Nrec-1, Nedg=parseInt(Nhex)+parseInt(2*Ntop);
+
+	var i, j, k, x, y, z;
+	var Ntot=0, Satm=[], Xatm=[], Yatm=[], Zatm=[];
+	for(i=-Nedg; i<=Nedg; i++) {
+		for(j=-Nedg; j<=Nedg; j++) {
+			for(k=-Nedg; k<=Nedg; k++) {
+				Ntot++
+				x=i*a; y=j*b; z=k*c
+				Satm[Ntot]="C"; Xatm[Ntot]=x; Yatm[Ntot]=y; Zatm[Ntot]=z
+				if(YesBCC) {
+					Ntot++; Satm[Ntot]="B";
+					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z+0.5*c
+				} else if(YesFCC) {
+					Ntot++; Satm[Ntot]="F";
+					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z
+					Ntot++; Satm[Ntot]="F";
+					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y;       Zatm[Ntot]=z+0.5*c
+					Ntot++; Satm[Ntot]="F";
+					Xatm[Ntot]=x;       Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z+0.5*c
+				}
+			}
+		}
+	}
+
+	var Na=Nedg, Nb=Nedg, Nc=Nedg,
+		Ra=1./(Na*a), Rb=1./(Nb*b), Rc=1./(Nc*c),
+		Reps=1.-1./Nedg+1E-3, Ncut=Nedg-Ntop-0.5001;
+	var Natm=0, YesIn=[];
+
+	for(i=1; i<=Ntot; i++) {
+		x=Xatm[i]; y=Yatm[i]; z=Zatm[i]
+		if( x*Ra+y*Rb+z*Rc<Reps &&  x*Ra-y*Rb+z*Rc<Reps
+		&& -x*Ra+y*Rb+z*Rc<Reps && -x*Ra-y*Rb+z*Rc<Reps
+		&&  x*Ra+y*Rb-z*Rc<Reps &&  x*Ra-y*Rb-z*Rc<Reps
+		&& -x*Ra+y*Rb-z*Rc<Reps && -x*Ra-y*Rb-z*Rc<Reps ) {
+			if(YesCut) {
+				if(-Ncut*a<x && x<Ncut*a && -Ncut*b<y && y<Ncut*b && -Ncut*c<z && z<Ncut*c) {
+					Natm++; YesIn[i]=1
+				}
+			} else {
+				Natm++; YesIn[i]=1
+			}
+		}
+	}
+
+	var Fmol=Natm+"\n"+"BCC= "+YesBCC+"  FCC= "+YesFCC+"  Nrec= "+Nrec+"  Nhex= "+Nhex+"\n"
+	for(i=1; i<=Ntot; i++) {
+		if(YesIn[i]) Fmol += fmtStr(Satm[i],4)+fmtNum(Xatm[i],12.6)+fmtNum(Yatm[i],12.6)+fmtNum(Zatm[i],12.6)+"\n"
+	}
+	$("xyzCoor").value=Fmol
+	Mol.loadMolecule(ChemDoodle.readXYZ(Fmol, 1));
+}
+
+function fmtNum(num, fmt) {
+	var fmt=String(fmt), m=fmt.split(".")[0]
+	num=num.toFixed(fmt.split(".")[1])
+	if(num.length<m) num=Array(m-num.length+1).join(" ")+num
+	return num
+}
+function fmtStr(str, fmt) {
+	if(str.length<fmt) str += Array(fmt-str.length+1).join(" ")
+	return str
+}
+
+</script>
+
+ </section>
+
+<section class="meta">
+	<br/><br/>
+	<hr>
+	<span style="float:left;">
+		<a  href="http://jerkwin.github.io/2014/12/11/%E7%89%A9%E7%90%86%E5%8C%96%E5%AD%A6%E4%B8%AD%E7%9A%84%E6%A0%87%E5%87%86%E6%80%81%E7%AC%A6%E5%8F%B7/" style="font-size: 21px"   >前一篇:　物理化学中的标准态符号</a>
+	</span>
+	<br/>
+	<span style="float:right;">
+		<a  href="http://jerkwin.github.io/2014/12/16/%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95/" style="font-size: 21px"   >后一篇:　动态网页数据的简单获取方法</a>
+	</span>
+	<br/><br/>
+	<hr>
+	<span class="author"> <a href="http://Jerkwin.github.com">Jerkwin</a> </span>
+	<span class="time"> / <time datetime="2014-12-15">2014-12-15</time> </span>
+	<br />
+	<span class="license">
+		版权: <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">(CC) BY-NC-SA</a>&nbsp;
+	</span>
+	
+		<span class="categories">
+			类别: 
+			 <a href="/categories/#科" title="科">科</a>&nbsp;
+			
+		</span>
+	
+	
+		<span class="tags">
+			标签: 
+			 <a href="/tags/#数理" title="数理">数理</a>&nbsp; 
+			 <a href="/tags/#编程" title="编程">编程</a>&nbsp; 
+			 <a href="/tags/#js" title="js">js</a>&nbsp; 
+			
+		</span>
+	
+</section>
+
+<section class="comment">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/2014/12/15/八面体与截角八面体团簇在线创建工具" data-title="八面体与截角八面体团簇在线创建工具" data-url="http://jerkwin.github.io/2014/12/15/%E5%85%AB%E9%9D%A2%E4%BD%93%E4%B8%8E%E6%88%AA%E8%A7%92%E5%85%AB%E9%9D%A2%E4%BD%93%E5%9B%A2%E7%B0%87%E5%9C%A8%E7%BA%BF%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7/"></div>
+<!-- 多说评论框 end -->
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jerkwin"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'jerkwin'; // required: replace example with your forum shortname
+    var disqus_url = 'http://jerkwin.github.io/2014/12/15/%E5%85%AB%E9%9D%A2%E4%BD%93%E4%B8%8E%E6%88%AA%E8%A7%92%E5%85%AB%E9%9D%A2%E4%BD%93%E5%9B%A2%E7%B0%87%E5%9C%A8%E7%BA%BF%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section--->
+
+
+
+<script type="text/javascript">
+$(function(){
+	$(document).keydown(function(e) {
+		var url = false;
+			if (e.which == 37 || e.which == 74) {  // Left arrow and J
+				
+			url = 'http://jerkwin.github.io/2014/12/11/%E7%89%A9%E7%90%86%E5%8C%96%E5%AD%A6%E4%B8%AD%E7%9A%84%E6%A0%87%E5%87%86%E6%80%81%E7%AC%A6%E5%8F%B7/';
+			
+			}
+			else if (e.which == 39 || e.which == 75) {  // Right arrow and K
+				
+			url = 'http://jerkwin.github.io/2014/12/16/%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AE%80%E5%8D%95%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95/';
+			
+			}
+			if (url) {
+				window.location = url;
+			}
+	});
+})
+
+</script>
+
+
+		</article>
+	</div>
+
+	<footer>
+		<p><small>Powered by <a href="https://github.com/mojombo/jekyll">Jekyll</a> | Copyright 2008 - 2015 by <a href="http://jerkwin.github.io/about/">Jerkwin</a> | <span class="label label-info">2015-01-01 16:44:51 UTC</span></small></p>
+	</footer>
+
+	</div>
+
+</body>
+</html>
+
 
