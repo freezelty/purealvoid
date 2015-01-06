@@ -1,4 +1,4 @@
-b
+a
 
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -9,97 +9,100 @@ b
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 
 <body>
+<script>
+		var $=function(id){return document.getElementById(id)};
+document.write("<p>Layers from plane to centre: <br />");
+for(i=1;i<=8;i++) {
+	document.write("D<sub>111</sub><sup>",i,
+		"</sup> <input style=\"width:50px;font-size:11pt\" type=\"box\" id=\"D111_",i,
+		"\" value=\"3\" /> &nbsp;&nbsp;")
+}
+document.write("<br /><br />")
+for(i=1;i<=6;i++) {
+	document.write("D<sub>002</sub><sup>",i,
+		"</sup> <input style=\"width:50px;font-size:11pt\" type=\"box\" id=\"D002_",i,
+		"\" value=\"2\" /> &nbsp;&nbsp;")
+}
+document.write("<br /></p>")
+</script>
 
-<p>团簇类型：
-<input type="radio" name="clsType" id="oct" checked="checked" />八面体     
-<input type="radio" name="clsType" id="trc" />截角八面体 <br /></p>
-
-<p>晶胞类型：
-<input type="radio" name="cubType" id="sc" checked="checked" />简单立方(SC)     
-<input type="radio" name="cubType" id="bcc" />体心立方(BCC)     
-<input type="radio" name="cubType" id="fcc" />面心立方(FCC) <br /></p>
-
-<p>晶胞参数(Å)：
-a <input type="box" id="a" value="1" />     
-b <input type="box" id="b" value="1" />     
-c <input type="box" id="c" value="1" /> <br /></p>
-
-<p>多边形边长(原子数)：
-四边形 <input type="box" id="recNO" value="3" />     
-六边形 <input type="box" id="hexNO" value="3" /> <br /></p>
-
-<p><input type="button" value="创建" onclick="genCoor()" style="width:100px; height:30px" /> <br /></p>
 
 <table><tr>
 <td>
-	团簇结构XYZ文件(C:正常位点; B:体心位点; F面心位点)<br /><textarea id="xyzCoor" style="width:400px; height:500px; resize: none"></textarea></td>
+	<p> <input type="button" value="Coordinates" onclick="genCoor()" style="font-size:12pt" /></p>
+	Atom coordinate list <br />
+	<textarea id="xyzCoor" style="width:400px; height:500px; resize: none"></textarea>
+</td>
 <td>
-	<figure><figurecaption>团簇结构</figurecaption><br />
+	<p> <input type="button" value="Draw" onclick="loadMol()" style="font-size:12pt" /></p>
+	3D Structure <br />
 	<script>
-		var Mol=new ChemDoodle.TransformCanvas3D('Mol-1', 400,500);
-		Mol.specs.backgroundColor='black';
-		Mol.specs.set3DRepresentation('Ball and Stick');
-		Mol.specs.projectionPerspective_3D = false;
-		Mol.loadMolecule(ChemDoodle.readXYZ("", 1));
-	</script></figure></td>
+		var Canv=new ChemDoodle.TransformCanvas3D('Canv-1', 400,500);
+		Canv.specs.backgroundColor='black';
+		Canv.specs.set3DRepresentation('Ball and Stick');
+		Canv.specs.projectionPerspective_3D = false;
+		Canv.loadMolecule(ChemDoodle.readXYZ(""));
+		$("xyzCoor").value=""
+	</script>
+	</figure>
+</td>
 </tr></table>
 
 <script>
-var $=function(id){return document.getElementById(id)};
 
 function genCoor() {
-	var YesCut=$("trc").checked,
-		YesBCC=$("bcc").checked, YesFCC=$("fcc").checked,
-		Nrec=parseInt($("recNO").value), Nhex=parseInt($("hexNO").value),  // Nhex=N-2*Ntop; Nrec=Ntop+1
-		a=parseFloat($("a").value), b=parseFloat($("b").value), c=parseFloat($("c").value)
+		
+	var D111=[], D002=[], D111_max=0;
+	for(i=1;i<=8;i++) {
+		D111[i]=parseInt($("D111_"+i).value)
+		if(D111[i]>D111_max) D111_max=D111[i]
+	}
+	
+	for(i=1;i<=6;i++) {D002[i]=parseInt($("D002_"+i).value)}
 
-	var Ntop=Nrec-1, Nedg=parseInt(Nhex)+parseInt(2*Ntop);
-
-	var i, j, k, x, y, z;
-	var Ntot=0, Satm=[], Xatm=[], Yatm=[], Zatm=[];
-	for(i=-Nedg; i<=Nedg; i++) {
-		for(j=-Nedg; j<=Nedg; j++) {
-			for(k=-Nedg; k<=Nedg; k++) {
-				Ntot++
-				x=i*a; y=j*b; z=k*c
-				Satm[Ntot]="C"; Xatm[Ntot]=x; Yatm[Ntot]=y; Zatm[Ntot]=z
-				if(YesBCC) {
-					Ntot++; Satm[Ntot]="B";
-					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z+0.5*c
-				} else if(YesFCC) {
-					Ntot++; Satm[Ntot]="F";
-					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z
-					Ntot++; Satm[Ntot]="F";
-					Xatm[Ntot]=x+0.5*a; Yatm[Ntot]=y;       Zatm[Ntot]=z+0.5*c
-					Ntot++; Satm[Ntot]="F";
-					Xatm[Ntot]=x;       Yatm[Ntot]=y+0.5*b; Zatm[Ntot]=z+0.5*c
-				}
+	var i, j, k, x, y, z, a=4.0495;
+	var Ntot=0, X=[], Y=[], Z=[];
+	
+	for(i=-D111_max; i<=D111_max; i++) {
+		for(j=-D111_max; j<=D111_max; j++) {
+			for(k=-D111_max; k<=D111_max; k++) {
+				x=i*a; y=j*a; z=k*a
+				Ntot++; X[Ntot]=x;       Y[Ntot]=y;       Z[Ntot]=z
+				Ntot++; X[Ntot]=x+0.5*a; Y[Ntot]=y+0.5*a; Z[Ntot]=z
+				Ntot++; X[Ntot]=x+0.5*a; Y[Ntot]=y;       Z[Ntot]=z+0.5*a
+				Ntot++; X[Ntot]=x;       Y[Ntot]=y+0.5*a; Z[Ntot]=z+0.5*a
 			}
 		}
 	}
-
-	var Na=Nedg, Nb=Nedg, Nc=Nedg,
-		Ra=1./(Na*a), Rb=1./(Nb*b), Rc=1./(Nc*c),
-		Reps=1.-1./Nedg+1E-3, Ncut=Nedg-Ntop-0.5001;
-	var Natm=0, YesIn=[];
+	
+	var Natm=0, YesIn=[], Reps=(1+1E-3)*a;
 
 	for(i=1; i<=Ntot; i++) {
-		x=Xatm[i]; y=Yatm[i]; z=Zatm[i]
-		if( x*Ra+y*Rb+z*Rc<Reps &&  x*Ra-y*Rb+z*Rc<Reps
-		&& -x*Ra+y*Rb+z*Rc<Reps && -x*Ra-y*Rb+z*Rc<Reps
-		&&  x*Ra+y*Rb-z*Rc<Reps &&  x*Ra-y*Rb-z*Rc<Reps
-		&& -x*Ra+y*Rb-z*Rc<Reps && -x*Ra-y*Rb-z*Rc<Reps ) {
-			if(-Ncut*a<x && x<Ncut*a && -Ncut*b<y && y<Ncut*b && -Ncut*c<z && z<Ncut*c) {
-				Natm++; YesIn[i]=1
+		x=X[i]; y=Y[i]; z=Z[i]
+		if( x+y+z<D111[1]*Reps &&  x+y-z<D111[5]*Reps && 
+			-x+y+z<D111[2]*Reps && -x+y-z<D111[6]*Reps && 
+			-x-y+z<D111[3]*Reps && -x-y-z<D111[7]*Reps && 
+			x-y+z<D111[4]*Reps &&  x-y-z<D111[8]*Reps && 
+			-D002[1]*a<=x && x<=D002[2]*a && 
+			-D002[3]*a<=y && y<=D002[4]*a && 
+			-D002[5]*a<=z && z<=D002[6]*a) {
+			
+			Natm=Natm+1; YesIn[i]=1
 		}
 	}
 
-	var Fmol=Natm+"\n"+"BCC= "+YesBCC+"  FCC= "+YesFCC+"  Nrec= "+Nrec+"  Nhex= "+Nhex+"\n"
+	var Fmol=Natm+"\n"
+	Fmol+="Atom    X           Y           Z\n"
 	for(i=1; i<=Ntot; i++) {
-		if(YesIn[i]) Fmol += fmtStr(Satm[i],4)+fmtNum(Xatm[i],12.6)+fmtNum(Yatm[i],12.6)+fmtNum(Zatm[i],12.6)+"\n"
+		if(YesIn[i]) Fmol += "Al  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
 	}
 	$("xyzCoor").value=Fmol
-	Mol.loadMolecule(ChemDoodle.readXYZ(Fmol, 1));
+}
+
+function loadMol() {
+
+	Fmol=$("xyzCoor").value
+	Canv.loadMolecule(ChemDoodle.readXYZ(Fmol));
 }
 
 function fmtNum(num, fmt) {
@@ -108,6 +111,7 @@ function fmtNum(num, fmt) {
 	if(num.length<m) num=Array(m-num.length+1).join(" ")+num
 	return num
 }
+
 function fmtStr(str, fmt) {
 	if(str.length<fmt) str += Array(fmt-str.length+1).join(" ")
 	return str
