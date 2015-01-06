@@ -1,41 +1,46 @@
-a
-
-
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <link rel="stylesheet" href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css" type="text/css">
 <script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
 
+<script> var $=function(id){return document.getElementById(id)} </script>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-
 <body>
+<p>
+Layers from faces to centre: <br/>
 <script>
-		var $=function(id){return document.getElementById(id)};
-document.write("<p>Layers from plane to centre: <br />");
-for(i=1;i<=8;i++) {
-	document.write("D<sub>111</sub><sup>",i,
-		"</sup> <input style=\"width:50px;font-size:11pt\" type=\"box\" id=\"D111_",i,
-		"\" value=\"3\" /> &nbsp;&nbsp;")
-}
-document.write("<br /><br />")
+	for(i=1;i<=8;i++) {
+		document.write("D<sub>111</sub><sup>",i,
+			"</sup> <input style=\"width:50px\" type=\"box\" id=\"D111_",i,
+			"\" value=\"3\" /> &nbsp;&nbsp;")
+	}
+</script>
+<br/>
+	Set all D<sub>111</sub> to <input style="width:50px" type="box" id="D111_all" value="3" />
+<input type="button" value="Apply" onclick="setAllD(0)" style="font-size:12pt" /> <br/><br/>
+<script>
 for(i=1;i<=6;i++) {
 	document.write("D<sub>002</sub><sup>",i,
-		"</sup> <input style=\"width:50px;font-size:11pt\" type=\"box\" id=\"D002_",i,
+		"</sup> <input style=\"width:50px\" type=\"box\" id=\"D002_",i,
 		"\" value=\"2\" /> &nbsp;&nbsp;")
 }
-document.write("<br /></p>")
 </script>
+<br/>
+	Set all D<sub>002</sub> to <input style="width:50px" type="box" id="D002_all" value="2" />
+<input type="button" value="Apply" onclick="setAllD(1)" style="font-size:12pt" />
 
+<br/><br/>
+<input type="button" value="Generate" onclick="genNow()" style="height:50px;font-size:12pt" /></p>
 
 <table><tr>
 <td>
-	<p> <input type="button" value="Coordinates" onclick="genCoor()" style="font-size:12pt" /></p>
-	Atom coordinate list <br />
+	<p> <input type="button" value="List coordinates" onclick="genCoor()" style="font-size:12pt" /></p>
+	Atom coordinate list <br/>
 	<textarea id="xyzCoor" style="width:400px; height:500px; resize: none"></textarea>
 </td>
 <td>
-	<p> <input type="button" value="Draw" onclick="loadMol()" style="font-size:12pt" /></p>
-	3D Structure <br />
+	<p> <input type="button" value="Draw from coordinates" onclick="loadMol()" style="font-size:12pt" /></p>
+	3D Structure <br/>
 	<script>
 		var Canv=new ChemDoodle.TransformCanvas3D('Canv-1', 400,500);
 		Canv.specs.backgroundColor='black';
@@ -50,8 +55,15 @@ document.write("<br /></p>")
 
 <script>
 
+function setAllD(a) {
+	if(a==0) {
+		for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
+	} else {
+		for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
+	}
+}
+
 function genCoor() {
-		
 	var D111=[], D002=[], D111_max=0;
 	for(i=1;i<=8;i++) {
 		D111[i]=parseInt($("D111_"+i).value)
@@ -75,17 +87,17 @@ function genCoor() {
 		}
 	}
 	
-	var Natm=0, YesIn=[], Reps=(1+1E-3)*a;
+	var Natm=0, YesIn=[], a2=a/2;
 
 	for(i=1; i<=Ntot; i++) {
 		x=X[i]; y=Y[i]; z=Z[i]
-		if( x+y+z<D111[1]*Reps &&  x+y-z<D111[5]*Reps && 
-			-x+y+z<D111[2]*Reps && -x+y-z<D111[6]*Reps && 
-			-x-y+z<D111[3]*Reps && -x-y-z<D111[7]*Reps && 
-			x-y+z<D111[4]*Reps &&  x-y-z<D111[8]*Reps && 
-			-D002[1]*a<=x && x<=D002[2]*a && 
-			-D002[3]*a<=y && y<=D002[4]*a && 
-			-D002[5]*a<=z && z<=D002[6]*a) {
+		if( x+y+z<=D111[1]*a &&  x+y-z<=D111[5]*a && 
+			-x+y+z<=D111[2]*a && -x+y-z<=D111[6]*a && 
+			-x-y+z<=D111[3]*a && -x-y-z<=D111[7]*a && 
+			x-y+z<=D111[4]*a &&  x-y-z<=D111[8]*a && 
+			-D002[1]*a2<=x && x<=D002[2]*a2 && 
+			-D002[3]*a2<=y && y<=D002[4]*a2 && 
+			-D002[5]*a2<=z && z<=D002[6]*a2) {
 			
 			Natm=Natm+1; YesIn[i]=1
 		}
@@ -94,15 +106,24 @@ function genCoor() {
 	var Fmol=Natm+"\n"
 	Fmol+="Atom    X           Y           Z\n"
 	for(i=1; i<=Ntot; i++) {
-		if(YesIn[i]) Fmol += "Al  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
+		if(YesIn[i]) {
+			if(X[i]==0 && Y[i]==0 && Z[i]==0) {
+				Fmol += "H  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
+			} else {
+				Fmol += "Al  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
+			}
+		}
 	}
 	$("xyzCoor").value=Fmol
 }
 
 function loadMol() {
-
 	Fmol=$("xyzCoor").value
 	Canv.loadMolecule(ChemDoodle.readXYZ(Fmol));
+}
+
+function genNow() {
+	genCoor(); loadMol()
 }
 
 function fmtNum(num, fmt) {
