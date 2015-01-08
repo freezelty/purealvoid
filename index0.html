@@ -1,0 +1,305 @@
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<link rel="stylesheet" href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css" type="text/css">
+<script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
+
+<script> var $=function(id){return document.getElementById(id)} </script>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<style>
+td {padding:5px;}
+</style>
+<body>
+<p style="white-space:normal">
+Distances (layers) from face to centre: 
+<!-- 
+D<sub>111</sub><sup>1</sup>=+x+y+z, D<sub>111</sub><sup>2</sup>=+x+y-z, D<sub>111</sub><sup>3</sup>=+x-y+z, 
+D<sub>111</sub><sup>4</sup>=+x-y-z, D<sub>111</sub><sup>5</sup>=-x+y+z, D<sub>111</sub><sup>6</sup>=-x+y-z, 
+D<sub>111</sub><sup>7</sup>=-x-y+z, D<sub>111</sub><sup>8</sup>=-x-y-z <br/>
+D<sub>002</sub><sup>1</sup>=+x, D<sub>002</sub><sup>2</sup>=-x, D<sub>002</sub><sup>3</sup>=+y, 
+D<sub>002</sub><sup>4</sup>=-y, D<sub>002</sub><sup>5</sup>=+z, D<sub>002</sub><sup>6</sup>=-z
+<br/>
+ -->
+<table>
+<tr><td> 
+	Set all D<sub>111</sub> to <input style="width:50px" type="box" id="D111_all" value="3" />
+	<input type="button" value="Apply" onclick="setAllD(0)"/>
+</td><td>
+	<table><tr>
+	<td> D<sub>111</sub><sup>+x+y+z</sup> = <input style="width:50px" type="box" id="D111_1" value="3" /> </td>
+	<td> D<sub>111</sub><sup>+x+y-z</sup> = <input style="width:50px" type="box" id="D111_2" value="3" /> </td>
+	<td> D<sub>111</sub><sup>+x-y+z</sup> = <input style="width:50px" type="box" id="D111_3" value="3" /> </td>
+	<td> D<sub>111</sub><sup>+x-y-z</sup> = <input style="width:50px" type="box" id="D111_4" value="3" /> </td>
+	</tr><tr>
+	<td> D<sub>111</sub><sup>-x+y+z</sup> = <input style="width:50px" type="box" id="D111_5" value="3" /> </td>
+	<td> D<sub>111</sub><sup>-x+y-z</sup> = <input style="width:50px" type="box" id="D111_6" value="3" /> </td>
+	<td> D<sub>111</sub><sup>-x-y+z</sup> = <input style="width:50px" type="box" id="D111_7" value="3" /> </td>
+	<td> D<sub>111</sub><sup>-x-y-z</sup> = <input style="width:50px" type="box" id="D111_8" value="3" /> </td>
+	</tr></table>
+</td></tr>
+<tr><td> 
+	Set all D<sub>002</sub> to <input style="width:50px" type="box" id="D002_all" value="4" />
+	<input type="button" value="Apply" onclick="setAllD(1)"/>
+</td><td>
+	<table><tr>
+	<td> D<sub>002</sub><sup>+x</sup> = <input style="width:50px" type="box" id="D002_1" value="4" /> </td>
+	<td> D<sub>002</sub><sup>+y</sup> = <input style="width:50px" type="box" id="D002_3" value="4" /> </td>
+	<td> D<sub>002</sub><sup>+z</sup> = <input style="width:50px" type="box" id="D002_5" value="4" /> </td>
+	</tr><tr>
+	<td> D<sub>002</sub><sup>-x</sup> = <input style="width:50px" type="box" id="D002_2" value="4" /> </td>
+	<td> D<sub>002</sub><sup>-y</sup> = <input style="width:50px" type="box" id="D002_4" value="4" /> </td>
+	<td> D<sub>002</sub><sup>-z</sup> = <input style="width:50px" type="box" id="D002_6" value="4" /> </td>
+	</tr></table>
+</td><td>
+	<input type="button" value="Generate" onclick="genNow()" style="height:50px;font-size:12pt" />
+</td></tr>
+</table>
+
+<table>
+<tr>
+</tr>
+<tr><td>
+	<table><tr>
+		<th>Atom coordinates list</th>
+		<th>Frame coordinates list</th>
+		<th>3D structure</th>
+	</tr><tr> 
+	<td>
+		<input type="button" value="List coordinates" onclick="genCoor()"/> <br/>
+		<textarea id="xyzCoor" style="width:350px; height:650px; resize: none"></textarea> 
+	</td><td> 
+		<input type="button" value="List frame coordinates" onclick="genFrmCoor()"/> <br/>
+		<textarea id="frmCoor" style="width:350px; height:650px; resize: none"></textarea> 
+	</td><td> 
+		<input type="button" value="Draw from coordinate list" onclick="loadMol()"/>  <br/>
+		<script>
+			var Canv=new ChemDoodle.TransformCanvas3D('Canv-1', 300,300);
+			Canv.specs.backgroundColor='black';
+			Canv.specs.set3DRepresentation('Ball and Stick');
+			Canv.specs.projectionPerspective_3D = false;
+			Canv.loadMolecule(ChemDoodle.readXYZ(""));
+			$("xyzCoor").value=""
+		</script> 
+		<br/><br/>
+		<input type="button" value="Draw from frame coordinate list" onclick="loadFrm()"/>  <br/>
+		<script>
+			var Canv2=new ChemDoodle.TransformCanvas3D('Canv-2', 300,300);
+			Canv2.specs.backgroundColor='black';
+			Canv2.specs.set3DRepresentation('Stick');
+			Canv2.specs.projectionPerspective_3D = false;
+			Canv2.loadMolecule(ChemDoodle.readXYZ(""));
+			$("frmCoor").value=""
+		</script> 
+	</td>
+	</tr></table>
+</td></tr>
+</table>
+</p>
+
+<script>
+	var D111=[], D002=[], D111_max;
+	var i, j, k, x, y, z, ii, a=4.0495;
+	var Ntot, X=[], Y=[], Z=[];
+	var Natm, Xin=[], Yin=[], Zin=[];
+	var Fmol;
+	var cdB[[],[],[]], cdW[[],[],[]], cdF[[],[],[]], cdE[[],[],[]], cdC[[],[],[]]
+	var Nfrm, Xf=[], Yf=[], Zf=[], Ncnr, Xc=[], Yc=[], Zc=[], Ncdt, 
+		iXmax, iXmin, iYmax, iYmin, iZmax, iZmin;
+	var D111_f=[[],[],[],[],[],[],[],[]], D002_f=[[],[],[],[],[],[]]
+	var Ffrm;
+	var area, j0, j1, j2;
+	
+function setAllD(a) {
+	if(a==0) {
+		for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
+	} else {
+		for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
+	}
+}
+
+function genCoor() {
+	D111_max=0; Ntot=0; Natm=0; Fmol=""
+	for(i=1;i<=8;i++) {
+		D111[i]=parseInt($("D111_"+i).value)
+		if(D111[i]>D111_max) D111_max=D111[i]
+	}
+	
+	for(i=1;i<=6;i++) {D002[i]=parseInt($("D002_"+i).value)}
+	
+	for(i=-D111_max; i<=D111_max; i++) {
+		for(j=-D111_max; j<=D111_max; j++) {
+			for(k=-D111_max; k<=D111_max; k++) {
+				x=i; y=j; z=k
+				Ntot++; X[Ntot]=x;       Y[Ntot]=y;       Z[Ntot]=z
+				Ntot++; X[Ntot]=x+0.5;   Y[Ntot]=y+0.5;   Z[Ntot]=z
+				Ntot++; X[Ntot]=x+0.5;   Y[Ntot]=y;       Z[Ntot]=z+0.5
+				Ntot++; X[Ntot]=x;       Y[Ntot]=y+0.5;   Z[Ntot]=z+0.5
+			}
+		}
+	}
+
+	for(i=1; i<=Ntot; i++) {
+		x=X[i]; y=Y[i]; z=Z[i]
+		if( x+y+z<D111[1]+0.1 && -x+y+z<D111[5]+0.1 && 
+			x+y-z<D111[2]+0.1 && -x+y-z<D111[6]+0.1 && 
+			x-y+z<D111[3]+0.1 && -x-y+z<D111[7]+0.1 && 
+			x-y-z<D111[4]+0.1 && -x-y-z<D111[8]+0.1 && 
+			D002[1]/2+0.1>x   && -D002[2]/2-0.1<x && 
+			D002[3]/2+0.1>y   && -D002[4]/2-0.1<y && 
+			D002[5]/2+0.1>z   && -D002[6]/2-0.1<z) 
+		{
+			Xin[++Natm]=x;Yin[Natm]=y;Zin[Natm]=z
+		}
+	}
+		
+
+	Fmol+=Natm+"\n"
+	Fmol+="Atom    X           Y           Z\n"
+	for(i=1; i<=Natm; i++) {
+		if(Xin[i]==0 && Yin[i]==0 && Zin[i]==0) {
+			Fmol += "H "+fmtNum(Xin[i]*a,12.5)+fmtNum(Yin[i]*a,12.5)+fmtNum(Zin[i]*a,12.5)+"\n"
+		} else {
+			Fmol += "Al "+fmtNum(Xin[i]*a,12.5)+fmtNum(Yin[i]*a,12.5)+fmtNum(Zin[i]*a,12.5)+"\n"
+		}
+	}
+	$("xyzCoor").value=Fmol
+}
+
+function genFrmCoor() {
+	Ffrm=""; 
+	Nfrm=0, Ncnr=0, Ncdt=[];
+	iXmax=1, iXmin=1, iYmax=1, iYmin=1, iZmax=1, iZmin=1;
+	Xf=[], Yf=[], Zf=[], Xc=[], Yc=[], Zc=[]
+	D111_f=[[],[],[],[],[],[],[],[]], D002_f=[[],[],[],[],[],[]]
+	
+	for(i=1; i<=Ntot; i++) {
+		if(X[i]>X[iXmax]) iXmax=i;
+		if(X[i]<X[iXmin]) iXmin=i;
+		if(Y[i]>Y[iXmax]) iYmax=i;
+		if(Y[i]<Y[iXmin]) iYmin=i;
+		if(Z[i]>Z[iXmax]) iZmax=i;
+		if(Z[i]<Z[iXmin]) iZmin=i;
+	}
+	
+	if(D002[1]/2>X[iXmax]) D002[1]=X[iXmax]*2;
+	if(D002[3]/2>X[iYmax]) D002[3]=Y[iYmax]*2;
+	if(D002[5]/2>X[iZmax]) D002[5]=Z[iZmax]*2;
+	if(D002[2]/2>Math.abs(X[iXmin])) D002[2]=X[iXmin]*2;
+	if(D002[4]/2>Math.abs(X[iYmin])) D002[4]=Y[iYmin]*2;
+	if(D002[6]/2>Math.abs(X[iZmin])) D002[6]=Z[iZmin]*2;
+	
+// 	Ffrm+="   "+D111[1]+"  "+D111[2]+"  "+D111[3]+"  "+D111[4]+"  "+D111[5]+"  "+D111[6]+"  "+D111[7]+"  "+
+// 		D111[8]+"  "+D002[1]/2+"  "+D002[3]/2+"  "+D002[5]/2+"  "+D002[2]/2+"  "+D002[4]/2+"  "+D002[6]/2+"\n"
+	
+	for(i=1; i<=Natm; i++) {
+		x=Xin[i]; y=Yin[i]; z=Zin[i]
+		Ncdt[i]=0;
+		if(D111[1]== x+y+z) {D111_f[1,i]=1;Ncdt[i]++;}
+		if(D111[2]== x+y-z) {D111_f[2,i]=1;Ncdt[i]++;}
+		if(D111[3]== x-y+z) {D111_f[3,i]=1;Ncdt[i]++;}
+		if(D111[4]== x-y-z) {D111_f[4,i]=1;Ncdt[i]++;}
+		if(D111[5]==-x+y+z) {D111_f[5,i]=1;Ncdt[i]++;}
+		if(D111[6]==-x+y-z) {D111_f[6,i]=1;Ncdt[i]++;}
+		if(D111[7]==-x-y+z) {D111_f[7,i]=1;Ncdt[i]++;}
+		if(D111[8]==-x-y-z) {D111_f[8,i]=1;Ncdt[i]++;}
+		if( D002[1]/2==x) {D002_f[1,i]=1;Ncdt[i]++;}
+		if(-D002[2]/2==x) {D002_f[2,i]=1;Ncdt[i]++;}
+		if( D002[3]/2==y) {D002_f[3,i]=1;Ncdt[i]++;}
+		if(-D002[4]/2==y) {D002_f[4,i]=1;Ncdt[i]++;}
+		if( D002[5]/2==z) {D002_f[5,i]=1;Ncdt[i]++;}
+		if(-D002[6]/2==z) {D002_f[6,i]=1;Ncdt[i]++;}
+		
+		if(Ncdt[i]>=2) {
+			Xf[++Nfrm]=x; Yf[Nfrm]=y; Zf[Nfrm]=z
+// 			Ffrm+=i+"  "+(x+y+z)+"  "+(-x+y+z)+"  "+( x+y-z)+"  "+(-x+y-z)+"  "+(x-y+z)+"  "+(-x-y+z)+"  "+( x-y-z)+"  "
+// 				+(-x-y-z)+"  "+x+"  "+(y)+"  "+(z)+"  "+Ncdt[i]+"\n"
+		}
+		if(Ncdt[i]>=3) Xc[++Ncnr]=x; Yc[Ncnr]=y; Zc[Ncnr]=z
+	}
+
+	Ffrm+=Nfrm+"\n"
+	Ffrm+="Atom    X           Y           Z\n"
+	for(i=1; i<=Nfrm; i++) {
+		if(Xf[i]==0 && Yf[i]==0 && Zf[i]==0) {
+			Ffrm += "H "+fmtNum(Xf[i]*a,12.5)+fmtNum(Yf[i]*a,12.5)+fmtNum(Zf[i]*a,12.5)+"\n"
+		} else {
+			Ffrm += "Al "+fmtNum(Xf[i]*a,12.5)+fmtNum(Yf[i]*a,12.5)+fmtNum(Zf[i]*a,12.5)+"\n"
+		}
+	}
+	$("frmCoor").value=Ffrm
+}
+
+function calArea() {
+	area=0
+	
+	for(i=1; i<=8; i++) {
+		j0=0, j1=0, j2=0
+		for(j=1; j<=Nfrm; j++) {
+			if(D111_f[i,j]==1) {
+				if(j0==0) j0=j
+				else if(j1==0) j1=j
+				else {
+					j2=j
+					
+				}
+			}
+		}
+	}
+		
+}
+
+function loadMol() {
+	Fmol=$("xyzCoor").value
+	Canv.loadMolecule(ChemDoodle.readXYZ(Fmol));
+	Canv.specs.compass_display = true;
+}
+
+function loadFrm() {
+	Ffrm=$("frmCoor").value
+	Canv2.loadMolecule(ChemDoodle.readXYZ(Ffrm));
+	Canv2.specs.compass_display = true;
+}
+
+function genNow() {
+	genCoor(); loadMol(); genFrmCoor(); loadFrm()
+}
+
+function fmtNum(num, fmt) {
+	var fmt=String(fmt), m=fmt.split(".")[0]
+	num=num.toFixed(fmt.split(".")[1])
+	if(num.length<m) num=Array(m-num.length+1).join(" ")+num
+	return num
+}
+
+function fmtStr(str, fmt) {
+	if(str.length<fmt) str += Array(fmt-str.length+1).join(" ")
+	return str
+}
+
+function sortCnr(ii,N) {
+	var l0=calLen(ii,ii+1), l1
+	for(i=ii+2; i<=N; i++) {
+		l1=calLen(ii,i)
+		if(l1<l0) l0=l1
+	}
+}
+
+function calTri(i1,i2,i3) {
+	var s1=calLen(i1,i2), s2=calLen(i1,i3), s3=calLen(i3,i2)
+	var s=(s1+s2+s3)/2
+	return Math.sqrt(s*(s-s1)*(s-s2)*(s-s3))
+}
+
+function calLen(i1,i2) {
+	var sx=pow(Math.abs(Xc[i1]-Xc[i2]),2)
+	var sy=pow(Math.abs(Yc[i1]-Yc[i2]),2)
+	var sz=pow(Math.abs(Zc[i1]-Zc[i2]),2)
+	return Math.sqrt(sx+sy+sz)
+}
+
+</script>
+
+
+</body>
+</html>
+
+

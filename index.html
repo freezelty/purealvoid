@@ -1,129 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Void in Pure Aluminum</title>
+</head>
+
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
-<link rel="stylesheet" href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css" type="text/css">
-<script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
+<link rel="stylesheet"
+	href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css"
+	type="text/css">
+<script type="text/javascript"
+	src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
 
 <script> var $=function(id){return document.getElementById(id)} </script>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-<body>
-<p>
-Layers from faces to centre: <br/>
-<script>
-	for(i=1;i<=8;i++) {
-		document.write("D<sub>111</sub><sup>",i,
-			"</sup> <input style=\"width:50px\" type=\"box\" id=\"D111_",i,
-			"\" value=\"3\" /> &nbsp;&nbsp;")
-	}
-</script>
-<br/>
-	Set all D<sub>111</sub> to <input style="width:50px" type="box" id="D111_all" value="3" />
-<input type="button" value="Apply" onclick="setAllD(0)" style="font-size:12pt" /> <br/><br/>
-<script>
-for(i=1;i<=6;i++) {
-	document.write("D<sub>002</sub><sup>",i,
-		"</sup> <input style=\"width:50px\" type=\"box\" id=\"D002_",i,
-		"\" value=\"4\" /> &nbsp;&nbsp;")
+<style>
+td {
+	padding: 5px;
 }
-</script>
+</style>
+
+<body>
+
+<!-- 
+D<sub>111</sub><sup>1</sup>=+x+y+z, D<sub>111</sub><sup>2</sup>=+x+y-z, D<sub>111</sub><sup>3</sup>=+x-y+z, 
+D<sub>111</sub><sup>4</sup>=+x-y-z, D<sub>111</sub><sup>5</sup>=-x+y+z, D<sub>111</sub><sup>6</sup>=-x+y-z, 
+D<sub>111</sub><sup>7</sup>=-x-y+z, D<sub>111</sub><sup>8</sup>=-x-y-z <br/>
+D<sub>002</sub><sup>1</sup>=+x, D<sub>002</sub><sup>2</sup>=-x, D<sub>002</sub><sup>3</sup>=+y, 
+D<sub>002</sub><sup>4</sup>=-y, D<sub>002</sub><sup>5</sup>=+z, D<sub>002</sub><sup>6</sup>=-z
 <br/>
-	Set all D<sub>002</sub> to <input style="width:50px" type="box" id="D002_all" value="4" />
-<input type="button" value="Apply" onclick="setAllD(1)" style="font-size:12pt" />
+-->
+	<table>
+		<tr>
+			<td>
+				<table>
+					<thead>
+						<tr>
+							<th>Distances (layers) from face to centre:</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>
+							<table style="font-size: 16pt; text-align: center">
+								<tr>
+									<td><button type="button" style="font-size: 11pt"
+											onclick="setAllD(0)">Set all</button></td>
+									<td>D<sub>111</sub> = <input style="width: 50px"
+										type="box" id="D111_1" value="3" />
+									</td>
+									<td>D<sub>111&#773;</sub> = <input style="width: 50px"
+										type="box" id="D111_2" value="3" />
+									</td>
+									<td>D<sub>11&#773;1</sub> = <input style="width: 50px"
+										type="box" id="D111_3" value="3" />
+									</td>
+									<td>D<sub>11&#773;1&#773;</sub> = <input
+										style="width: 50px" type="box" id="D111_4" value="3" />
+									</td>
+								</tr>
+								<tr>
+									<td><input style="width: 50px" type="box" id="D111_all"
+										value="3"></td>
+									<td>D<sub>1&#773;11</sub> = <input style="width: 50px"
+										type="box" id="D111_5" value="3" />
+									</td>
+									<td>D<sub>1&#773;11&#773;</sub> = <input
+										style="width: 50px" type="box" id="D111_6" value="3" />
+									</td>
+									<td>D<sub>1&#773;1&#773;1</sub> = <input
+										style="width: 50px" type="box" id="D111_7" value="3" />
+									</td>
+									<td>D<sub>1&#773;1&#773;1&#773;</sub> = <input
+										style="width: 50px" type="box" id="D111_8" value="3" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table style="font-size: 16pt; text-align: center">
+								<tr>
+									<td><button type="button" style="font-size: 11pt"
+											onclick="setAllD(1)">Set all</button></td>
+									<td>D<sub>200</sub> = <input style="width: 50px"
+										type="box" id="D002_1" value="4" />
+									</td>
+									<td>D<sub>020</sub> = <input style="width: 50px"
+										type="box" id="D002_3" value="4" />
+									</td>
+									<td>D<sub>002</sub> = <input style="width: 50px"
+										type="box" id="D002_5" value="4" />
+									</td>
+								</tr>
+								<tr>
+									<td><input style="width: 50px" type="box" id="D002_all"
+										value="3"></td>
+									<td>D<sub>2&#773;00</sub> = <input style="width: 50px"
+										type="box" id="D002_2" value="4" />
+									</td>
+									<td>D<sub>02&#773;0</sub> = <input style="width: 50px"
+										type="box" id="D002_4" value="4" />
+									</td>
+									<td>D<sub>002&#773;</sub> = <input style="width: 50px"
+										type="box" id="D002_6" value="4" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td style="text-align: left">
+				<table style="text-align: center">
+					<tr>
+						<td>One click<br> <input type="button" value="Generate"
+							onclick="genNow()" style="font-size: 12pt; height: 47px"></td>
+					</tr>
+					<tr>
+						<td>Or separately<br>
+							<button type="button" style="font-size: 10pt" onclick="genCoor()">
+								List<br>Coordinates
+							</button>
+							<button type="button" style="font-size: 10pt"
+								onclick="loadMol('field1',Canv1)">
+								Draw<br>Field 1
+							</button>
+							<button type="button" style="font-size: 10pt"
+								onclick="loadMol('field2',Canv2)">
+								Draw<br>Field 2
+							</button></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 
-<br/><br/>
-<input type="button" value="Generate" onclick="genNow()" style="height:50px;font-size:12pt" /></p>
+	<table>
+		<tr>
+			<th>Coordinates field 1 <select id="field1_opt">
+					<option value="Shape" selected="selected">Solid shape</option>
+					<option value="Face">Faces only</option>
+					<option value="Edge">Edges only</option>
+					<option value="Vertex">Vertices</option>
+			</select></th>
+			<th>Coordinates field 2 <select id="field2_opt">
+					<option value="Shape">Solid shape</option>
+					<option value="Face">Faces only</option>
+					<option value="Edge" selected="selected">Edges only</option>
+					<option value="Vertex">Vertices</option>
+			</select></th>
+			<th>3D structure</th>
+		</tr>
+		<tr>
+			<td><textarea id="field1"
+					style="width: 350px; height: 650px; resize: none"></textarea></td>
+			<td><textarea id="field2"
+					style="width: 350px; height: 650px; resize: none"></textarea></td>
+			<td><script>
+			var Canv1=new ChemDoodle.TransformCanvas3D('Canv1-1', 300,300);
+			Canv1.specs.backgroundColor='black';
+			Canv1.specs.set3DRepresentation('Ball and Stick');
+			Canv1.specs.projectionPerspective_3D = false;
+			Canv1.loadMolecule(ChemDoodle.readXYZ(""));
+			$("field1").value=""
+		</script> <br> <br> <script>
+			var Canv2=new ChemDoodle.TransformCanvas3D('Canv1-2', 300,300);
+			Canv2.specs.backgroundColor='black';
+			Canv2.specs.set3DRepresentation('Stick');
+			Canv2.specs.projectionPerspective_3D = false;
+			Canv2.loadMolecule(ChemDoodle.readXYZ(""));
+			$("field2").value=""
+		</script></td>
+		</tr>
+	</table>
 
-<table><tr>
-<td>
-	<p> <input type="button" value="List coordinates" onclick="genCoor()" style="font-size:12pt" /></p>
-	Atom coordinate list <br/>
-	<textarea id="xyzCoor" style="width:400px; height:500px; resize: none"></textarea>
-</td>
-<td>
-	<p> <input type="button" value="Draw from coordinates" onclick="loadMol()" style="font-size:12pt" /></p>
-	3D Structure <br/>
 	<script>
-		var Canv=new ChemDoodle.TransformCanvas3D('Canv-1', 400,500);
-		Canv.specs.backgroundColor='black';
-		Canv.specs.set3DRepresentation('Ball and Stick');
-		Canv.specs.projectionPerspective_3D = false;
-		Canv.loadMolecule(ChemDoodle.readXYZ(""));
-		$("xyzCoor").value=""
-	</script>
-	</figure>
-</td>
-</tr></table>
-
-<script>
-
-function setAllD(a) {
-	if(a==0) {
-		for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
-	} else {
-		for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
-	}
+	var D111=[], D002=[];
+	var x, y, z, bdy=[], a=4.0495;
+	var nB, nS, nF, nE, nV, nOnF;
+	var cdB=[], cdS=[], cdF=[], cdE=[], cdV=[]
+	var onFace=[]
+	var area;
+	
+function setAllD(p) {
+	if(p==0) for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
+	else for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
 }
 
 function genCoor() {
-	var D111=[], D002=[], D111_max=0;
-	for(i=1;i<=8;i++) {
-		D111[i]=parseInt($("D111_"+i).value)
-		if(D111[i]>D111_max) D111_max=D111[i]
-	}
+	D111_max=0; nB=0; nS=0; lsS=""
+	cdB=[], cdS=[]
 	
-	for(i=1;i<=6;i++) {D002[i]=parseInt($("D002_"+i).value)}
+	for(var i=1;i<=8;i++) D111[i]=parseInt($("D111_"+i).value)
+	for(var i=1;i<=6;i++) D002[i]=parseInt($("D002_"+i).value)
+	
+	nF=0, nE=0, nV=0, nOnF=[];
+	
+	bdy[1]=Math.ceil(Math.min(D111[1]+D111[4], D111[2]+D111[3], D002[1])/2)
+	bdy[2]=Math.ceil(Math.min(D111[5]+D111[8], D111[6]+D111[7], D002[2])/2)
+	bdy[3]=Math.ceil(Math.min(D111[1]+D111[6], D111[2]+D111[5], D002[3])/2)
+	bdy[4]=Math.ceil(Math.min(D111[3]+D111[8], D111[4]+D111[7], D002[4])/2)
+	bdy[5]=Math.ceil(Math.min(D111[1]+D111[7], D111[3]+D111[5], D002[5])/2)
+	bdy[6]=Math.ceil(Math.min(D111[2]+D111[8], D111[4]+D111[6], D002[6])/2)
 
-	var i, j, k, x, y, z, a=4.0495;
-	var Ntot=0, X=[], Y=[], Z=[];
-	
-	for(i=-D111_max; i<=D111_max; i++) {
-		for(j=-D111_max; j<=D111_max; j++) {
-			for(k=-D111_max; k<=D111_max; k++) {
-				x=i*a; y=j*a; z=k*a
-				Ntot++; X[Ntot]=x;       Y[Ntot]=y;       Z[Ntot]=z
-				Ntot++; X[Ntot]=x+0.5*a; Y[Ntot]=y+0.5*a; Z[Ntot]=z
-				Ntot++; X[Ntot]=x+0.5*a; Y[Ntot]=y;       Z[Ntot]=z+0.5*a
-				Ntot++; X[Ntot]=x;       Y[Ntot]=y+0.5*a; Z[Ntot]=z+0.5*a
+	for(x=-bdy[2]; x<=bdy[1]; x++) {
+		for(y=-bdy[4]; y<=bdy[3]; y++) {
+			for(z=-bdy[6]; z<=bdy[5]; z++) {
+				cdB[++nB]=[    x,     y,     z]
+				cdB[++nB]=[0.5+x, 0.5+y,     z]
+				cdB[++nB]=[0.5+x,     y, 0.5+z]
+				cdB[++nB]=[    x, 0.5+y, 0.5+z]
 			}
 		}
 	}
 	
-	var Natm=0, YesIn=[], a2=a/2;
+// 	prtCoor(nB,cdB,"field1")
 
-	for(i=1; i<=Ntot; i++) {
-		x=X[i]; y=Y[i]; z=Z[i]
-		if( x+y+z<D111[1]*a+0.1 &&  x+y-z<D111[5]*a+0.1 && 
-			-x+y+z<D111[2]*a+0.1 && -x+y-z<D111[6]*a+0.1 && 
-			-x-y+z<D111[3]*a+0.1 && -x-y-z<D111[7]*a+0.1 && 
-			x-y+z<D111[4]*a+0.1 &&  x-y-z<D111[8]*a+0.1 && 
-			-D002[1]*a2-0.1<x && x<D002[2]*a2+0.1 && 
-			-D002[3]*a2-0.1<y && y<D002[4]*a2+0.1 && 
-			-D002[5]*a2-0.1<z && z<D002[6]*a2+0.1) {
+// 	lsS+="   "+D111[1]+"  "+D111[2]+"  "+D111[3]+"  "+D111[4]+"  "+D111[5]+"  "+D111[6]+"  "+D111[7]+"  "+
+// 		D111[8]+"  "+D002[1]/2+"  "+D002[3]/2+"  "+D002[5]/2+"  "+D002[2]/2+"  "+D002[4]/2+"  "+D002[6]/2+"\n"
+	for(var i=1;i<=14;i++) onFace[i]=[];
+	for(var i=1; i<=nB; i++) {
+		[x,y,z]=cdB[i]
+		if( x+y+z<D111[1]+0.1 && -x+y+z<D111[5]+0.1 && 
+			x+y-z<D111[2]+0.1 && -x+y-z<D111[6]+0.1 && 
+			x-y+z<D111[3]+0.1 && -x-y+z<D111[7]+0.1 && 
+			x-y-z<D111[4]+0.1 && -x-y-z<D111[8]+0.1 && 
+			D002[1]/2+0.1>x   && -D002[2]/2-0.1<x   && 
+			D002[3]/2+0.1>y   && -D002[4]/2-0.1<y   && 
+			D002[5]/2+0.1>z   && -D002[6]/2-0.1<z) 
+		{
+			cdS[++nS]=[x, y, z]; nOnF[i]=0;
+	// 		lsS+=i+"  "+(x+y+z)+"  "+(-x+y+z)+"  "+( x+y-z)+"  "+(-x+y-z)+"  "+(x-y+z)+"  "+(-x-y+z)+"  "+( x-y-z)+"  "
+	// 			+(-x-y-z)+"  "+x+"  "+(y)+"  "+(z)+"  "+nOnF[i]+"\n"
+	
+			if(D111[1]== x+y+z) {onFace[1][i]=1;nOnF[i]++}
+			if(D111[2]== x+y-z) {onFace[2][i]=1;nOnF[i]++}
+			if(D111[3]== x-y+z) {onFace[3][i]=1;nOnF[i]++}
+			if(D111[4]== x-y-z) {onFace[4][i]=1;nOnF[i]++}
+			if(D111[5]==-x+y+z) {onFace[5][i]=1;nOnF[i]++}
+			if(D111[6]==-x+y-z) {onFace[6][i]=1;nOnF[i]++}
+			if(D111[7]==-x-y+z) {onFace[7][i]=1;nOnF[i]++}
+			if(D111[8]==-x-y-z) {onFace[8][i]=1;nOnF[i]++}
+			if( D002[1]/2==x)   {onFace[9][i]=1;nOnF[i]++}
+			if(-D002[2]/2==x)   {onFace[10][i]=1;nOnF[i]++}
+			if( D002[3]/2==y)   {onFace[11][i]=1;nOnF[i]++}
+			if(-D002[4]/2==y)   {onFace[12][i]=1;nOnF[i]++}
+			if( D002[5]/2==z)   {onFace[13][i]=1;nOnF[i]++}
+			if(-D002[6]/2==z)   {onFace[14][i]=1;nOnF[i]++}
 			
-			Natm=Natm+1; YesIn[i]=1
+			if(nOnF[i]>=1) cdF[++nF]=[x,y,z]
+			if(nOnF[i]>=2) cdE[++nE]=[x,y,z]
+			if(nOnF[i]>=3) cdV[++nV]=[x,y,z]
 		}
 	}
-
-	var Fmol=Natm+"\n"
-	Fmol+="Atom    X           Y           Z\n"
-	for(i=1; i<=Ntot; i++) {
-		if(YesIn[i]) {
-			if(X[i]==0 && Y[i]==0 && Z[i]==0) {
-				Fmol += "H  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
-			} else {
-				Fmol += "Al  "+fmtNum(X[i],12.6)+fmtNum(Y[i],12.6)+fmtNum(Z[i],12.6)+"\n"
-			}
-		}
-	}
-	$("xyzCoor").value=Fmol
+	
+	cdB=[];
+	
+	prtCoor($("field1_opt").value,"field1")
+	prtCoor($("field2_opt").value,"field2")
+// 	$("field2").value=lsS
 }
 
-function loadMol() {
-	Fmol=$("xyzCoor").value
-	Canv.loadMolecule(ChemDoodle.readXYZ(Fmol));
+function prtCoor(field_opt,field){
+	var n,cd;
+	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n", cen=1;
+	
+	if(field_opt=="Shape")  {n=nS,cd=cdS};
+	if(field_opt=="Face")   {n=nF,cd=cdF};
+	if(field_opt=="Edge")   {n=nE,cd=cdE};
+	if(field_opt=="Vertex") {n=nV,cd=cdV};
+	
+	for(i=1; i<=n; i++) {
+		if(cd[i][0]==0 && cd[i][1]==0 && cd[i][2]==0) cen=0;
+		else ls += "Al "+fmtcdNum(cd[i],12.5,a)+"\n";
+	}
+	ls=(n+cen)+ls;
+	
+	$(field).value=ls
+}
+
+function calArea() {
+	var j0,j1,j2;
+	area=0
+	
+	for(i=1; i<=8; i++) {
+		j0=0, j1=0, j2=0
+		for(j=1; j<=nE; j++) {
+			if(D111_f[i,j]==1) {
+				if(j0==0) j0=j
+				else if(j1==0) j1=j
+				else {
+					j2=j
+					
+				}
+			}
+		}
+	}
+		
+}
+
+function sortVrt(ii,N,cd) {
+	var l0=calLen(ii,ii+1), l1
+	for(i=ii+2; i<=N; i++) {
+		l1=calLen(ii,i)
+		if(l1<l0) l0=l1
+	}
+}
+
+function calTriArea(i1,i2,i3,cd) {
+	var l1=calLen(i1,i2,cd), l2=calLen(i1,i3,cd), l3=calLen(i3,i2,cd)
+	var s=(l1+l2+l3)/2
+	return Math.sqrt(s*(s-s1)*(s-s2)*(s-s3))
+}
+
+function calLen(i1,i2,cd) {
+	var lx=pow(Math.abs(cd[i1][0]-cd[i2][0]),2)
+	var ly=pow(Math.abs(cd[i1][1]-cd[i2][1]),2)
+	var lz=pow(Math.abs(cd[i1][2]-cd[i2][2]),2)
+	return Math.sqrt(lx+ly+lz)
+}
+
+function loadMol(field,Canv) {
+	var ls=$(field).value
+	Canv.loadMolecule(ChemDoodle.readXYZ(ls));
+	Canv.specs.compass_display = true;
 }
 
 function genNow() {
-	genCoor(); loadMol()
+	genCoor(); loadMol("field1",Canv1); loadMol("field2",Canv2)
 }
 
 function fmtNum(num, fmt) {
@@ -133,12 +337,22 @@ function fmtNum(num, fmt) {
 	return num
 }
 
+function fmtcdNum(num, fmt, a) {
+	var fmt=String(fmt), m=fmt.split(".")[0], fmtnum=[]
+	for(var i=0; i<3; i++) {
+		fmtnum[i]=(num[i]*a).toFixed(fmt.split(".")[1])
+		if(fmtnum[i].length<m) fmtnum[i]=Array(m-fmtnum[i].length+1).join(" ")+fmtnum[i]
+	}
+	return fmtnum
+}
+
 function fmtStr(str, fmt) {
 	if(str.length<fmt) str += Array(fmt-str.length+1).join(" ")
 	return str
 }
 
 </script>
+
 
 </body>
 </html>
