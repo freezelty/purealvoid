@@ -258,8 +258,8 @@ function genCoor() {
 						if(BDY[14]/2==-z)   {onFace[14]=1;nOnF++}
 					
 						//debug info
-// 						lsA+="\n"+(x+y+z)+"\t"+(-x+y+z)+"\t"+( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+(-x-y+z)+"\t"+( x-y-z)+"\t"
-// 							+(-x-y-z)+"\t"+x+"\t"+(y)+"\t"+(z)+"\t"+nOnF+"\n"
+// 						lsA+="\n"+(x+y+z)+"\t"+(-x+y+z)+"\t"+( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+
+// 								(-x-y+z)+"\t"+( x-y-z)+"\t"+(-x-y-z)+"\t"+x+"\t"+(y)+"\t"+(z)+"\t"+nOnF+"\n"
 						
 						if(nOnF>=$("field1_opt").value) cd1[++n1]=[x,y,z];
 						if(nOnF>=$("field2_opt").value) cd2[++n2]=[x,y,z];
@@ -282,23 +282,29 @@ function genCoor() {
 		else area2+=areaF[i];
 	}
 	
-	var NL=2, aA, rA, aD, DAtotT=""
-	lsA+="\nArea{111} = "+area1.toFixed(NL)+" Å^2"
-	lsA+="\nArea{002} = "+area2.toFixed(NL)+" Å^2"
-	lsA+="\n    Total = "+(area1+area2).toFixed(NL)+"Å^2\n"
-	DAtotT =  "Area{111} = "+area1.toFixed(NL)+" &#8491;<sup>2</sup>"; 
-	DAtotT+="\nArea{002} = "+area2.toFixed(NL)+" &#8491;<sup>2</sup>";
-	DAtotT+="\n    Total = "+(area1+area2).toFixed(NL)+" &#8491;<sup>2</sup>";
+	var NL=2, aA, rA, aD, DAtotT="", area3=area1+area2, as=a*a, 
+			area11=(area1*as).toFixed(NL), area21=(area2*as).toFixed(NL), area31=(area3*as).toFixed(NL)
+	area1=area1.toFixed(NL), area2=area2.toFixed(NL), area3=area3.toFixed(NL)
+	
+	DAtotT =  "Area{111} = "+area1+" &times; 4.0495<sup>2</sup> = "+
+			area11+" &#8491;<sup>2</sup>"; 
+	DAtotT+="\nArea{002} = "+area2+" &times; 4.0495<sup>2</sup> = "+
+			area21+" &#8491;<sup>2</sup>";
+	DAtotT+="\n    Total = "+area3+" &times; 4.0495<sup>2</sup> = "+
+			area31+" &#8491;<sup>2</sup>";
 	$("DAtot").innerHTML=DAtotT
 	
+	lsA+="\nArea{111} = "+area1+" * 4.0495^2 = "+area11+" Å^2"
+	lsA+="\nArea{002} = "+area2+" * 4.0495^2 = "+area21+" Å^2"
+	lsA+="\n    Total = "+area3+" * 4.0495^2 = "+area31+" Å^2\n"
 	lsA+="\nNo.  Face    \tArea\t\tActual Dist."
 	lsA+="\n          \tÅ^2\trel.\tÅ\trel."
 	
 	for(var i=1; i<=14; i++) {
-		aA=(a*areaF[i]).toFixed(NL), rA=areaF[i].toFixed(NL), aD=(BDY[i]*a).toFixed(NL)
-		lsA+="\n"+fmtStr(i+".",4)+FL[i]+"\t"+aA+"\t"+rA+"\t"+aD+"\t"+BDY[i]
+		aA=(as*areaF[i]).toFixed(NL), rA=areaF[i].toFixed(NL), aD=(BDY[i]*as).toFixed(NL)
 		$("DaA_"+i).innerHTML="  "+aA; $("DrA_"+i).innerHTML="  "+rA;
 		$("DaD_"+i).innerHTML="  "+aD; $("DrD_"+i).innerHTML="  "+BDY[i];
+		lsA+="\n"+fmtStr(i+".",4)+FL[i]+"\t"+aA+"\t"+rA+"\t"+aD+"\t"+BDY[i]
 	}
 	
 	$("field_area").value=lsA
@@ -317,8 +323,8 @@ function prtCoor(n,cd,field){
 }
 
 function D111fromD002(b1,b2,b3) {
-	var s=D002[b1]*D002[b1]+D002[b2]*D002[b2]+D002[b3]*D002[b3];
-	return Math.floor(Math.sqrt(s))
+	var s=D002[b1]+D002[b2]+D002[b3];
+	return Math.floor(s/2)
 }
 
 function calArea(N,cd) {
