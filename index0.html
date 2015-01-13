@@ -24,74 +24,75 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 	<table>
 		<tbody>
 			<tr>
-				<td><table style="font-size: 12pt">
+				<td><table>
 						<tbody>
 							<tr>
 								<th>Distances (atom layers) from centre:</th>
 							</tr>
 							<tr>
-								<td><table style="text-align: right; text-indent: 5px">
+								<td><table style="font-size: 12pt; text-align: center">
 										<tbody>
 											<tr>
-												<td><button type="button" style="font-size: 10pt"
-														onclick="setAllD(0)">Set D{111}</button></td>
-												<td>1. D(111) = <input style="width: 50px" id="D111_1"
+												<td><button type="button" style="font-size: 11pt"
+														onclick="setAllD(0)">Set all</button></td>
+												<td>D(111) = <input style="width: 50px" id="D111_1"
 													value="3" type="text">
 												</td>
-												<td>2. D(111̅) = <input style="width: 50px" id="D111_2"
+												<td>D(111) = <input style="width: 50px" id="D111_2"
 													value="3" type="text">
 												</td>
-												<td>3. D(11̅1) = <input style="width: 50px" id="D111_3"
+												<td>D(11̅1) = <input style="width: 50px" id="D111_3"
 													value="3" type="text">
 												</td>
-												<td>4. D(11̅1̅) = <input style="width: 50px"
-													id="D111_4" value="3" type="text">
+												<td>D(11̅1̅) = <input style="width: 50px" id="D111_4"
+													value="3" type="text">
 												</td>
 											</tr>
 											<tr>
-												<td style="text-align: center""><input
-													style="width: 50px" id="D111_all" value="3" type="text"></td>
-												<td>5. D(1̅11) = <input style="width: 50px" id="D111_5"
+												<td><input style="width: 50px" id="D111_all" value="3"
+													type="text"></td>
+												<td>D(1̅11) = <input style="width: 50px" id="D111_5"
 													value="3" type="text">
 												</td>
-												<td>6. D(1̅11̅) = <input style="width: 50px"
-													id="D111_6" value="3" type="text">
+												<td>D(1̅11̅) = <input style="width: 50px" id="D111_6"
+													value="3" type="text">
 												</td>
-												<td>7. D(1̅1̅1) = <input style="width: 50px"
-													id="D111_7" value="3" type="text">
+												<td>D(1̅1̅1) = <input style="width: 50px" id="D111_7"
+													value="3" type="text">
 												</td>
-												<td>8. D(1̅1̅1̅) = <input style="width: 50px"
-													id="D111_8" value="3" type="text">
+												<td>D(1̅1̅1̅) = <input style="width: 50px" id="D111_8"
+													value="3" type="text">
 												</td>
 											</tr>
 										</tbody>
-									</table> <br>
-									<table style="text-align: right; text-indent: 5px">
+									</table>
+									<br>
+								<table style="font-size: 12pt; text-align: center">
 										<tbody>
 											<tr>
-												<td><button type="button" style="font-size: 10pt"
-														onclick="setAllD(1)">Set D{002}</button></td>
-												<td>9. D(200) = <input style="width: 50px" id="D002_1"
+												<td><button type="button" style="font-size: 11pt"
+														onclick="setAllD(1)">Set all</button></td>
+												<td>D(200) = <input style="width: 50px" id="D002_1"
 													value="4" type="text">
 												</td>
-												<td>11. D(020) = <input style="width: 50px" id="D002_3"
+												<td>D(020) = <input style="width: 50px" id="D002_3"
 													value="4" type="text">
 												</td>
-												<td>13. D(002) = <input style="width: 50px" id="D002_5"
+												<td>D(002) = <input style="width: 50px" id="D002_5"
 													value="4" type="text">
 												</td>
 											</tr>
 											<tr>
-												<td style="text-align: center"><input
-													style="width: 50px" id="D002_all" value="4" type="text"></td>
-												<td>10. D(2̅00) = <input style="width: 50px"
-													id="D002_2" value="4" type="text">
+												<td><input style="width: 50px" id="D002_all" value="3"
+													type="text"></td>
+												<td>D(2̅00) = <input style="width: 50px" id="D002_2"
+													value="4" type="text">
 												</td>
-												<td>12. D(02̅0) = <input style="width: 50px"
-													id="D002_4" value="4" type="text">
+												<td>D(02̅0) = <input style="width: 50px" id="D002_4"
+													value="4" type="text">
 												</td>
-												<td>14. D(002̅) = <input style="width: 50px"
-													id="D002_6" value="4" type="text">
+												<td>D(002̅) = <input style="width: 50px" id="D002_6"
+													value="4" type="text">
 												</td>
 											</tr>
 										</tbody>
@@ -105,17 +106,14 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 							<tr>
 								<td>One click<br> <input value="Generate"
 									onclick="genNow()" style="font-size: 12pt; height: 41px"
-									type="button"><br />
-								</td>
-								<td><input value="Evolute" onclick="cdEv=exe()"
-									style="font-size: 12pt; height: 41px" type="button"></td>
+									type="button"></td>
 							</tr>
 							<tr>
 								<td><br>Or separately<br>
 									<button type="button" style="font-size: 12px"
-										onclick="genCoor(getAllD())">
+										onclick="genCoor()">
 										List<br>Coordinates
-									</button> <br>
+									</button>
 									<button type="button" style="font-size: 12px"
 										onclick="loadMol('field1',Canv1)">
 										Draw<br>Field 1
@@ -123,13 +121,7 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 									<button type="button" style="font-size: 12px"
 										onclick="loadMol('field2',Canv2)">
 										Draw<br>Field 2
-									</button> <br></td>
-								<td>
-									<button type="button" style="font-size: 12px"
-										onclick="prtCoor(cdEv[--iEv],'field1');loadMol('field1',Canv1)">&lt;</button>
-									<button type="button" style="font-size: 12px"
-										onclick="prtCoor(cdEv[++iEv],'field1');loadMol('field1',Canv1)">&gt;</button>
-								</td>
+									</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -141,8 +133,8 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 		<tbody>
 			<tr>
 				<th>Field 1 <select id="field1_opt" style="font-size: 12px">
-						<option value=0 selected="selected">Solid shape</option>
-						<option value=1>Faces only</option>
+						<option value=0>Solid shape</option>
+						<option value=1 selected="selected">Faces only</option>
 						<option value=2>Edges only</option>
 						<option value=3>Vertices</option>
 				</select></th>
@@ -176,15 +168,16 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 						document.write("text-align: right; white-space: pre\">")
 						document.write("<thead style=\"text-align: center\"><tr><th>No. </th><th>Face</th>")
 						document.write("<th colspan=\"2\">  Area</th><th colspan=\"2\">  Actual Dist.</th></thead>")
-						document.write("<tr style=\"text-align: center\"><td></td><td></td><td>  rel.</td>")
-						document.write("<td>  &#8491;<sup>2</sup></td><td>  rel.</td><td>  &#8491;</td></tr>")
+						document.write("<tr style=\"text-align: center\"><td></td><td></td><td>  &#8491;<sup>2</sup>")
+						document.write("</td><td>  rel.</td><td>  &#8491;<sup>2</sup></td><td>  rel.</td></tr>")
 						for(var i=1;i<=14;i++) {
-							document.write("<tr><td>"+i+". </td><td>  "+FL[i]+"</td>")
-							document.write("<td id=\"DrA_"+i+"\">  </td><td id=\"DaA_"+i+"\">  </td>")
-							document.write("<td id=\"DrD_"+i+"\">  </td><td id=\"DaD_"+i+"\">  </td></tr>")
+							document.write("<tr><td>"+i+". </td><td>"+FL[i]+"</td><td id=\"DaA_"+i+"\">  </td>")
+							document.write("<td id=\"DrA_"+i+"\"></td><td id=\"DaD_"+i+"\">")
+							document.write("</td><td id=\"DrD_"+i+"\"></td></tr>")
 						}
 						document.write("</table>")
-						</script> <textarea id="field_area" style="width: 450px; height: 180px"></textarea></td>
+						</script>
+				<textarea id="field_area" style="width: 450px; height: 180px"></textarea></td>
 			</tr>
 		</tbody>
 	</table>
@@ -193,49 +186,15 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 	$("field1").value=""
 	$("field2").value=""
 	$("field_area").value=""
-// 		var D111=[], D002=[], BDY=[];
-	var x, y, z, a=4.0495;
+	var D111=[], D002=[];
+	var x, y, z, BDY=[], a=4.0495;
 	var nOnF, n1=0, n2=0, cd1=[], cd2=[]; 
-	var onFace=[], cdVF=[], nVF=[], cdEv=[], iEv=0
+	var onFace=[], cdVF=[], nVF=[]
 	var areaF=[], area1=0, area2=0, lsA="";
 	
 function setAllD(p) {
 	if(p==0) for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
 	else for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
-}
-
-function getAllD() {
-	var BDY=[]
-	for(var i=1;i<=8;i++) BDY[i]=parseInt($("D111_"+i).value)
-	for(var i=1;i<=6;i++) BDY[i+8]=parseInt($("D002_"+i).value)
-	
-	return actualBDY(BDY)
-}
-
-function actualBDY(BDY) {
-	var aBDY=[]
-
-	aBDY[1]=Math.min(calD111(9,11,13,BDY),BDY[1])
-	aBDY[2]=Math.min(calD111(9,11,14,BDY),BDY[2])
-	aBDY[3]=Math.min(calD111(9,12,13,BDY),BDY[3])
-	aBDY[4]=Math.min(calD111(9,12,14,BDY),BDY[4])
-	aBDY[5]=Math.min(calD111(10,11,13,BDY),BDY[5])
-	aBDY[6]=Math.min(calD111(10,11,14,BDY),BDY[6])
-	aBDY[7]=Math.min(calD111(10,12,13,BDY),BDY[7])
-	aBDY[8]=Math.min(calD111(10,12,14,BDY),BDY[8])
-	aBDY[9]=Math.min(BDY[1]+BDY[4], BDY[2]+BDY[3], BDY[9])
-	aBDY[10]=Math.min(BDY[5]+BDY[8], BDY[6]+BDY[7], BDY[10])
-	aBDY[11]=Math.min(BDY[1]+BDY[6], BDY[2]+BDY[5], BDY[11])
-	aBDY[12]=Math.min(BDY[3]+BDY[8], BDY[4]+BDY[7], BDY[12])
-	aBDY[13]=Math.min(BDY[1]+BDY[7], BDY[3]+BDY[5], BDY[13])
-	aBDY[14]=Math.min(BDY[2]+BDY[8], BDY[4]+BDY[6], BDY[14])
-	
-	return aBDY
-}
-
-function calD111(b1,b2,b3, BDY) {
-	var s=BDY[b1]+BDY[b2]+BDY[b3];
-	return Math.floor(s/2)
 }
 
 function FCC(x1,y1,z1,i) {
@@ -245,13 +204,32 @@ function FCC(x1,y1,z1,i) {
 	if(i==3) return [    x1, 0.5+y1, 0.5+z1];
 }
 
-function genCoor(BDY) {
-	lsA=""; n1=0; n2=0; cd1=[]; cd2=[]; areaF=[]; area1=0, area2=0 
+function genCoor() {
+	lsA=""; n1=0; n2=0; cd1=[]; cd2=[]; areaF=[]; area1=0, area2=0
 	for(var i=1;i<=14;i++) {cdVF[i]=[]; nVF[i]=0}
 	
-	for(var x0=-Math.ceil(BDY[10]/2); x0<=BDY[9]/2; x0++) {
-		for(var y0=-Math.ceil(BDY[12]/2); y0<=BDY[11]/2; y0++) {
-			for(var z0=-Math.ceil(BDY[14]/2); z0<=BDY[13]/2; z0++) {
+	for(var i=1;i<=8;i++) D111[i]=parseInt($("D111_"+i).value)
+	for(var i=1;i<=6;i++) D002[i]=parseInt($("D002_"+i).value)
+
+	BDY[1]=Math.min(D111fromD002(1,3,5),D111[1])
+	BDY[2]=Math.min(D111fromD002(1,3,6),D111[2])
+	BDY[3]=Math.min(D111fromD002(1,4,5),D111[3])
+	BDY[4]=Math.min(D111fromD002(1,4,6),D111[4])
+	BDY[5]=Math.min(D111fromD002(2,3,5),D111[5])
+	BDY[6]=Math.min(D111fromD002(2,3,6),D111[6])
+	BDY[7]=Math.min(D111fromD002(2,4,5),D111[7])
+	BDY[8]=Math.min(D111fromD002(2,4,6),D111[8])
+	BDY[9]=Math.min(D111[1]+D111[4], D111[2]+D111[3], D002[1])
+	BDY[10]=Math.min(D111[5]+D111[8], D111[6]+D111[7], D002[2])
+	BDY[11]=Math.min(D111[1]+D111[6], D111[2]+D111[5], D002[3])
+	BDY[12]=Math.min(D111[3]+D111[8], D111[4]+D111[7], D002[4])
+	BDY[13]=Math.min(D111[1]+D111[7], D111[3]+D111[5], D002[5])
+	BDY[14]=Math.min(D111[2]+D111[8], D111[4]+D111[6], D002[6])
+// 	for(var j=1; j<=14; j++) lsA+=BDY[j]+"\t"
+	
+	for(var x0=-Math.ceil(BDY[10]); x0<=BDY[9]; x0++) {
+		for(var y0=-Math.ceil(BDY[12]); y0<=BDY[11]; y0++) {
+			for(var z0=-Math.ceil(BDY[14]); z0<=BDY[13]; z0++) {
 				for (var i=0; i<4; i++) {
 					[x,y,z]=FCC(x0,y0,z0,i)
 
@@ -295,20 +273,17 @@ function genCoor(BDY) {
 		}
 	}
 	
-	prtCoor(cd1,"field1")
-	prtCoor(cd2,"field2")
-	
-	areaF=calArea(BDY)
+	prtCoor(n1,cd1,"field1")
+	prtCoor(n2,cd2,"field2")
+
 	for(var i=1; i<=14; i++) {
-// 		areaF[i]=calAreaTri(nVF[i],cdVF[i]);
+		areaF[i]=calArea(nVF[i],cdVF[i]);
 		if(i<=8) area1+=areaF[i];
 		else area2+=areaF[i];
 	}
 	
 	var NL=2, aA, rA, aD, DAtotT="", area3=area1+area2, as=a*a, 
 			area11=(area1*as).toFixed(NL), area21=(area2*as).toFixed(NL), area31=(area3*as).toFixed(NL)
-			totEng=area11*6.552+area21*6.864
-			
 	area1=area1.toFixed(NL), area2=area2.toFixed(NL), area3=area3.toFixed(NL)
 	
 	DAtotT =  "Area{111} = "+area1+" &times; 4.0495<sup>2</sup> = "+
@@ -323,23 +298,20 @@ function genCoor(BDY) {
 	lsA+="\nArea{002} = "+area2+" * 4.0495^2 = "+area21+" Å^2"
 	lsA+="\n    Total = "+area3+" * 4.0495^2 = "+area31+" Å^2\n"
 	lsA+="\nNo.  Face    \tArea\t\tActual Dist."
-	lsA+="\n          \trel.\tÅ^2\trel.\tÅ"
+	lsA+="\n          \tÅ^2\trel.\tÅ\trel."
 	
 	for(var i=1; i<=14; i++) {
-		aA=(as*areaF[i]).toFixed(NL), rA=areaF[i].toFixed(NL)
-		if(i<=8) aD=(BDY[i]*a/Math.sqrt(3)).toFixed(NL)
-		else aD=(BDY[i]*a/2).toFixed(NL)
-		$("DrA_"+i).innerHTML="  "+rA; $("DaA_"+i).innerHTML="  "+aA; 
-		$("DrD_"+i).innerHTML="  "+BDY[i]; $("DaD_"+i).innerHTML="  "+aD; 
-		lsA+="\n"+fmtStr(i+".",4)+FL[i]+"\t"+rA+"\t"+aA+"\t"+BDY[i]+"\t"+aD
+		aA=(as*areaF[i]).toFixed(NL), rA=areaF[i].toFixed(NL), aD=(BDY[i]*as).toFixed(NL)
+		$("DaA_"+i).innerHTML="  "+aA; $("DrA_"+i).innerHTML="  "+rA;
+		$("DaD_"+i).innerHTML="  "+aD; $("DrD_"+i).innerHTML="  "+BDY[i];
+		lsA+="\n"+fmtStr(i+".",4)+FL[i]+"\t"+aA+"\t"+rA+"\t"+aD+"\t"+BDY[i]
 	}
 	
-	$("field_area").value=n1+" "+totEng
-	return [n1, totEng, cd1]
+	$("field_area").value=lsA
 }
 
-function prtCoor(cd,field){
-	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n", cen=1, n=cd.length-1;
+function prtCoor(n,cd,field){
+	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n", cen=1;
 	
 	for(i=1; i<=n; i++) {
 		if(cd[i][0]==0 && cd[i][1]==0 && cd[i][2]==0) cen=0;
@@ -350,44 +322,12 @@ function prtCoor(cd,field){
 	$(field).value=ls
 }
 
-function exe() {
-	var n0, ni, n1, Eng0, Engi, Eng1, out0, out1, outi, maxDelta=0, Delta=0, 
-			DD=1, i1=1, BDYi=[], BDY=[];
-	var j=1;
-	var cdEv=[], iEv=0
-	
-	BDY=getAllD()
-	out0=genCoor(BDY);
-	cdEv[0]=out0[2]
-	console.log(out0[0]+"\t"+out0[1])
-	while (out0[0]>10) {
-		maxDelta=0, i1=1
-		for(var i=1; i<=14; i++) {
-			BDYi=BDY.slice(), BDYi[i]=BDY[i]-1, BDYi=actualBDY(BDYi)
-			outi=genCoor(BDYi)
-			Delta=(out0[1]-outi[1])/(out0[0]-outi[0])
-			if(Delta>maxDelta || (Delta==maxDelta && BDY[i]>BDY[i1])) {
-// 				console.log(maxDelta.toFixed(2)+" * "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
-				i1=i, out1=outi.slice(), maxDelta=Delta;
-			}
-// 			else 
-// 				console.log(maxDelta.toFixed(2)+"   "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
-		}
-		
-		out0=out1.slice(), cdEv[++iEv]=out0[2]; BDY[i1]=BDY[i1]-1, BDY=actualBDY(BDY)
-		console.log(out0[0]+"\t"+out0[1].toFixed(2)+"\t"+maxDelta.toFixed(2)+"\t"+i1+"\t"+BDY);
-		j++
-	}
-	
-	return cdEv
+function D111fromD002(b1,b2,b3) {
+	var s=D002[b1]+D002[b2]+D002[b3];
+	return Math.floor(s/2)
 }
 
-function dispEv(iEv) {
-	console.log(iEv)
-// 	prtCoor(cdEv[iEv1],"field1")
-}
-
-function calAreaTri(N,cd) {
+function calArea(N,cd) {
 	var s, area=0
 	if(N>2) {
 		sortVrt(1,N,cd)
@@ -399,53 +339,6 @@ function calAreaTri(N,cd) {
 		}
 	}
 	return area
-}
-
-function calArea(BDY) {
-	var MS1=[], MS2=[], areaF=[], a=Math.sqrt(3)/8
-
-	MS1[1]=BDY[1]-BDY[2]-BDY[3]-BDY[5]
-	MS1[2]=BDY[2]-BDY[1]-BDY[4]-BDY[6]
-	MS1[3]=BDY[3]-BDY[1]-BDY[4]-BDY[7]
-	MS1[4]=BDY[4]-BDY[2]-BDY[3]-BDY[8]
-	MS1[5]=BDY[5]-BDY[1]-BDY[6]-BDY[7]
-	MS1[6]=BDY[6]-BDY[2]-BDY[5]-BDY[8]
-	MS1[7]=BDY[7]-BDY[3]-BDY[5]-BDY[8]
-	MS1[8]=BDY[8]-BDY[4]-BDY[6]-BDY[7]
-	
-	MS2[1]=BDY[9]-BDY[1]-BDY[4]
-	MS2[2]=BDY[9]-BDY[2]-BDY[3]
-	MS2[3]=BDY[10]-BDY[5]-BDY[8]
-	MS2[4]=BDY[10]-BDY[6]-BDY[7]
-	MS2[5]=BDY[11]-BDY[1]-BDY[6]
-	MS2[6]=BDY[11]-BDY[2]-BDY[5]
-	MS2[7]=BDY[12]-BDY[3]-BDY[8]
-	MS2[8]=BDY[12]-BDY[4]-BDY[7]
-	MS2[9]=BDY[13]-BDY[1]-BDY[7]
-	MS2[10]=BDY[13]-BDY[3]-BDY[5]
-	MS2[11]=BDY[14]-BDY[2]-BDY[8]
-	MS2[12]=BDY[14]-BDY[4]-BDY[6]
-	
-	areaF[9]=MS2[1]*MS2[2]/2
-	areaF[10]=MS2[3]*MS2[4]/2
-	areaF[11]=MS2[5]*MS2[6]/2
-	areaF[12]=MS2[7]*MS2[8]/2
-	areaF[13]=MS2[9]*MS2[10]/2
-	areaF[14]=MS2[11]*MS2[12]/2
-
-	for(var i=1;i<=8;i++) MS1[i]=MS1[i]*MS1[i];
-	for(var i=1;i<=12;i++) MS2[i]=MS2[i]*MS2[i];
-	
-	areaF[1]=(MS1[1]-MS2[2]-MS2[6]-MS2[10])*a
-	areaF[2]=(MS1[2]-MS2[1]-MS2[5]-MS2[12])*a
-	areaF[3]=(MS1[3]-MS2[1]-MS2[8]-MS2[9])*a
-	areaF[4]=(MS1[4]-MS2[2]-MS2[7]-MS2[11])*a
-	areaF[5]=(MS1[5]-MS2[4]-MS2[5]-MS2[9])*a
-	areaF[6]=(MS1[6]-MS2[3]-MS2[6]-MS2[11])*a
-	areaF[7]=(MS1[7]-MS2[3]-MS2[7]-MS2[10])*a
-	areaF[8]=(MS1[8]-MS2[4]-MS2[8]-MS2[12])*a
-	
-	return areaF
 }
 
 function sortVrt(iV0,N,cd) {
@@ -478,8 +371,7 @@ function loadMol(field,Canv) {
 
 function genNow() {
 	$("field1").value=""; $("field2").value=""; $("field_area").value=""
-	var cdEv=[]
-	genCoor(getAllD(),cdEv); loadMol("field1",Canv1); loadMol("field2",Canv2)
+	genCoor(); loadMol("field1",Canv1); loadMol("field2",Canv2)
 }
 
 function fmtcdNum(cd, fmt, a) {
