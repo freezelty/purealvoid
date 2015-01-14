@@ -65,7 +65,7 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 												</td>
 											</tr>
 										</tbody>
-									</table> <br>
+									</table> <br />
 									<table style="text-align: right; text-indent: 5px">
 										<tbody>
 											<tr>
@@ -103,33 +103,36 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 					<table style="text-align: center">
 						<tbody>
 							<tr>
-								<td>One click<br> <input value="Generate"
+								<td>One click<br /> <input value="Generate"
 									onclick="genNow()" style="font-size: 12pt; height: 41px"
 									type="button"><br />
 								</td>
-								<td><input value="Evolute" onclick="cdEv=exe()"
-									style="font-size: 12pt; height: 41px" type="button"></td>
+								<td></td>
 							</tr>
 							<tr>
-								<td><br>Or separately<br>
+								<td><br />Or separately<br />
 									<button type="button" style="font-size: 12px"
 										onclick="genCoor(getAllD())">
-										List<br>Coordinates
-									</button> <br>
+										List<br />Coordinates
+									</button> <br />
 									<button type="button" style="font-size: 12px"
 										onclick="loadMol('field1',Canv1)">
-										Draw<br>Field 1
+										Draw<br />Field 1
 									</button>
 									<button type="button" style="font-size: 12px"
 										onclick="loadMol('field2',Canv2)">
-										Draw<br>Field 2
-									</button> <br></td>
-								<td>
+										Draw<br />Field 2
+									</button> <br /></td>
+								<td>Evolute steps:<br /> <input style="width: 50px"
+									id="spEv" value="10" type="text"><br /> <input
+									value="Evolute" onclick="cdEv=Evolute($('spEv').value)"
+									style="font-size: 12pt; height: 41px" type="button"><br />
 									<button type="button" style="font-size: 12px"
-										onclick="prtCoor(cdEv[--iEv],'field1');loadMol('field1',Canv1)">&lt;</button>
+										onclick="prtCoor(cdEv[--iEv],'field1');loadMol('field1',Canv1)">&lt;
+									</button>
 									<button type="button" style="font-size: 12px"
-										onclick="prtCoor(cdEv[++iEv],'field1');loadMol('field1',Canv1)">&gt;</button>
-								</td>
+										onclick="prtCoor(cdEv[++iEv],'field1');loadMol('field1',Canv1)">&gt;
+									</button> <br /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -143,8 +146,6 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 				<th>Field 1 <select id="field1_opt" style="font-size: 12px">
 						<option value=0 selected="selected">Solid shape</option>
 						<option value=1>Faces only</option>
-						<option value=2>Edges only</option>
-						<option value=3>Vertices</option>
 				</select></th>
 				<th>Field 2 <select id="field2_opt" style="font-size: 12px">
 						<option value=0>Solid shape</option>
@@ -161,14 +162,14 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 					Canv1.specs.set3DRepresentation('Ball and Stick');
 					Canv1.specs.projectionPerspective_3D = false;
 					Canv1.loadMolecule(ChemDoodle.readXYZ(""));
-				</script> <br> <textarea id="field1" style="width: 350px; height: 200px"></textarea></td>
+				</script> <br /> <textarea id="field1" style="width: 350px; height: 200px"></textarea></td>
 				<td style="vertical-align: top"><script>
 					var Canv2=new ChemDoodle.TransformCanvas3D('Canv1-2', 350,350);
 					Canv2.specs.backgroundColor='black';
 					Canv2.specs.set3DRepresentation('Stick');
 					Canv2.specs.projectionPerspective_3D = false;
 					Canv2.loadMolecule(ChemDoodle.readXYZ(""));
-				</script> <br> <textarea id="field2" style="width: 350px; height: 200px"></textarea></td>
+				</script> <br /> <textarea id="field2" style="width: 350px; height: 200px"></textarea></td>
 				<td style="vertical-align: top; text-align: justify"><script>
 						document.write("<p id=\"DAtot\" style=\"font-size: 10pt; font-family: Courier;")
 						document.write("white-space: pre\">Area{111} =\nArea{002} = \n    Total = </p>")
@@ -196,7 +197,7 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 // 		var D111=[], D002=[], BDY=[];
 	var x, y, z, a=4.0495;
 	var nOnF, n1=0, n2=0, cd1=[], cd2=[]; 
-	var onFace=[], cdVF=[], nVF=[], cdEv=[], iEv=0
+	var onFace=[], cdVF=[], nVF=[], cdEv=[], iEv=0, sEv=0
 	var areaF=[], area1=0, area2=0, lsA="";
 	
 function setAllD(p) {
@@ -305,9 +306,11 @@ function genCoor(BDY) {
 		else area2+=areaF[i];
 	}
 	
-	var NL=2, aA, rA, aD, DAtotT="", area3=area1+area2, as=a*a, 
-			area11=(area1*as).toFixed(NL), area21=(area2*as).toFixed(NL), area31=(area3*as).toFixed(NL)
-			totEng=area11*6.552+area21*6.864
+	var NL=2, aA, rA, aD, DAtotT="", area3=area1+area2, as=a*a
+	var totEng=(area1*6.552*as+area2*6.864*as)/100
+	var area11=(area1*as).toFixed(NL), area21=(area2*as).toFixed(NL)
+	var area31=(area3*as).toFixed(NL)
+			
 			
 	area1=area1.toFixed(NL), area2=area2.toFixed(NL), area3=area3.toFixed(NL)
 	
@@ -317,6 +320,7 @@ function genCoor(BDY) {
 			area21+" &#8491;<sup>2</sup>";
 	DAtotT+="\n    Total = "+area3+" &times; 4.0495<sup>2</sup> = "+
 			area31+" &#8491;<sup>2</sup>";
+	DAtotT+="\nTotal Surface Energy = "+totEng.toFixed(NL)+" eV";
 	$("DAtot").innerHTML=DAtotT
 	
 	lsA+="\nArea{111} = "+area1+" * 4.0495^2 = "+area11+" Å^2"
@@ -350,7 +354,7 @@ function prtCoor(cd,field){
 	$(field).value=ls
 }
 
-function exe() {
+function Evolute(sEv) {
 	var n0, ni, n1, Eng0, Engi, Eng1, out0, out1, outi, maxDelta=0, Delta=0, 
 			DD=1, i1=1, BDYi=[], BDY=[];
 	var j=1;
@@ -360,23 +364,23 @@ function exe() {
 	out0=genCoor(BDY);
 	cdEv[0]=out0[2]
 	console.log(out0[0]+"\t"+out0[1])
-	while (out0[0]>0) {
+	while (out0[0]>0 && j<=sEv) {
 		maxDelta=0, i1=1
 		for(var i=1; i<=14; i++) {
 			BDYi=BDY.slice(), BDYi[i]=BDY[i]-1, BDYi=actualBDY(BDYi)
 			outi=genCoor(BDYi)
 			Delta=(out0[1]-outi[1])/(out0[0]-outi[0])
 			if(Delta>maxDelta || (Delta==maxDelta && BDY[i]>BDY[i1])) {
-// 				console.log(maxDelta.toFixed(2)+" * "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
+				console.log(maxDelta.toFixed(2)+" * "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
 				i1=i, out1=outi.slice(), maxDelta=Delta;
 			}
-// 			else 
-// 				console.log(maxDelta.toFixed(2)+"   "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
+			else 
+				console.log(maxDelta.toFixed(2)+"   "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
 		}
 		
 		out0=out1.slice(); BDY[i1]=BDY[i1]-1, BDY=actualBDY(BDY)
 		if (out0[0]>0) cdEv[++iEv]=out0[2];
-		console.log(out0[0]+"\t"+out0[1].toFixed(2)+"\t"+maxDelta.toFixed(2)+"\t"+i1+"\t"+BDY);
+		console.log("Step "+j+"\t"+out0[0]+"\t"+out0[1].toFixed(2)+"\t"+maxDelta.toFixed(2)+"\t"+i1+"\t"+BDY);
 		j++
 	}
 	
@@ -437,7 +441,7 @@ function calArea(BDY) {
 	for(var i=1;i<=8;i++) MS1[i]=MS1[i]*MS1[i];
 	for(var i=1;i<=12;i++) MS2[i]=MS2[i]*MS2[i];
 	
-	areaF[1]=(MS1[1]-MS2[2]-MS2[6]-MS2[10])*a
+	areaF[1]=(MS1[1]-(MS2[2]+MS2[6]+MS2[10]))*a
 	areaF[2]=(MS1[2]-MS2[1]-MS2[5]-MS2[12])*a
 	areaF[3]=(MS1[3]-MS2[1]-MS2[8]-MS2[9])*a
 	areaF[4]=(MS1[4]-MS2[2]-MS2[7]-MS2[11])*a
