@@ -107,7 +107,7 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 									onclick="genNow()" style="font-size: 12pt; height: 41px"
 									type="button"><br />
 								</td>
-								<td></td>
+								
 							</tr>
 							<tr>
 								<td><br />Or separately<br />
@@ -123,7 +123,12 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 										onclick="loadMol('field2',Canv2)">
 										Draw<br />Field 2
 									</button> <br /></td>
-								<td>Evolute steps:<br /> <input style="width: 50px"
+								
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td style="text-align: center">Evolute steps:<br /> <input style="width: 50px"
 									id="spEv" value="10" type="text"><br /> <input
 									value="Evolute" onclick="cdEv=Evolute($('spEv').value)"
 									style="font-size: 12pt; height: 41px" type="button"><br />
@@ -132,11 +137,7 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 									</button>
 									<button type="button" style="font-size: 12px"
 										onclick="prtCoor(cdEv[++iEv],'field1');loadMol('field1',Canv1)">&gt;
-									</button> <br /></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
+									</button><br /></td>
 			</tr>
 		</tbody>
 	</table>
