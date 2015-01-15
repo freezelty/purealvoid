@@ -6,18 +6,27 @@
 </head>
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
-<link rel="stylesheet"
-	href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css"
-	type="text/css">
-<script type="text/javascript"
-	src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
+<link rel="stylesheet" href="ChemDoodleWeb.css" type="text/css">
+<script type="text/javascript" src="ChemDoodleWeb.js"></script>
 <script> var $=function(id){return document.getElementById(id)} 
-var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
-		["-1  1  1"],["-1  1 -1"],["-1 -1  1"],["-1 -1 -1"],
-		[" 2  0  0"],["-2  0  0"],[" 0  2  0"],[" 0 -2  0"],[" 0  0  2"],[" 0  0 -2"]];
+var FL=[["  "],
+		["( 1  1  1 )"],["( 1  1 -1 )"],["( 1 -1  1 )"],["( 1 -1 -1 )"],
+		["(-1  1  1 )"],["(-1  1 -1 )"],["(-1 -1  1 )"],["(-1 -1 -1 )"],
+		["( 2  0  0 )"],["(-2  0  0 )"],["( 0  2  0 )"],["( 0 -2  0 )"],
+		["( 0  0  2 )"],["( 0  0 -2 )"]];
 </script>
 
-<style>
+<style type="text/css">
+.table1 {
+	border-spacing: 10px 0px;
+	font-size: 10pt;
+	font-family: Courier;
+	text-align: right;
+	white-space: pre;
+	font-family: Courier;
+	text-align: right;
+	text-align: right;
+}
 </style>
 
 <body>
@@ -34,34 +43,34 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 										<tbody>
 											<tr>
 												<td><button type="button" style="font-size: 10pt"
-														onclick="setAllD(0)">Set D{111}</button></td>
-												<td>1. D(111) = <input style="width: 50px" id="D111_1"
+														onclick="setAllL(0)">Set L{111}</button></td>
+												<td>1. L(111) = <input style="width: 50px" id="L111_1"
 													value="3" type="text">
 												</td>
-												<td>2. D(111̅) = <input style="width: 50px" id="D111_2"
+												<td>2. L(111̅) = <input style="width: 50px" id="L111_2"
 													value="3" type="text">
 												</td>
-												<td>3. D(11̅1) = <input style="width: 50px" id="D111_3"
+												<td>3. L(11̅1) = <input style="width: 50px" id="L111_3"
 													value="3" type="text">
 												</td>
-												<td>4. D(11̅1̅) = <input style="width: 50px"
-													id="D111_4" value="3" type="text">
+												<td>4. L(11̅1̅) = <input style="width: 50px"
+													id="L111_4" value="3" type="text">
 												</td>
 											</tr>
 											<tr>
-												<td style="text-align: center""><input
-													style="width: 50px" id="D111_all" value="3" type="text"></td>
-												<td>5. D(1̅11) = <input style="width: 50px" id="D111_5"
+												<td style="text-align: center"><input
+													style="width: 50px" id="L111_all" value="3" type="text"></td>
+												<td>5. L(1̅11) = <input style="width: 50px" id="L111_5"
 													value="3" type="text">
 												</td>
-												<td>6. D(1̅11̅) = <input style="width: 50px"
-													id="D111_6" value="3" type="text">
+												<td>6. L(1̅11̅) = <input style="width: 50px"
+													id="L111_6" value="3" type="text">
 												</td>
-												<td>7. D(1̅1̅1) = <input style="width: 50px"
-													id="D111_7" value="3" type="text">
+												<td>7. L(1̅1̅1) = <input style="width: 50px"
+													id="L111_7" value="3" type="text">
 												</td>
-												<td>8. D(1̅1̅1̅) = <input style="width: 50px"
-													id="D111_8" value="3" type="text">
+												<td>8. L(1̅1̅1̅) = <input style="width: 50px"
+													id="L111_8" value="3" type="text">
 												</td>
 											</tr>
 										</tbody>
@@ -70,28 +79,28 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 										<tbody>
 											<tr>
 												<td><button type="button" style="font-size: 10pt"
-														onclick="setAllD(1)">Set D{002}</button></td>
-												<td>9. D(200) = <input style="width: 50px" id="D002_1"
+														onclick="setAllL(1)">Set L{002}</button></td>
+												<td>9. L(200) = <input style="width: 50px" id="L002_1"
 													value="4" type="text">
 												</td>
-												<td>11. D(020) = <input style="width: 50px" id="D002_3"
+												<td>11. L(020) = <input style="width: 50px" id="L002_3"
 													value="4" type="text">
 												</td>
-												<td>13. D(002) = <input style="width: 50px" id="D002_5"
+												<td>13. L(002) = <input style="width: 50px" id="L002_5"
 													value="4" type="text">
 												</td>
 											</tr>
 											<tr>
 												<td style="text-align: center"><input
-													style="width: 50px" id="D002_all" value="4" type="text"></td>
-												<td>10. D(2̅00) = <input style="width: 50px"
-													id="D002_2" value="4" type="text">
+													style="width: 50px" id="L002_all" value="4" type="text"></td>
+												<td>10. L(2̅00) = <input style="width: 50px"
+													id="L002_2" value="4" type="text">
 												</td>
-												<td>12. D(02̅0) = <input style="width: 50px"
-													id="D002_4" value="4" type="text">
+												<td>12. L(02̅0) = <input style="width: 50px"
+													id="L002_4" value="4" type="text">
 												</td>
-												<td>14. D(002̅) = <input style="width: 50px"
-													id="D002_6" value="4" type="text">
+												<td>14. L(002̅) = <input style="width: 50px"
+													id="L002_6" value="4" type="text">
 												</td>
 											</tr>
 										</tbody>
@@ -103,16 +112,18 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 					<table style="text-align: center">
 						<tbody>
 							<tr>
-								<td>One click<br /> <input value="Generate"
-									onclick="genNow()" style="font-size: 12pt; height: 41px"
-									type="button"><br />
+								<td>
+									<button type="button" onclick="OneClickDraw()"
+										style="font-size: 13px">
+										One Click<br />Draw
+									</button> <br />
 								</td>
 							</tr>
 							<tr>
 								<td><br />Or separately<br />
 									<button type="button" style="font-size: 12px"
-										onclick="genCoor(getAllD())">
-										List<br />Coordinates
+										onclick="CalcOnly()">
+										Calculations<br />Only
 									</button> <br />
 									<button type="button" style="font-size: 12px"
 										onclick="loadMol('field1',Canv1)">
@@ -128,19 +139,19 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 				</td>
 				<td><p style="white-space: pre">&nbsp;&nbsp;</p></td>
 				<td style="text-align: center">Evolute steps:<br /> <input
-					style="width: 50px" id="spEv" value="10" type="text"><br/>
+					style="width: 50px" id="spEv" value="10" type="text"><br />
 					<br /> <input value="Evolute"
-					onclick="out=Evolute($('spEv').value);cdEv=out[0];iEv=sEvT=out[1]"
-					style="font-size: 12pt; height: 41px" type="button"><br/>
+					onclick="outEv=Evolute($('spEv').value);iEv=sEvT=outEv.length-1"
+					style="font-size: 12pt; height: 41px" type="button"><br />
 					<p id="sEvStat"></p>
 					<button type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(0,cdEv,sEvT)">0</button>
+						onclick="iEv=dispEv(0,outEv)">0</button>
 					<button id="sEvTB" type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(sEvT,cdEv,sEvT)">0</button> <br />
+						onclick="iEv=dispEv(sEvT,outEv)">0</button> <br />
 					<button type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(--iEv,cdEv,sEvT)">&lt;</button>
+						onclick="iEv=dispEv(--iEv,outEv)">&lt;</button>
 					<button type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(++iEv,cdEv,sEvT)">&gt;</button> <br /></td>
+						onclick="iEv=dispEv(++iEv,outEv)">&gt;</button> <br /></td>
 			</tr>
 		</tbody>
 	</table>
@@ -148,7 +159,10 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 		<tbody>
 			<tr>
 				<th>Field 1 <select id="field1_opt" style="font-size: 12px">
-						<option value=0 selected="selected">Solid shape</option>
+						<option value=0>Solid shape</option>
+						<option value=1 selected="selected">Faces only</option>
+						<option value=2>Edges only</option>
+						<option value=3>Vertices</option>
 				</select></th>
 				<th>Field 2 <select id="field2_opt" style="font-size: 12px">
 						<option value=0>Solid shape</option>
@@ -174,57 +188,70 @@ var FL=[["  "],[" 1  1  1"],[" 1  1 -1"],[" 1 -1  1"],[" 1 -1 -1"],
 					Canv2.loadMolecule(ChemDoodle.readXYZ(""));
 				</script> <br /> <textarea id="field2" style="width: 350px; height: 200px"></textarea></td>
 				<td style="vertical-align: top; text-align: justify"><script>
-						document.write("<p id=\"DAtot\" style=\"font-size: 10pt; font-family: Courier;")
-						document.write("white-space: pre\">Area{111} =\nArea{002} = \n    Total = </p>")
-						document.write("<table style=\"font-size: 10pt; font-family: Courier;")
-						document.write("text-align: right; white-space: pre\">")
-						document.write("<thead style=\"text-align: center\"><tr><th>No. </th><th>Face</th>")
-						document.write("<th colspan=\"2\">  Area</th><th colspan=\"2\">  Actual Dist.</th></thead>")
-						document.write("<tr style=\"text-align: center\"><td></td><td></td><td>  rel.</td>")
-						document.write("<td>  &#8491;<sup>2</sup></td><td>  rel.</td><td>  &#8491;</td></tr>")
+						document.write("<table class=\"table1\">")
+						document.write("<thead style=\"text-align: center\"><tr><th>No.</th><th>Face</th>")
+						document.write("<th colspan=\"2\">Actual Dist.</th><th colspan=\"2\">Area</th>")
+						document.write("<th>Energy</th></thead>")
+						document.write("<tr style=\"text-align: center\"><td></td><td></td><td>Layer</td>")
+						document.write("<td>&#8491;</td><td>Unit=1</td>")
+						document.write("<td>&#8491;<sup>2</sup></td><td>eV</td></tr>")
 						for(var i=1;i<=14;i++) {
-							document.write("<tr><td>"+i+". </td><td>  "+FL[i]+"</td>")
-							document.write("<td id=\"DrA_"+i+"\">  </td><td id=\"DaA_"+i+"\">  </td>")
-							document.write("<td id=\"DrD_"+i+"\">  </td><td id=\"DaD_"+i+"\">  </td></tr>")
+							document.write("<tr><td>"+i+".</td><td>"+FL[i]+" </td>")
+							document.write("<td id=\"DrL_"+i+"\"></td><td id=\"DaL_"+i+"\"></td>")
+							document.write("<td id=\"DrA_"+i+"\"></td><td id=\"DaA_"+i+"\"></td>")
+							document.write("<td id=\"DEng_"+i+"\"></td></tr>")
 						}
+						document.write("<tr style=\"text-align:center;font-weight: bold\">")
+						document.write("<td></td><td></td><td colspan=\"2\">Average</td>")
+						document.write("<td colspan=\"2\">Total</td><td>Total</td></tr>")
+						document.write("<tr><td style=\"text-align:center;font-weight: bold\">Total</td>")
+						document.write("<td>{ 1 1 1 }</td><td id=\"DrL_a1\"></td><td id=\"DaL_a1\"></td>")
+						document.write("<td id=\"DrA_t1\"></td><td id=\"DaA_t1\"></td><td id=\"DEng_t1\"></td></tr>")
+						document.write("<tr><td style=\"text-align:center;font-weight: bold\">Atoms</td>")
+						document.write("<td>{ 0 0 2 }</td><td id=\"DrL_a2\"></td><td id=\"DaL_a2\"></td>")
+						document.write("<td id=\"DrA_t2\"></td><td id=\"DaA_t2\"></td><td id=\"DEng_t2\"></td></tr>")
+						document.write("<tr><td id=\"DAc\" style=\"text-align:center\"></td>")
+						document.write("<td>  Total  </td><td>Ratio</td><td id=\"DrL_a3\"></td>")
+						document.write("<td id=\"DrA_t3\"></td><td id=\"DaA_t3\"></td><td id=\"DEng_t3\"></td></tr>")
 						document.write("</table>")
-						</script> <textarea id="field_area" style="width: 450px; height: 180px"></textarea></td>
+						</script> <textarea id="field_EvSumm" style="width: 600px; height: 220px"></textarea></td>
 			</tr>
 		</tbody>
 	</table>
+	<b style="white-space: pre">		Evolution Log</b><br />
+	<textarea id="field_EvLog" style="width: 700px; height: 600px"></textarea>
 
 	<script>
 	$("field1").value=""
 	$("field2").value=""
-	$("field_area").value=""
-// 		var D111=[], D002=[], BDY=[];
-	var a=4.0495;
-	var cdEv=[], iEv=0, sEv=0, sEvT=0, out
+	var BDY=[];
+	var a=4.0495, as=a*a, Epa1=0.06552, Epa2=0.06864;
+	var outEv=[], iEv=0, sEv=0, sEvT=0, out
 	
-function setAllD(p) {
-	if(p==0) for(i=1;i<=8;i++) $("D111_"+i).value=$("D111_all").value
-	else for(i=1;i<=6;i++) $("D002_"+i).value=$("D002_all").value
+function setAllL(p) {
+	if(p==0) for(i=1;i<=8;i++) $("L111_"+i).value=$("L111_all").value
+	else for(i=1;i<=6;i++) $("L002_"+i).value=$("L002_all").value
 }
 
-function getAllD() {
+function getAllL() {
 	var BDY=[]
-	for(var i=1;i<=8;i++) BDY[i]=parseInt($("D111_"+i).value)
-	for(var i=1;i<=6;i++) BDY[i+8]=parseInt($("D002_"+i).value)
+	for(var i=1;i<=8;i++) BDY[i]=parseInt($("L111_"+i).value)
+	for(var i=1;i<=6;i++) BDY[i+8]=parseInt($("L002_"+i).value)
 	
-	return actualBDY(BDY)
+	return calcBDY(BDY)
 }
 
-function actualBDY(BDY) {
+function calcBDY(BDY) {
 	var aBDY=[]
 
-	aBDY[1]=Math.min(calD111(9,11,13,BDY),BDY[1])
-	aBDY[2]=Math.min(calD111(9,11,14,BDY),BDY[2])
-	aBDY[3]=Math.min(calD111(9,12,13,BDY),BDY[3])
-	aBDY[4]=Math.min(calD111(9,12,14,BDY),BDY[4])
-	aBDY[5]=Math.min(calD111(10,11,13,BDY),BDY[5])
-	aBDY[6]=Math.min(calD111(10,11,14,BDY),BDY[6])
-	aBDY[7]=Math.min(calD111(10,12,13,BDY),BDY[7])
-	aBDY[8]=Math.min(calD111(10,12,14,BDY),BDY[8])
+	aBDY[1]=Math.min(calcL111(9,11,13,BDY),BDY[1])
+	aBDY[2]=Math.min(calcL111(9,11,14,BDY),BDY[2])
+	aBDY[3]=Math.min(calcL111(9,12,13,BDY),BDY[3])
+	aBDY[4]=Math.min(calcL111(9,12,14,BDY),BDY[4])
+	aBDY[5]=Math.min(calcL111(10,11,13,BDY),BDY[5])
+	aBDY[6]=Math.min(calcL111(10,11,14,BDY),BDY[6])
+	aBDY[7]=Math.min(calcL111(10,12,13,BDY),BDY[7])
+	aBDY[8]=Math.min(calcL111(10,12,14,BDY),BDY[8])
 	aBDY[9]=Math.min(BDY[1]+BDY[4], BDY[2]+BDY[3], BDY[9])
 	aBDY[10]=Math.min(BDY[5]+BDY[8], BDY[6]+BDY[7], BDY[10])
 	aBDY[11]=Math.min(BDY[1]+BDY[6], BDY[2]+BDY[5], BDY[11])
@@ -232,11 +259,22 @@ function actualBDY(BDY) {
 	aBDY[13]=Math.min(BDY[1]+BDY[7], BDY[3]+BDY[5], BDY[13])
 	aBDY[14]=Math.min(BDY[2]+BDY[8], BDY[4]+BDY[6], BDY[14])
 	
+	var la1=la2=0
+	
+	for(var i=1; i<=14; i++) {
+		if(i<=8) la1+=aBDY[i]
+		else la2+=aBDY[i]
+	}
+
+	aBDY[15]=la1/8
+	aBDY[16]=la2/6
+	aBDY[17]=(aBDY[16]+0.5)/(aBDY[15]+0.5)
+	
 	return aBDY
 }
 
-function calD111(b1,b2,b3, BDY) {
-	var s=BDY[b1]+BDY[b2]+BDY[b3];
+function calcL111(a,b,c, BDY) {
+	var s=BDY[a]+BDY[b]+BDY[c];
 	return Math.floor(s/2)
 }
 
@@ -249,10 +287,7 @@ function FCC(x1,y1,z1,i) {
 
 function genCoor(BDY) {
 	var x, y, z, out=[], fv1=$("field1_opt").value, fv2=$("field2_opt").value
-	var nOnF, n1=0, n2=0, cd1=[], cd2=[], onFace=[], cdVF=[], nVF=[]
-	var areaF=[], area1=0, area2=0, lsA="";
-	
-// 	for(var i=1;i<=14;i++) {cdVF[i]=[]; nVF[i]=0}
+	var nOnF, n0=0, n1=0, n2=0, cd0=[], cd1=[], cd2=[]
 	
 	for(var x0=-Math.ceil(BDY[10]/2); x0<=BDY[9]/2; x0++) {
 		for(var y0=-Math.ceil(BDY[12]/2); y0<=BDY[11]/2; y0++) {
@@ -265,11 +300,15 @@ function genCoor(BDY) {
 							BDY[2]+0.1>x+y-z && BDY[6]+0.1>-x+y-z && 
 							BDY[3]+0.1>x-y+z && BDY[7]+0.1>-x-y+z && 
 							BDY[4]+0.1>x-y-z && BDY[8]+0.1>-x-y-z && 
-							BDY[ 9]/2+0.1>x   && -BDY[10]/2-0.1<x   && 
-							BDY[11]/2+0.1>y   && -BDY[12]/2-0.1<y   && 
-							BDY[13]/2+0.1>z   && -BDY[14]/2-0.1<z) 
+							BDY[ 9]/2+0.1>x  && -BDY[10]/2-0.1<x  && 
+							BDY[11]/2+0.1>y  && -BDY[12]/2-0.1<y  && 
+							BDY[13]/2+0.1>z  && -BDY[14]/2-0.1<z)
 					{
-						nOnF=0; //onFace=[]
+// 						console.log("(x+y+z)="+(x+y+z)+"\t"+(-x+y+z)+"\t"+( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+
+// 								(-x-y+z)+"\t"+( x-y-z)+"\t"+(-x-y-z)+"\t"+x+"\t"+(y)+"\t"+(z)+"\t"+nOnF)
+						++n0
+						
+						nOnF=0;
 						if(BDY[1]== x+y+z) nOnF++
 						if(BDY[2]== x+y-z) nOnF++
 						if(BDY[3]== x-y+z) nOnF++
@@ -284,68 +323,47 @@ function genCoor(BDY) {
 						if(BDY[12]/2==-y)  nOnF++
 						if(BDY[13]/2== z)  nOnF++
 						if(BDY[14]/2==-z)  nOnF++
-					
-						//debug info
-// 						console.log("(x+y+z)="+(x+y+z)+"\t"+(-x+y+z)+"\t"+( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+
-// 								(-x-y+z)+"\t"+( x-y-z)+"\t"+(-x-y-z)+"\t"+x+"\t"+(y)+"\t"+(z)+"\t"+nOnF)
 						
 						if(nOnF>=fv1) cd1[++n1]=[x,y,z];
 						if(nOnF>=fv2) cd2[++n2]=[x,y,z];
 						
-// 						for(var j=1; j<=14; j++) 
-// 							if(onFace[j] && nOnF>=3) 
-// 								cdVF[j][++nVF[j]]=[x,y,z];
+// 						console.log(n0,n1,n2)
 					}
 				}
 			}
 		}
 	}
-	
-	prtCoor(cd1,"field1")
-	prtCoor(cd2,"field2")
-	
-	areaF=calArea(BDY)
-	for(var i=1; i<=14; i++) {
-// 		areaF[i]=calAreaTri(nVF[i],cdVF[i]);
-		if(i<=8) area1+=areaF[i];
-		else area2+=areaF[i];
-	}
-	
-	var NL=2, aA, rA, aD, DAtotT="", area3=area1+area2, as=a*a
-	var totEng=(area1*6.552*as+area2*6.864*as)/100
-	var area11=(area1*as).toFixed(NL), area21=(area2*as).toFixed(NL), area31=(area3*as).toFixed(NL)
-	
-	area1=area1.toFixed(NL), area2=area2.toFixed(NL), area3=area3.toFixed(NL)
-	
-	DAtotT =  "Area{111} = "+area1+" &times; 4.0495<sup>2</sup> = "+
-			area11+" &#8491;<sup>2</sup>"; 
-	DAtotT+="\nArea{002} = "+area2+" &times; 4.0495<sup>2</sup> = "+
-			area21+" &#8491;<sup>2</sup>";
-	DAtotT+="\n    Total = "+area3+" &times; 4.0495<sup>2</sup> = "+
-			area31+" &#8491;<sup>2</sup>";
-	DAtotT+="\nTotal Surface Energy = "+totEng.toFixed(NL)+" eV";
-	$("DAtot").innerHTML=DAtotT
-	
-	lsA+="\nArea{111} = "+area1+" * 4.0495^2 = "+area11+" Å^2"
-	lsA+="\nArea{002} = "+area2+" * 4.0495^2 = "+area21+" Å^2"
-	lsA+="\n    Total = "+area3+" * 4.0495^2 = "+area31+" Å^2\n"
-	lsA+="\nNo.  Face    \tArea\t\tActual Dist."
-	lsA+="\n          \trel.\tÅ^2\trel.\tÅ"
-	
-	for(var i=1; i<=14; i++) {
-		aA=(as*areaF[i]).toFixed(NL), rA=areaF[i].toFixed(NL)
-		if(i<=8) aD=(BDY[i]*a/Math.sqrt(3)).toFixed(NL)
-		else aD=(BDY[i]*a/2).toFixed(NL)
-		$("DrA_"+i).innerHTML="  "+rA; $("DaA_"+i).innerHTML="  "+aA; 
-		$("DrD_"+i).innerHTML="  "+BDY[i]; $("DaD_"+i).innerHTML="  "+aD; 
-		lsA+="\n"+fmtStr(i+".",4)+FL[i]+"\t"+rA+"\t"+aA+"\t"+BDY[i]+"\t"+aD
-	}
-	
-	$("field_area").value=lsA
-	return [n1, totEng, cd1, areaF]
+
+	return [n0, cd1, cd2]
 }
 
-function prtCoor(cd,field){
+function dispSumm(n, areaF, BDY) {
+	var area1, area2, area3, area11, area21, area31, la1, la2, la11, la21
+	var NL=3, aA, rA, aL, Eng
+	
+	for(var i=1; i<=14; i++) {
+		rA=areaF[i].toFixed(NL), aA=(areaF[i]*as).toFixed(NL)
+		if(i<=8) {aL=(BDY[i]*a/Math.sqrt(3)).toFixed(NL); Eng=(aA*0.06552).toFixed(4)}
+		else {aL=(BDY[i]*a/2).toFixed(NL); Eng=(aA*0.06864).toFixed(4)}
+		$("DrA_"+i).innerHTML=rA; $("DaA_"+i).innerHTML=aA; 
+		$("DrL_"+i).innerHTML=BDY[i]; $("DaL_"+i).innerHTML=aL; $("DEng_"+i).innerHTML=aL
+	}
+	
+	la1=BDY[15].toFixed(NL), la2=BDY[16].toFixed(NL)
+	la11=(BDY[15]*a/Math.sqrt(3)).toFixed(NL), la21=(BDY[16]*a/2).toFixed(NL)
+	
+	area1=areaF[15].toFixed(NL), area2=areaF[16].toFixed(NL), area3=areaF[17].toFixed(NL)
+	area11=(areaF[15]*as).toFixed(NL), area21=(areaF[16]*as).toFixed(NL), area31=(areaF[17]*as).toFixed(NL)
+
+	$("DrL_a1").innerHTML=la1; $("DaL_a1").innerHTML=la11; $("DrA_t1").innerHTML=area1; 
+	$("DaA_t1").innerHTML=area11; $("DEng_t1").innerHTML=(area11*Epa1).toFixed(4); 
+	$("DrL_a2").innerHTML=la2; $("DaL_a2").innerHTML=la21; $("DrA_t2").innerHTML=area2; 
+	$("DaA_t2").innerHTML=area21; $("DEng_t2").innerHTML=(area21*Epa2).toFixed(4); 
+	$("DrL_a3").innerHTML=BDY[17].toFixed(NL); $("DrA_t3").innerHTML=area3; 
+	$("DaA_t3").innerHTML=area31; $("DEng_t3").innerHTML=areaF[0].toFixed(4); $("DAc").innerHTML=n; 
+}
+
+function prtCoor(cd,field) {
 	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n", cen=1, n=cd.length-1;
 	
 	for(i=1; i<=n; i++) {
@@ -357,46 +375,76 @@ function prtCoor(cd,field){
 	$(field).value=ls
 }
 
-function Evolute(sEv) {
-	var n0, ni, n1, Eng0, Engi, Eng1, out0, out1, outi, maxDelta=0, Delta=0, 
-			DD=1, i1=1, BDYi=[], BDY=[];
-	var j=1;
-	var cdEv=[], iEv=0
+function process1(cds,BDY) {
+	prtCoor(cds[1],"field1")
+	prtCoor(cds[2],"field2")
+	dispSumm(cds[0],calcArea(BDY),BDY)
+}
+
+function process2(BDY) {
+	var cds=genCoor(BDY)
+	var areaF=calcArea(BDY)
 	
-	BDY=getAllD()
-	out0=genCoor(BDY);
-	cdEv[0]=out0[2]
-	console.log(out0[0]+"\t"+out0[1])
-	for(j=1; j<=sEv; j++) {
+	return [cds[0],areaF[0],BDY,cds,areaF]
+}
+
+function Evolute(sEvT) {
+	var outj=[], maxDelta=0, Delta=0, i1=1, BDYi=[]
+	var j=0;
+	var outEv=[], iEv=0, logEv="", logSy=""
+	
+	BDYi=getAllL()
+	outEv[0]=process2(BDYi); 
+	logSy+="Step,Atom Counts,Surface Energy,Driving Force,Atom Layers,,,,,,,,,,,,,,Ratio,Face #,Face\n"
+	logSy+="0,"+outEv[0][0]+","+outEv[0][1].toFixed(4)+",0,"
+	logEv+="Step 0. "+outEv[0][0]+", "+outEv[0][1]+"; "+BDYi[15].toFixed(1)+", "+BDYi[16].toFixed(1)
+	for(var k=1;k<=14;k++) {logEv+=BDYi[k]+",";logSy+=BDYi[k]+","}
+	logEv+=" "+BDYi[17].toFixed(4), logSy+=BDYi[17].toFixed(4)
+	for(j=1; j<=sEvT; j++) {
 		maxDelta=0, i1=1
 		for(var i=1; i<=14; i++) {
-			BDYi=BDY.slice(), BDYi[i]=BDY[i]-1, BDYi=actualBDY(BDYi)
-			outi=genCoor(BDYi)
-			Delta=(out0[1]-outi[1])/(out0[0]-outi[0])
-			if(Delta>maxDelta || (Delta==maxDelta && BDY[i]>BDY[i1])) {
-				console.log(maxDelta.toFixed(2)+" * "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
-				i1=i, out1=outi.slice(), maxDelta=Delta;
-			}
-			else 
-				console.log(maxDelta.toFixed(2)+"   "+Delta.toFixed(2)+"\t"+i1+"\t"+i+"\t"+BDYi);
+			BDYi=outEv[j-1][2].slice(), BDYi[i]=outEv[j-1][2][i]-1, BDYi=calcBDY(BDYi)
+			outj[i]=process2(BDYi)
+			Delta=(outEv[j-1][1]-outj[i][1])/(outEv[j-1][0]-outj[i][0])
+			
+			if(Delta>maxDelta || (Delta==maxDelta && BDY[i]<BDY[i1])) {
+				i1=i, maxDelta=Delta
+				logEv+="\n    * "
+			} else logEv+="\n      ";
+			
+			logEv+=fmtStr(i+". ",4)+FL[i]+"  "+Delta.toFixed(4)+"; \t"
+			for(var k=1;k<=14;k++) logEv+=BDYi[k]+",";
+			logEv+=" "+BDYi[17].toFixed(4)
 		}
+
+		logSy+="\n"+j+","+outj[i1][0]+","+outj[i1][1].toFixed(4)+","+maxDelta.toFixed(4)+","
 		
-		out0=out1.slice(); BDY[i1]=BDY[i1]-1, BDY=actualBDY(BDY)
-		console.log("Step "+j+"\t"+out0[0]+"\t"+out0[1].toFixed(2)+"\t"+maxDelta.toFixed(2)+"\t"+i1+"\t"+BDY);
-		if (out0[0]>0) cdEv[++iEv]=out0[2];
+		logEv+="\n\nStep "+j+". "+outj[i1][0]+", "+outj[i1][1].toFixed(4)
+		logEv+="; "+outj[i1][2][15].toFixed(1)+", "+outj[i1][2][16].toFixed(1)
+		for(var k=1;k<=14;k++) {logEv+=outj[i1][2][k]+",";logSy+=outj[i1][2][k]+","}
+		
+		logSy+=outj[i1][2][17].toFixed(4)+","+i1+","+FL[i1]
+		
+		logEv+="\n      "+fmtStr(i1+". ",4)+FL[i1]+"  "+maxDelta.toFixed(4)+"; \t"
+		logEv+=" "+outj[i1][2][17].toFixed(4)+"\n"
+		if (outj[i1][0]>0 && outj[i1][0]>0) outEv[j]=outj[i1].slice();
 		else break
 	}
 	
-	$("sEvTB").innerHTML=--j
-	dispEv(j, cdEv, j)
+	$("sEvTB").innerHTML=sEvT
+	$("field_EvLog").value=logEv
+	$("field_EvSumm").value=logSy
+	dispEv(sEvT, outEv)
 	
-	return [cdEv,j]
+	return outEv
 }
 
-function dispEv(iEv, cdEv, sEvT) {
+function dispEv(iEv, outEv) {
+	var sEvT=outEv.length-1
 	if(0<=iEv && iEv<=sEvT) {
-		prtCoor(cdEv[iEv],"field1")
+		process1(outEv[iEv][3],outEv[iEv][2])
 		loadMol('field1',Canv1)
+		loadMol('field2',Canv2)
 	} else if(iEv<0) iEv=0;
 	else iEv=sEvT
 	
@@ -405,7 +453,26 @@ function dispEv(iEv, cdEv, sEvT) {
 	return iEv
 }
 
-function calArea(BDY) {
+function loadMol(field,Canv) {
+	var ls=$(field).value
+	Canv.loadMolecule(ChemDoodle.readXYZ(ls));
+	Canv.specs.compass_display = true;
+}
+
+function CalcOnly() {
+	var BDY=getAllL()
+	process1(genCoor(BDY),BDY)
+}
+
+function OneClickDraw() {
+	$("field1").value="", $("field2").value="", $("field_area").value=""
+	var BDY=getAllL()
+	process1(genCoor(BDY),BDY)
+	loadMol("field1",Canv1)
+	loadMol("field2",Canv2)
+}
+
+function calcArea(BDY) {
 	var MS1=[], MS2=[], areaF=[], a=Math.sqrt(3)/8
 
 	MS1[1]=BDY[1]-BDY[2]-BDY[3]-BDY[5]
@@ -440,7 +507,7 @@ function calArea(BDY) {
 	for(var i=1;i<=8;i++) MS1[i]=MS1[i]*MS1[i];
 	for(var i=1;i<=12;i++) MS2[i]=MS2[i]*MS2[i];
 	
-	areaF[1]=(MS1[1]-(MS2[2]+MS2[6]+MS2[10]))*a
+	areaF[1]=(MS1[1]-MS2[2]-MS2[6]-MS2[10])*a
 	areaF[2]=(MS1[2]-MS2[1]-MS2[5]-MS2[12])*a
 	areaF[3]=(MS1[3]-MS2[1]-MS2[8]-MS2[9])*a
 	areaF[4]=(MS1[4]-MS2[2]-MS2[7]-MS2[11])*a
@@ -449,19 +516,15 @@ function calArea(BDY) {
 	areaF[7]=(MS1[7]-MS2[3]-MS2[7]-MS2[10])*a
 	areaF[8]=(MS1[8]-MS2[4]-MS2[8]-MS2[12])*a
 	
+	areaF[15]=0, areaF[16]=0
+
+	for(var i=1; i<=8; i++) areaF[15]+=areaF[i]
+	for(var i=9; i<=14; i++)  areaF[16]+=areaF[i]
+	
+	areaF[17]=areaF[15]+areaF[16]
+	areaF[0]=(areaF[15]*Epa1+areaF[16]*Epa2)*as
+	
 	return areaF
-}
-
-function loadMol(field,Canv) {
-	var ls=$(field).value
-	Canv.loadMolecule(ChemDoodle.readXYZ(ls));
-	Canv.specs.compass_display = true;
-}
-
-function genNow() {
-	$("field1").value=""; $("field2").value=""; $("field_area").value=""
-	var cdEv=[]
-	genCoor(getAllD(),cdEv); loadMol("field1",Canv1); loadMol("field2",Canv2)
 }
 
 function fmtcdNum(cd, fmt, a) {
@@ -482,13 +545,13 @@ function fmtStr(str, fmt) {
 	return str
 }
 
-// function calAreaTri(N,cd) {
+// function calcAreaTri(N,cd) {
 // 	var s, area=0
 // 	if(N>2) {
 // 		sortVrt(1,N,cd)
 	
 // 		for(var i=2; i<=N-1; i++) {
-// 			var l1=calLen(1,i,cd), l2=calLen(1,i+1,cd), l3=calLen(i,i+1,cd)
+// 			var l1=calcLen(1,i,cd), l2=calcLen(1,i+1,cd), l3=calcLen(i,i+1,cd)
 // 			var s=(l1+l2+l3)/2
 // 			area+=Math.sqrt(s*(s-l1)*(s-l2)*(s-l3))
 // 		}
@@ -498,9 +561,9 @@ function fmtStr(str, fmt) {
 
 // function sortVrt(iV0,N,cd) {
 // 	var iV1=iV0+1, x, y, z;
-// 	var l0=calLen(iV0,iV1,cd), l1
+// 	var l0=calcLen(iV0,iV1,cd), l1
 // 	for(var i=iV1+1; i<=N; i++) {
-// 		l1=calLen(iV0,i,cd)
+// 		l1=calcLen(iV0,i,cd)
 // 		if(l1<l0) {l0=l1; iV1=i}
 // 	}
 	
@@ -511,7 +574,7 @@ function fmtStr(str, fmt) {
 // 	if(iV0+2<N) sortVrt(iV0+1,N,cd);
 // }
 
-// function calLen(i1,i2,cd) {
+// function calcLen(i1,i2,cd) {
 // 	var lx=Math.pow(Math.abs(cd[i1][0]-cd[i2][0]),2)
 // 	var ly=Math.pow(Math.abs(cd[i1][1]-cd[i2][1]),2)
 // 	var lz=Math.pow(Math.abs(cd[i1][2]-cd[i2][2]),2)
