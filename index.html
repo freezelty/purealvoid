@@ -6,8 +6,11 @@
 </head>
 
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
-<link rel="stylesheet" href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css" type="text/css">
-<script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
+<link rel="stylesheet"
+	href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css"
+	type="text/css">
+<script type="text/javascript"
+	src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
 <script> var $=function(id){return document.getElementById(id)} 
 var FL=["  ",
 		"(111)","(111̅)","(11̅1)","(11̅1̅)",
@@ -23,16 +26,62 @@ var FL=["  ",
 	font-family: Courier;
 	text-align: right;
 }
+
+.table2 {
+	text-align: center;
+	border: 2px solid black;
+}
+
+.td1 {
+	padding: 5px;
+}
+
+.td2 {
+	padding-top: 10px;
+	border-top: 1px solid black
+}
 </style>
 
 <body>
-	<table>
+	<table style="text-align: center">
 		<tbody>
 			<tr>
-				<td><table style="font-size: 12pt">
+				<td><table
+						class="table2">
+						<tr>
+							<td class="td1">
+								<button type="button" onclick="OneClickDraw()"
+									style="font-size: 13px">
+									One Click Draw
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td  class="td2">
+								<button type="button" style="font-size: 12px"
+									onclick="CalcOnly()">
+									Calculations Only
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td class="td1"><button type="button" style="font-size: 12px"
+									onclick="loadMol('field1',Canv1)">
+									Draw 1
+								</button>
+								<button type="button" style="font-size: 12px"
+									onclick="loadMol('field2',Canv2)">
+									Draw 2
+								</button></td>
+						</tr>
+					</table></td>
+				<td style="text-align: left">
+
+					<table style="font-size: 12pt">
 						<tbody>
 							<tr>
-								<th>Distances (atom layers) from centre:</th>
+								<th style="text-align: center">Distances (atom layers) from
+									centre:</th>
 							</tr>
 							<tr>
 								<td><table style="text-align: right; text-indent: 5px">
@@ -70,7 +119,7 @@ var FL=["  ",
 												</td>
 											</tr>
 										</tbody>
-									</table> <br />
+									</table>
 									<table style="text-align: right; text-indent: 5px">
 										<tbody>
 											<tr>
@@ -103,87 +152,77 @@ var FL=["  ",
 									</table></td>
 							</tr>
 						</tbody>
-					</table></td>
-				<td style="text-align: left">
-					<table style="text-align: center">
-						<tbody>
-							<tr>
-								<td>
-									<button type="button" onclick="OneClickDraw()"
-										style="font-size: 13px">
-										One Click<br />Draw
-									</button> <br />
-								</td>
-							</tr>
-							<tr>
-								<td><br />Or separately<br />
-									<button type="button" style="font-size: 12px"
-										onclick="CalcOnly()">
-										Calculations<br />Only
-									</button> <br />
-									<button type="button" style="font-size: 12px"
-										onclick="loadMol('field1',Canv1)">
-										Draw<br />Field 1
-									</button>
-									<button type="button" style="font-size: 12px"
-										onclick="loadMol('field2',Canv2)">
-										Draw<br />Field 2
-									</button> <br /></td>
-							</tr>
-						</tbody>
 					</table>
 				</td>
-				<td><p style="white-space: pre">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
-				<td style="text-align: center">Evolute steps:<br /> <input
-					style="width: 50px" id="spEv" value="10" type="text"><br />
-					<br /> <input value="Evolute"
-					onclick="outEv=Evolute($('spEv').value);iEv=sEvT=outEv.length-1"
-					style="font-size: 12pt; height: 41px" type="button">
-					<p id="sEvStat" style="white-space: nowrap; line-height: 0%">0/0</p>
-					<button type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(0,outEv)">0</button><button type="button" style="font-size: 12px" onclick="iEv=dispEv(--iEv,outEv)">&lt;</button><button type="button" style="font-size: 12px" onclick="iEv=dispEv(++iEv,outEv)">&gt;</button><button id="sEvTB" type="button" style="font-size: 12px"
-						onclick="iEv=dispEv(sEvT,outEv)">0</button></td>
+
+				<td><table class="table2">
+						<tr>
+							<td class="td1"><input value="Evolute"
+								onclick="outEv=Evolute($('spEv').value);iEv=sEvT=outEv.length-1"
+								style="font-size: 12pt" type="button"></td>
+							<td class="td1">Evolute <input style="width: 50px" id="spEv"
+								value="1000" type="text"> steps</td>
+						</tr>
+						<tr>
+							<td class="td1"><select id="iEv_opt"
+								onchange="iEv=dispEv($('iEv_opt').value,outEv)"></select>
+								<button type="button" style="font-size: 12px"
+									onclick="iEv=dispEv(--iEv,outEv)">&lt;</button>
+								<button type="button" style="font-size: 12px"
+									onclick="iEv=dispEv(++iEv,outEv)">&gt;</button></td>
+							<td class="td1">Calculate graphs when<br> <select
+								id="gphEv_opt" style="width: 100px">
+									<option value="0" selected>Iterate (smoother display)</option>
+									<option value="1">Display (shorter iteration time)</option>
+									<option value="2">No graph (fastest)</option>
+							</select></td>
+						</tr>
+
+
+					</table></td>
 			</tr>
 		</tbody>
-	</table><table><tr><td style="vertical-align: top">
-	<table style="vertical-align: top">
-		<tbody>
-			<tr>
-				<th>Field 1 <select id="field1_opt" style="font-size: 12px">
-						<option value=0>Solid shape</option>
-						<option value=1 selected="selected">Faces only</option>
-						<option value=2>Edges only</option>
-						<option value=3>Vertices</option>
-				</select></th>
-				<th>Field 2 <select id="field2_opt" style="font-size: 12px">
-						<option value=0>Solid shape</option>
-						<option value=1>Faces only</option>
-						<option value=2 selected="selected">Edges only</option>
-						<option value=3>Vertices</option>
-				</select></th>
-			</tr>
-			<tr>
-				<td style="vertical-align: top"><script>
+	</table>
+	<table>
+		<tr>
+			<td style="vertical-align: top">
+				<table style="vertical-align: top">
+					<tbody>
+						<tr>
+							<th>Field 1 <select id="field1_opt" style="font-size: 12px">
+									<option value=0>Solid shape</option>
+									<option value=1 selected>Faces only</option>
+									<option value=2>Edges only</option>
+									<option value=3>Vertices</option>
+							</select></th>
+							<th>Field 2 <select id="field2_opt" style="font-size: 12px">
+									<option value=0>Solid shape</option>
+									<option value=1>Faces only</option>
+									<option value=2 selected>Edges only</option>
+									<option value=3>Vertices</option>
+							</select></th>
+						</tr>
+						<tr>
+							<td style="vertical-align: top"><script>
 					var Canv1=new ChemDoodle.TransformCanvas3D('Canv1-1', 350,350);
 					Canv1.specs.backgroundColor='black';
 					Canv1.specs.set3DRepresentation('Ball and Stick');
 					Canv1.specs.projectionPerspective_3D = false;
 					Canv1.loadMolecule(ChemDoodle.readXYZ(""));
 				</script> <br /> <textarea id="field1" style="width: 350px; height: 200px"></textarea></td>
-				<td style="vertical-align: top"><script>
+							<td style="vertical-align: top"><script>
 					var Canv2=new ChemDoodle.TransformCanvas3D('Canv1-2', 350,350);
 					Canv2.specs.backgroundColor='black';
 					Canv2.specs.set3DRepresentation('Stick');
 					Canv2.specs.projectionPerspective_3D = false;
 					Canv2.loadMolecule(ChemDoodle.readXYZ(""));
 				</script> <br /> <textarea id="field2" style="width: 350px; height: 200px"></textarea></td>
-				
-			</tr>
-		</tbody>
-	</table>
-	<b style="white-space: pre">		Evolution Log</b><br />
-	<textarea id="field_EvLog" style="width: 700px; height: 600px"></textarea>
-	</td><td style="vertical-align: top"><script>
+						</tr>
+					</tbody>
+				</table> <b style="white-space: pre"> Evolution Log</b><br /> <textarea
+					id="field_EvLog" style="width: 700px; height: 600px"></textarea>
+			</td>
+			<td style="vertical-align: top"><script>
 						document.write("<table class=\"table1\">")
 						document.write("<thead style=\"text-align: center\"><tr><th>No.</th><th>Face</th>")
 						document.write("<th colspan=\"2\">Actual Dist.</th><th colspan=\"2\">Area</th>")
@@ -210,88 +249,337 @@ var FL=["  ",
 						document.write("<td>  Total  </td><td>Ratio</td><td id=\"DrL_a3\"></td>")
 						document.write("<td id=\"DrA_t3\"></td><td id=\"DaA_t3\"></td><td id=\"DEng_t3\"></td></tr>")
 						document.write("</table>")
-						</script><br/><b> Evolution Summary </b>(comma as delimiter)<br><textarea id="field_EvSumm" style="width: 400px; height: 220px"></textarea></td></tr></table>
+						</script><br /> <b> Evolution Summary </b>(comma as delimiter)<br> <textarea
+					id="field_EvSumm" style="width: 400px; height: 220px"></textarea></td>
+		</tr>
+	</table>
 	<script>
-	$("field1").value=""
-	$("field2").value=""
-	var BDY=[];
+	$("field1").value="", $("field2").value=""
+	$("field_EvSumm").value="", $("field_EvLog").value=""
+	var L=[];
 	var a=4.0495, as=a*a, Epa1=0.06552, Epa2=0.06864;
 	var outEv=[], iEv=0, sEv=0, sEvT=0, out, sqrt3=Math.sqrt(3)
 	
+function dispEv(iEv, outEv) {
+	var sEvT=outEv.length-1, gph_opt=$("gphEv_opt").value
+	
+	if(0<=iEv && iEv<=sEvT) {
+		var cds=[[],[]], L=outEv[iEv][2]
+		if(gph_opt==0) cds=outEv[iEv][4]
+		else if(gph_opt==1) cds=genCoor(L)
+		
+		dispCalc(outEv[iEv][0],L,outEv[iEv][3],cds)
+		
+		if($("field1").value!="") loadMol('field1',Canv1)
+		if($("field2").value!="") loadMol('field2',Canv2)
+		
+		$('iEv_opt').options[iEv].selected=1
+	} else if(iEv<0) iEv=0;
+	else iEv=sEvT
+	
+	return iEv
+}
+
+function CalcOnly() {
+	var L=getAllL()
+	dispCalc(calcAtom(L),L,calcArea(L),genCoor(L))
+}
+
+function OneClickDraw() {
+	$("field1").value="", $("field2").value=""
+	var L=getAllL()
+	dispCalc(calcAtom(L),L,calcArea(L),genCoor(L))
+	loadMol("field1",Canv1)
+	loadMol("field2",Canv2)
+}
+
+function loadMol(field,Canv) {
+	var ls=$(field).value
+	Canv.loadMolecule(ChemDoodle.readXYZ(ls));
+	Canv.specs.compass_display = true;
+}
+
+function dispCalc(n,L,areaF,cds) {
+	prtCoor(cds[0],"field1")
+	prtCoor(cds[1],"field2")
+	dispSumm(n,L,areaF)
+}
+
+function dispSumm(n, L, areaF) {
+	var area1, area2, area3, area11, area21, area31, la1, la2, la11, la21
+	var NL=3, aA, rA, aL, Eng
+	
+	for(var i=1; i<=14; i++) {
+		rA=areaF[i].toFixed(NL), aA=(areaF[i]*as).toFixed(NL)
+		
+		if(i<=8) {
+			aL=(L[i]*a/sqrt3).toFixed(NL); 
+			Eng=(aA*0.06552).toFixed(4)
+		} else {
+			aL=(L[i]*a/2).toFixed(NL); 
+			Eng=(aA*0.06864).toFixed(4)
+		}
+		
+		$("DrA_"+i).innerHTML=rA; $("DaA_"+i).innerHTML=aA; 
+		$("DrL_"+i).innerHTML=L[i]; $("DaL_"+i).innerHTML=aL; $("DEng_"+i).innerHTML=Eng
+	}
+	
+	la1=L[15].toFixed(NL), la2=L[16].toFixed(NL)
+	la11=(L[15]*a/sqrt3).toFixed(NL), la21=(L[16]*a/2).toFixed(NL)
+	
+	area1=areaF[15].toFixed(NL), area2=areaF[16].toFixed(NL), area3=areaF[17].toFixed(NL)
+	area11=(areaF[15]*as).toFixed(NL), area21=(areaF[16]*as).toFixed(NL)
+	area31=(areaF[17]*as).toFixed(NL)
+
+	$("DrL_a1").innerHTML=la1; $("DaL_a1").innerHTML=la11; $("DrA_t1").innerHTML=area1; 
+	$("DaA_t1").innerHTML=area11; $("DEng_t1").innerHTML=(area11*Epa1).toFixed(4); 
+	$("DrL_a2").innerHTML=la2; $("DaL_a2").innerHTML=la21; $("DrA_t2").innerHTML=area2; 
+	$("DaA_t2").innerHTML=area21; $("DEng_t2").innerHTML=(area21*Epa2).toFixed(4); 
+	$("DrL_a3").innerHTML=L[17].toFixed(NL); $("DrA_t3").innerHTML=area3; 
+	$("DaA_t3").innerHTML=area31; $("DEng_t3").innerHTML=areaF[0].toFixed(4); $("DAc").innerHTML=n; 
+}
+
+function prtCoor(cd,field) {
+	var cen=1, n=cd.length-1;
+	if(n<1) return 0;
+	
+	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n"
+	
+	for(i=1; i<=n; i++) {
+		if(cd[i][0]==0 && cd[i][1]==0 && cd[i][2]==0) cen=0;
+		else ls += "Al "+fmtcdNum(cd[i],12.5,a)+"\n";
+	}
+	ls=(n+cen)+ls;
+	
+	$(field).value=ls
+}
+
+function iterateEv(L) {
+	var n=calcAtom(L)
+	var areaF=calcArea(L)
+	
+	return [n,areaF[0],L,areaF,[]]
+}
+
+function Evolute(sEvT) {
+	var gph_opt=$("gphEv_opt").value
+	var outj=[], maxDelta=0, Delta=0, i1=1, Li=[], Lu=[]
+	var outEv=[], j=0, logEv="", smyEv="", dt=0, dn=0, S_D=0
+	var Ds=0.001949, omega=0.0166, xi=0.781, kB=8.6173324e-5, T=373
+	
+	Li=getAllL()
+	outEv[0]=iterateEv(Li) 
+	if(gph_opt==0) outEv[0][4]=genCoor(Li)
+	
+	smyEv+="Step,Atom Counts,Surface Energy,Driving Force,Time"
+	for(k=1;k<=14;k++) smyEv+=",L"+FL[k];
+	for(k=1;k<=14;k++) smyEv+=",S"+FL[k];
+	smyEv+=",Ratio,Cut Face #,Cut Face\n"
+	smyEv+="0,"+outEv[0][0]+","+outEv[0][1].toFixed(4)+",-,-,"
+	logEv+="Start: "+outEv[0][0]+", "+outEv[0][1]+"; "+Li[15].toFixed(1)+", "+Li[16].toFixed(1)
+	for(var k=1;k<=14;k++) {logEv+=Li[k]+",";smyEv+=Li[k]+",", Lu[k]=0}
+	for(var k=1;k<=14;k++) {smyEv+=outEv[j][3][k].toFixed(2)+","}
+	logEv+=" "+Li[17].toFixed(4)+"\n", smyEv+=Li[17].toFixed(4)+",-,-"
+	
+	for(j=1; j<=sEvT; j++) {
+		maxDelta=0, i1=1
+		for(var i=1; i<=14; i++) {
+			Li=outEv[j-1][2].slice(), Li[i]--, Li=calcL(Li)
+			outj[i]=iterateEv(Li)
+			Delta=(outEv[j-1][1]-outj[i][1])/(outEv[j-1][0]-outj[i][0])
+			
+			if(Delta>maxDelta) {
+				i1=i, maxDelta=Delta
+				logEv+="\n * "
+			} else if (Delta==maxDelta && Lu[i]>Lu[i1]) {
+				i1=i, maxDelta=Delta
+				logEv+="\n *^"
+			} else logEv+="\n   ";
+			
+			logEv+=j+"-"+fmtStr(i+". ",4)+FL[i]+"  "+Delta.toFixed(4)+"; \t"
+			for(var k=1;k<=14;k++) logEv+=Li[k]+",";
+			logEv+=" "+Li[17].toFixed(4)
+		}
+		
+		if (outj[i1][0]<=0 || outj[i1][1]<=0) break;
+		
+		outEv[j]=outj[i1].slice();
+		if(gph_opt==0) outEv[j][4]=genCoor(outj[i1][2])
+		
+		//Calculate time
+		S_D=0, dn=outEv[j-1][0]-outEv[j][0]
+		for(var k=1;k<=8;k++) S_D+=outEv[j-1][3][k]/outEv[j-1][2][k]*sqrt3
+		for(var k=9;k<=14;k++) S_D+=outEv[j-1][3][k]/outEv[j-1][2][k]*2
+		dt=dn/(S_D*a/10*Ds/omega/xi*(Math.exp(maxDelta/kB/T)-1))
+
+		smyEv+="\n"+j+","+outEv[j][0]+","+outEv[j][1].toFixed(4)+","+maxDelta.toFixed(4)+","
+		smyEv+=dt.toExponential(2)+","
+		logEv+="\n\n"+j+"-"+fmtStr(i1+". ",4)+FL[i1]+"  "+maxDelta.toFixed(4)+"; "
+		for(var k=1;k<=14;k++) {logEv+=outEv[j][2][k]+",";smyEv+=outEv[j][2][k]+","}
+		for(var k=1;k<=14;k++) {smyEv+=outEv[j][3][k].toFixed(2)+","}
+		logEv+=" "+outEv[j][2][17].toFixed(4)
+		logEv+="\n\t"+outEv[j][0]+", "+outEv[j][1].toFixed(4)
+		logEv+="; "+outEv[j][2][15].toFixed(1)+", "+outEv[j][2][16].toFixed(1)+";  "
+		smyEv+=outEv[j][2][17].toFixed(4)+","+i1+",'"+FL[i1]+"'"
+		
+		// Lu records how long since each face's last cut
+		for(var k=1;k<=14;k++) {
+			if(outEv[j][2][k]==outEv[j-1][2][k]) Lu[k]++;
+			else Lu[k]=0;
+			
+			logEv+=Lu[k]+","
+		}
+		
+		logEv+="\n"
+	}
+	--j
+	var tt=document.getElementById("iEv_opt")
+	tt.options.length=0
+	for(var i=0;i<=j;i++) {
+		tt.options[i] = new Option(i, i);
+	}
+	$("field_EvLog").value=logEv
+	$("field_EvSumm").value=smyEv
+	dispEv(j, outEv)
+	
+	return outEv
+}
+
+function FCC(x1,y1,z1,i) {
+	if(i==0) return [    x1,     y1,     z1];
+	if(i==1) return [0.5+x1, 0.5+y1,     z1];
+	if(i==2) return [0.5+x1,     y1, 0.5+z1];
+	if(i==3) return [    x1, 0.5+y1, 0.5+z1];
+}
+
+function genCoor(L) {
+	var x, y, z, out=[], fv1=$("field1_opt").value, fv2=$("field2_opt").value
+	var nOnF, n0=0, n1=0, n2=0, cd0=[], cd1=[], cd2=[]
+	
+	for(var x0=-Math.ceil(L[10]/2); x0<=L[9]/2; x0++) {
+		for(var y0=-Math.ceil(L[12]/2); y0<=L[11]/2; y0++) {
+			for(var z0=-Math.ceil(L[14]/2); z0<=L[13]/2; z0++) {
+				for (var i=0; i<4; i++) {
+					out=FCC(x0,y0,z0,i)
+					x=out[0],y=out[1],z=out[2]
+
+					if(  L[1]+0.1>x+y+z && L[5]+0.1>-x+y+z && 
+							L[2]+0.1>x+y-z && L[6]+0.1>-x+y-z && 
+							L[3]+0.1>x-y+z && L[7]+0.1>-x-y+z && 
+							L[4]+0.1>x-y-z && L[8]+0.1>-x-y-z && 
+							L[ 9]/2+0.1>x  && -L[10]/2-0.1<x  && 
+							L[11]/2+0.1>y  && -L[12]/2-0.1<y  && 
+							L[13]/2+0.1>z  && -L[14]/2-0.1<z)
+					{
+						nOnF=0
+						if(L[1]== x+y+z) nOnF++
+						if(L[2]== x+y-z) nOnF++
+						if(L[3]== x-y+z) nOnF++
+						if(L[4]== x-y-z) nOnF++
+						if(L[5]==-x+y+z) nOnF++
+						if(L[6]==-x+y-z) nOnF++
+						if(L[7]==-x-y+z) nOnF++
+						if(L[8]==-x-y-z) nOnF++
+						if(L[ 9]/2== x)  nOnF++
+						if(L[10]/2==-x)  nOnF++
+						if(L[11]/2== y)  nOnF++
+						if(L[12]/2==-y)  nOnF++
+						if(L[13]/2== z)  nOnF++
+						if(L[14]/2==-z)  nOnF++
+						
+						if(nOnF>=fv1) cd1[++n1]=[x,y,z];
+						if(nOnF>=fv2) cd2[++n2]=[x,y,z];
+					
+// 						console.log("(x+y+z)="+(x+y+z)+"\t"+(-x+y+z)+"\t"+
+// 								( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+
+// 								(-x-y+z)+"\t"+( x-y-z)+"\t"+(-x-y-z)+"\t"+
+// 								x+"\t"+(y)+"\t"+(z)+"\t"+nOnF)
+
+					}
+				}
+			}
+		}
+	}
+
+	return [cd1, cd2]
+}
+
 function setAllL(p) {
 	if(p==0) for(i=1;i<=8;i++) $("L111_"+i).value=$("L111_all").value
 	else for(i=1;i<=6;i++) $("L002_"+i).value=$("L002_all").value
 }
 
 function getAllL() {
-	var BDY=[]
-	for(var i=1;i<=8;i++) BDY[i]=parseInt($("L111_"+i).value)
-	for(var i=1;i<=6;i++) BDY[i+8]=parseInt($("L002_"+i).value)
+	var L=[]
+	for(var i=1;i<=8;i++) L[i]=parseInt($("L111_"+i).value)
+	for(var i=1;i<=6;i++) L[i+8]=parseInt($("L002_"+i).value)
 	
-	return calcBDY(BDY)
+	return calcL(L)
 }
 
-function calcBDY(BDY) {
-	var aBDY=[]
+function calcL(L) {
+	var L1=[]
 
-	aBDY[1]=Math.min(calcL111(9,11,13,BDY),BDY[1])
-	aBDY[2]=Math.min(calcL111(9,11,14,BDY),BDY[2])
-	aBDY[3]=Math.min(calcL111(9,12,13,BDY),BDY[3])
-	aBDY[4]=Math.min(calcL111(9,12,14,BDY),BDY[4])
-	aBDY[5]=Math.min(calcL111(10,11,13,BDY),BDY[5])
-	aBDY[6]=Math.min(calcL111(10,11,14,BDY),BDY[6])
-	aBDY[7]=Math.min(calcL111(10,12,13,BDY),BDY[7])
-	aBDY[8]=Math.min(calcL111(10,12,14,BDY),BDY[8])
-	aBDY[9]=Math.min(BDY[1]+BDY[4], BDY[2]+BDY[3], BDY[9])
-	aBDY[10]=Math.min(BDY[5]+BDY[8], BDY[6]+BDY[7], BDY[10])
-	aBDY[11]=Math.min(BDY[1]+BDY[6], BDY[2]+BDY[5], BDY[11])
-	aBDY[12]=Math.min(BDY[3]+BDY[8], BDY[4]+BDY[7], BDY[12])
-	aBDY[13]=Math.min(BDY[1]+BDY[7], BDY[3]+BDY[5], BDY[13])
-	aBDY[14]=Math.min(BDY[2]+BDY[8], BDY[4]+BDY[6], BDY[14])
+	L1[-1]=-1
+	L1[0]=0
+	L1[1]=Math.min(calcL111(9,11,13,L),L[1])
+	L1[2]=Math.min(calcL111(9,11,14,L),L[2])
+	L1[3]=Math.min(calcL111(9,12,13,L),L[3])
+	L1[4]=Math.min(calcL111(9,12,14,L),L[4])
+	L1[5]=Math.min(calcL111(10,11,13,L),L[5])
+	L1[6]=Math.min(calcL111(10,11,14,L),L[6])
+	L1[7]=Math.min(calcL111(10,12,13,L),L[7])
+	L1[8]=Math.min(calcL111(10,12,14,L),L[8])
+	L1[9]=Math.min(L[1]+L[4], L[2]+L[3], L[9])
+	L1[10]=Math.min(L[5]+L[8], L[6]+L[7], L[10])
+	L1[11]=Math.min(L[1]+L[6], L[2]+L[5], L[11])
+	L1[12]=Math.min(L[3]+L[8], L[4]+L[7], L[12])
+	L1[13]=Math.min(L[1]+L[7], L[3]+L[5], L[13])
+	L1[14]=Math.min(L[2]+L[8], L[4]+L[6], L[14])
 	
 	var la1=la2=0
 	
 	for(var i=1; i<=14; i++) {
-		if(i<=8) la1+=aBDY[i]
-		else la2+=aBDY[i]
+		if(i<=8) la1+=L1[i]
+		else la2+=L1[i]
 	}
 
-	aBDY[15]=la1/8
-	aBDY[16]=la2/6
-	aBDY[17]=(aBDY[16]/2)/(aBDY[15]/sqrt3)
+	L1[15]=la1/8
+	L1[16]=la2/6
+	L1[17]=(L1[16]/2)/(L1[15]/sqrt3)
 	
-	return aBDY
+	return L1
 }
 
-function calcL111(a,b,c, BDY) {
-	var s=BDY[a]+BDY[b]+BDY[c];
+function calcL111(a,b,c, L) {
+	var s=L[a]+L[b]+L[c];
 	return Math.floor(s/2)
 }
 
-function calcArea(BDY) {
+function calcArea(L) {
 	var MS1=[], MS2=[], areaF=[], b=sqrt3/8
 
-	MS1[1]=BDY[1]-BDY[2]-BDY[3]-BDY[5]
-	MS1[2]=BDY[2]-BDY[1]-BDY[4]-BDY[6]
-	MS1[3]=BDY[3]-BDY[1]-BDY[4]-BDY[7]
-	MS1[4]=BDY[4]-BDY[2]-BDY[3]-BDY[8]
-	MS1[5]=BDY[5]-BDY[1]-BDY[6]-BDY[7]
-	MS1[6]=BDY[6]-BDY[2]-BDY[5]-BDY[8]
-	MS1[7]=BDY[7]-BDY[3]-BDY[5]-BDY[8]
-	MS1[8]=BDY[8]-BDY[4]-BDY[6]-BDY[7]
+	MS1[1]=L[1]-L[2]-L[3]-L[5]
+	MS1[2]=L[2]-L[1]-L[4]-L[6]
+	MS1[3]=L[3]-L[1]-L[4]-L[7]
+	MS1[4]=L[4]-L[2]-L[3]-L[8]
+	MS1[5]=L[5]-L[1]-L[6]-L[7]
+	MS1[6]=L[6]-L[2]-L[5]-L[8]
+	MS1[7]=L[7]-L[3]-L[5]-L[8]
+	MS1[8]=L[8]-L[4]-L[6]-L[7]
 	
-	MS2[1]=BDY[9]-BDY[1]-BDY[4]
-	MS2[2]=BDY[9]-BDY[2]-BDY[3]
-	MS2[3]=BDY[10]-BDY[5]-BDY[8]
-	MS2[4]=BDY[10]-BDY[6]-BDY[7]
-	MS2[5]=BDY[11]-BDY[1]-BDY[6]
-	MS2[6]=BDY[11]-BDY[2]-BDY[5]
-	MS2[7]=BDY[12]-BDY[3]-BDY[8]
-	MS2[8]=BDY[12]-BDY[4]-BDY[7]
-	MS2[9]=BDY[13]-BDY[1]-BDY[7]
-	MS2[10]=BDY[13]-BDY[3]-BDY[5]
-	MS2[11]=BDY[14]-BDY[2]-BDY[8]
-	MS2[12]=BDY[14]-BDY[4]-BDY[6]
+	MS2[1]=L[9]-L[1]-L[4]
+	MS2[2]=L[9]-L[2]-L[3]
+	MS2[3]=L[10]-L[5]-L[8]
+	MS2[4]=L[10]-L[6]-L[7]
+	MS2[5]=L[11]-L[1]-L[6]
+	MS2[6]=L[11]-L[2]-L[5]
+	MS2[7]=L[12]-L[3]-L[8]
+	MS2[8]=L[12]-L[4]-L[7]
+	MS2[9]=L[13]-L[1]-L[7]
+	MS2[10]=L[13]-L[3]-L[5]
+	MS2[11]=L[14]-L[2]-L[8]
+	MS2[12]=L[14]-L[4]-L[6]
 	
 	areaF[9]=MS2[1]*MS2[2]/2
 	areaF[10]=MS2[3]*MS2[4]/2
@@ -312,10 +600,12 @@ function calcArea(BDY) {
 	areaF[7]=(MS1[7]-MS2[3]-MS2[7]-MS2[10])*b
 	areaF[8]=(MS1[8]-MS2[4]-MS2[8]-MS2[12])*b
 	
+	for(var i=1;i<=14;i++) if(areaF[i]<0) areaF[i]=0;
+	
 	areaF[15]=0, areaF[16]=0
 
-	for(var i=1; i<=8; i++) areaF[15]+=areaF[i]
-	for(var i=9; i<=14; i++)  areaF[16]+=areaF[i]
+	for(var i=1; i<=8; i++) areaF[15]+=areaF[i];
+	for(var i=9; i<=14; i++) areaF[16]+=areaF[i];
 	
 	areaF[17]=areaF[15]+areaF[16]
 	areaF[0]=(areaF[15]*Epa1+areaF[16]*Epa2)*as
@@ -323,232 +613,65 @@ function calcArea(BDY) {
 	return areaF
 }
 
-function FCC(x1,y1,z1,i) {
-	if(i==0) return [    x1,     y1,     z1];
-	if(i==1) return [0.5+x1, 0.5+y1,     z1];
-	if(i==2) return [0.5+x1,     y1, 0.5+z1];
-	if(i==3) return [    x1, 0.5+y1, 0.5+z1];
-}
-
-function genCoor(BDY) {
-	var x, y, z, out=[], fv1=$("field1_opt").value, fv2=$("field2_opt").value
-	var nOnF, n0=0, n1=0, n2=0, cd0=[], cd1=[], cd2=[]
-	
-	for(var x0=-Math.ceil(BDY[10]/2); x0<=BDY[9]/2; x0++) {
-		for(var y0=-Math.ceil(BDY[12]/2); y0<=BDY[11]/2; y0++) {
-			for(var z0=-Math.ceil(BDY[14]/2); z0<=BDY[13]/2; z0++) {
-				for (var i=0; i<4; i++) {
-					out=FCC(x0,y0,z0,i)
-					x=out[0],y=out[1],z=out[2]
-
-					if(  BDY[1]+0.1>x+y+z && BDY[5]+0.1>-x+y+z && 
-							BDY[2]+0.1>x+y-z && BDY[6]+0.1>-x+y-z && 
-							BDY[3]+0.1>x-y+z && BDY[7]+0.1>-x-y+z && 
-							BDY[4]+0.1>x-y-z && BDY[8]+0.1>-x-y-z && 
-							BDY[ 9]/2+0.1>x  && -BDY[10]/2-0.1<x  && 
-							BDY[11]/2+0.1>y  && -BDY[12]/2-0.1<y  && 
-							BDY[13]/2+0.1>z  && -BDY[14]/2-0.1<z)
-					{
-// 						console.log("(x+y+z)="+(x+y+z)+"\t"+(-x+y+z)+"\t"+( x+y-z)+"\t"+(-x+y-z)+"\t"+(x-y+z)+"\t"+
-// 								(-x-y+z)+"\t"+( x-y-z)+"\t"+(-x-y-z)+"\t"+x+"\t"+(y)+"\t"+(z)+"\t"+nOnF)
-						++n0
-						
-						nOnF=0;
-						if(BDY[1]== x+y+z) nOnF++
-						if(BDY[2]== x+y-z) nOnF++
-						if(BDY[3]== x-y+z) nOnF++
-						if(BDY[4]== x-y-z) nOnF++
-						if(BDY[5]==-x+y+z) nOnF++
-						if(BDY[6]==-x+y-z) nOnF++
-						if(BDY[7]==-x-y+z) nOnF++
-						if(BDY[8]==-x-y-z) nOnF++
-						if(BDY[ 9]/2== x)  nOnF++
-						if(BDY[10]/2==-x)  nOnF++
-						if(BDY[11]/2== y)  nOnF++
-						if(BDY[12]/2==-y)  nOnF++
-						if(BDY[13]/2== z)  nOnF++
-						if(BDY[14]/2==-z)  nOnF++
-						
-						if(nOnF>=fv1) cd1[++n1]=[x,y,z];
-						if(nOnF>=fv2) cd2[++n2]=[x,y,z];
-						
-// 						console.log(n0,n1,n2)
-					}
-				}
-			}
+function calcAtom(L) {
+	var n=0, n0=0, np=1, ns=0, n1=0, n2=0, oe=[]
+	n0=(L[9]+L[10]+1)*(L[11]+L[12]+1)*(L[13]+L[14]+1)/2
+	for(var i=9;i<=14;i++) {oe[i]=L[i]%2; if(oe[i]==1) np=0}
+	if(np==0) {
+		for(var i=9;i<=14;i++) ns+=oe[i];
+		if(ns==4) {
+			if(oe[9]+oe[10]==0 || oe[11]+oe[12]==0 || oe[13]+oe[14]==0)
+				np=1
 		}
 	}
-
-	return [n0, cd1, cd2]
+	
+	n0=Math.floor(n0)+np
+	
+	n1+=calc111Atom(L[1],L[9],L[11],L[13])
+	n1+=calc111Atom(L[2],L[9],L[11],L[14])
+	n1+=calc111Atom(L[3],L[9],L[12],L[13])
+	n1+=calc111Atom(L[4],L[9],L[12],L[14])
+	n1+=calc111Atom(L[5],L[10],L[11],L[13])
+	n1+=calc111Atom(L[6],L[10],L[11],L[14])
+	n1+=calc111Atom(L[7],L[10],L[12],L[13])
+	n1+=calc111Atom(L[8],L[10],L[12],L[14])
+	
+	n2+=calc111OverlapAtom(L[1],L[2],L[9],L[11])
+	n2+=calc111OverlapAtom(L[1],L[3],L[9],L[13])
+	n2+=calc111OverlapAtom(L[1],L[5],L[11],L[13])
+	n2+=calc111OverlapAtom(L[2],L[4],L[9],L[14])
+	n2+=calc111OverlapAtom(L[2],L[6],L[11],L[14])
+	n2+=calc111OverlapAtom(L[3],L[4],L[9],L[12])
+	n2+=calc111OverlapAtom(L[3],L[7],L[12],L[13])
+	n2+=calc111OverlapAtom(L[4],L[8],L[12],L[14])
+	n2+=calc111OverlapAtom(L[5],L[6],L[10],L[11])
+	n2+=calc111OverlapAtom(L[5],L[7],L[10],L[13])
+	n2+=calc111OverlapAtom(L[6],L[8],L[10],L[14])
+	n2+=calc111OverlapAtom(L[7],L[8],L[10],L[12])
+	
+	n=n0-n1+n2
+	
+	return n
 }
 
-function dispSumm(n, areaF, BDY) {
-	var area1, area2, area3, area11, area21, area31, la1, la2, la11, la21
-	var NL=3, aA, rA, aL, Eng
-	
-	for(var i=1; i<=14; i++) {
-		rA=areaF[i].toFixed(NL), aA=(areaF[i]*as).toFixed(NL)
-		
-		if(i<=8) {
-			aL=(BDY[i]*a/sqrt3).toFixed(NL); 
-			Eng=(aA*0.06552).toFixed(4)
-		} else {
-			aL=(BDY[i]*a/2).toFixed(NL); 
-			Eng=(aA*0.06864).toFixed(4)
-		}
-		
-		$("DrA_"+i).innerHTML=rA; $("DaA_"+i).innerHTML=aA; 
-		$("DrL_"+i).innerHTML=BDY[i]; $("DaL_"+i).innerHTML=aL; $("DEng_"+i).innerHTML=aL
-	}
-	
-	la1=BDY[15].toFixed(NL), la2=BDY[16].toFixed(NL)
-	la11=(BDY[15]*a/sqrt3).toFixed(NL), la21=(BDY[16]*a/2).toFixed(NL)
-	
-	area1=areaF[15].toFixed(NL), area2=areaF[16].toFixed(NL), area3=areaF[17].toFixed(NL)
-	area11=(areaF[15]*as).toFixed(NL), area21=(areaF[16]*as).toFixed(NL), area31=(areaF[17]*as).toFixed(NL)
-
-	$("DrL_a1").innerHTML=la1; $("DaL_a1").innerHTML=la11; $("DrA_t1").innerHTML=area1; 
-	$("DaA_t1").innerHTML=area11; $("DEng_t1").innerHTML=(area11*Epa1).toFixed(4); 
-	$("DrL_a2").innerHTML=la2; $("DaL_a2").innerHTML=la21; $("DrA_t2").innerHTML=area2; 
-	$("DaA_t2").innerHTML=area21; $("DEng_t2").innerHTML=(area21*Epa2).toFixed(4); 
-	$("DrL_a3").innerHTML=BDY[17].toFixed(NL); $("DrA_t3").innerHTML=area3; 
-	$("DaA_t3").innerHTML=area31; $("DEng_t3").innerHTML=areaF[0].toFixed(4); $("DAc").innerHTML=n; 
+function calc111OverlapAtom(x,y,a,b) {
+	var n0=calc111Atom(x,a,b,x-y-1)+calc111Atom(y,a,b,y-x-1)
+	var l=a+b-x-y-1
+	if(l<=0) return n0;
+	return n0+(l*(2+l)+l%2)/4
 }
 
-function prtCoor(cd,field) {
-	var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n", cen=1, n=cd.length-1;
+function calc111Atom(x,a,b,c) {
 	
-	for(i=1; i<=n; i++) {
-		if(cd[i][0]==0 && cd[i][1]==0 && cd[i][2]==0) cen=0;
-		else ls += "Al "+fmtcdNum(cd[i],12.5,a)+"\n";
-	}
-	ls=(n+cen)+ls;
+	var l=Math.floor((a+b+c)/2)-x
+	if(l<=0) return 0;
 	
-	$(field).value=ls
-}
-
-function process1(cds,BDY) {
-	prtCoor(cds[1],"field1")
-	prtCoor(cds[2],"field2")
-	dispSumm(cds[0],calcArea(BDY),BDY)
-}
-
-function process2(BDY) {
-	var cds=genCoor(BDY)
-	var areaF=calcArea(BDY)
+	var n=l*(l+1)/6
 	
-	return [cds[0],areaF[0],BDY,cds,areaF]
-}
-
-function Evolute(sEvT) {
-	var outj=[], maxDelta=0, Delta=0, i1=1, BDYi=[], BDYu=[]
-	var outEv=[], j=0, logEv="", smyEv="", dt=0, dn=0, S_D=0
-	var Ds=0.001949, omega=0.0166, xi=0.781, kB=8.6173324e-5, T=373
+	if((a+b+c)%2==0) n*=4*l-1
+	else n*=4*l+5
 	
-	BDYi=getAllL()
-	outEv[0]=process2(BDYi); 
-	
-	smyEv+="Step,Atom Counts,Surface Energy,Driving Force,Time"
-	for(k=1;k<=14;k++) smyEv+=",L"+FL[k];
-	for(k=1;k<=14;k++) smyEv+=",S"+FL[k];
-	smyEv+=",Ratio,Cut Face #,Cut Face\n"
-	smyEv+="0,"+outEv[0][0]+","+outEv[0][1].toFixed(4)+",-,-,"
-	logEv+="Start: "+outEv[0][0]+", "+outEv[0][1]+"; "+BDYi[15].toFixed(1)+", "+BDYi[16].toFixed(1)
-	for(var k=1;k<=14;k++) {logEv+=BDYi[k]+",";smyEv+=BDYi[k]+",", BDYu[k]=0}
-	for(var k=1;k<=14;k++) {smyEv+=outEv[j][4][k].toFixed(2)+","}
-	logEv+=" "+BDYi[17].toFixed(4)+"\n", smyEv+=BDYi[17].toFixed(4)+",-,-"
-	
-	for(j=1; j<=sEvT; j++) {
-		maxDelta=0, i1=1
-		for(var i=1; i<=14; i++) {
-			BDYi=outEv[j-1][2].slice(), BDYi[i]=outEv[j-1][2][i]-1, BDYi=calcBDY(BDYi)
-			outj[i]=process2(BDYi)
-			Delta=(outEv[j-1][1]-outj[i][1])/(outEv[j-1][0]-outj[i][0])
-			
-			if(Delta>maxDelta) {
-				i1=i, maxDelta=Delta
-				logEv+="\n * "
-			} else if (Delta==maxDelta && BDYu[i]>BDYu[i1]) {
-				i1=i, maxDelta=Delta
-				logEv+="\n *^"
-			} else logEv+="\n   ";
-			
-			logEv+=j+"-"+fmtStr(i+". ",4)+FL[i]+"  "+Delta.toFixed(4)+"; \t"
-			for(var k=1;k<=14;k++) logEv+=BDYi[k]+",";
-			logEv+=" "+BDYi[17].toFixed(4)
-		}
-		
-		if (outj[i1][0]>0 && outj[i1][0]>0) outEv[j]=outj[i1].slice();
-		else break
-		
-		//Calculate time
-		S_D=0, dn=outEv[j-1][0]-outEv[j][0]
-		for(var k=1;k<=8;k++) S_D+=outEv[j-1][4][k]/outEv[j-1][2][k]*sqrt3
-		for(var k=9;k<=14;k++) S_D+=outEv[j-1][4][k]/outEv[j-1][2][k]*2
-		dt=dn/(S_D*a/10*Ds/omega/xi*(Math.exp(maxDelta/kB/T)-1))
-
-		smyEv+="\n"+j+","+outEv[j][0]+","+outEv[j][1].toFixed(4)+","+maxDelta.toFixed(4)+","
-		smyEv+=dt.toExponential(2)+","
-
-		logEv+="\n\n"+j+"-"+fmtStr(i1+". ",4)+FL[i1]+"  "+maxDelta.toFixed(4)+"; "
-		for(var k=1;k<=14;k++) {logEv+=outEv[j][2][k]+",";smyEv+=outEv[j][2][k]+","}
-		for(var k=1;k<=14;k++) {smyEv+=outEv[j][4][k].toFixed(2)+","}
-		logEv+=" "+outEv[j][2][17].toFixed(4)
-		logEv+="\n\t"+outEv[j][0]+", "+outEv[j][1].toFixed(4)
-		logEv+="; "+outEv[j][2][15].toFixed(1)+", "+outEv[j][2][16].toFixed(1)+";  "
-		
-		smyEv+=outEv[j][2][17].toFixed(4)+","+i1+",'"+FL[i1]+"'"
-		
-		// BDYu records how long since each face's last cut
-		for(var k=1;k<=14;k++) {
-			if(outEv[j][2][k]==outEv[j-1][2][k]) BDYu[k]++;
-			else BDYu[k]=0;
-			
-			logEv+=BDYu[k]+","
-		}
-		
-		logEv+="\n"
-	}
-	
-	$("sEvTB").innerHTML=--j
-	$("field_EvLog").value=logEv
-	$("field_EvSumm").value=smyEv
-	dispEv(sEvT, outEv)
-	
-	return outEv
-}
-
-function dispEv(iEv, outEv) {
-	var sEvT=outEv.length-1
-	if(0<=iEv && iEv<=sEvT) {
-		process1(outEv[iEv][3],outEv[iEv][2])
-		loadMol('field1',Canv1)
-		loadMol('field2',Canv2)
-	} else if(iEv<0) iEv=0;
-	else iEv=sEvT
-	
-	$("sEvStat").innerHTML=iEv+"/"+sEvT
-	
-	return iEv
-}
-
-function loadMol(field,Canv) {
-	var ls=$(field).value
-	Canv.loadMolecule(ChemDoodle.readXYZ(ls));
-	Canv.specs.compass_display = true;
-}
-
-function CalcOnly() {
-	var BDY=getAllL()
-	process1(genCoor(BDY),BDY)
-}
-
-function OneClickDraw() {
-	$("field1").value="", $("field2").value=""
-	var BDY=getAllL()
-	process1(genCoor(BDY),BDY)
-	loadMol("field1",Canv1)
-	loadMol("field2",Canv2)
+	return n
 }
 
 function fmtcdNum(cd, fmt, a) {
