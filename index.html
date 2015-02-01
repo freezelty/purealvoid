@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Void in Pure Aluminum</title>
+<title>Void Evolution in Pure Aluminum</title>
 </head>
 <meta http-equiv="X-UA-Compatible" content="chrome=1">
 <link rel="stylesheet" href="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.css"
   type="text/css">
 <script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
+<script type="text/javascript" src="FileSaver.min.js"></script>
 <script> var $=function(id){return document.getElementById(id)} 
 var FL=["  ",
   "(111)","(111̅)","(11̅1)","(11̅1̅)",
@@ -166,6 +167,15 @@ var FL=["  ",
     <tr>
       <td style="vertical-align: top"><table style="text-align: right">
           <tr>
+            <th><input value="Evolute" onclick="outEv=Evolute();iEv=outEv.length-1"
+              style="font-size: 12pt" type="button"> <select id="iEv_opt"
+              onchange="iEv=dispEv($('iEv_opt').value,outEv)"></select>
+              <button type="button" style="font-size: 12px"
+                onclick="iEv=dispEv(--iEv,outEv)">&lt;</button>
+              <button type="button" style="font-size: 12px"
+                onclick="iEv=dispEv(++iEv,outEv)">&gt;</button></th>
+          </tr>
+          <tr>
             <td><table id='DsTable' style="text-align: right">
                 <tr>
                   <td>Temp. Independent Pre-factor</td>
@@ -210,7 +220,8 @@ var FL=["  ",
           <tr>
             <td>Calculate graphs when <select id="gphEv_opt" style="width: 80px">
                 <option value="0">Iterate (very slow for voids not small enough)</option>
-                <option value="1">Display (short iteration time, slow display for huge void)</option>
+                <option value="1">Display (short iteration time, slow display for
+                  huge void)</option>
                 <option value="2" selected>No graph (fastest)</option>
             </select></td>
           </tr>
@@ -220,18 +231,13 @@ var FL=["  ",
             </td>
           </tr>
           <tr>
-            <td><input value="Evolute" onclick="outEv=Evolute();iEv=outEv.length-1"
-              style="font-size: 12pt" type="button"></td>
+            <td></td>
           </tr>
           <tr>
-            <td><select id="iEv_opt" onchange="iEv=dispEv($('iEv_opt').value,outEv)"></select>
-              <button type="button" style="font-size: 12px"
-                onclick="iEv=dispEv(--iEv,outEv)">&lt;</button>
-              <button type="button" style="font-size: 12px"
-                onclick="iEv=dispEv(++iEv,outEv)">&gt;</button></td>
+            <td></td>
           </tr>
-        </table> <br /> <b> Evolution Summary </b>(comma as delimiter)<br /> <textarea
-          id="field_EvSumm" style="width: 350px; height: 150px"></textarea></td>
+        </table> <br /> <b> Evolution Summary </b>(spread sheet)<br /> <textarea
+          id="field_EvSumm" style="width: 350px; height: 100px"></textarea></td>
       <td style="vertical-align: top"><b>Draw Atoms on </b> <select id="field1_opt"
         style="font-size: 12px">
           <option value="0">Solid shape (Slow with large void)</option>
@@ -245,7 +251,8 @@ var FL=["  ",
           Canv1.specs.projectionPerspective_3D = false;
           Canv1.loadMolecule(ChemDoodle.readXYZ(""));
         </script></td>
-      <td style="vertical-align: top"><table class="table1" style="white-space: nowrap">
+      <td style="vertical-align: top"><table class="table1"
+          style="white-space: nowrap">
           <col class="col1">
           <col class="col2">
           <col class="col1">
@@ -526,24 +533,29 @@ function calcTime(outEv,j,Ds,T) {
 
 function dispEvSmy(outEv) {
   var smyEv="", accr_t=0, Ds=calcDs(), T=$("tT").value, Q=$("tQ").value, D0=$("tD0").value
-  smyEv+="Ds (nm^2/s),T (K),Q (eV),D0 (nm^2/s)\n"
-  smyEv+=Ds.toExponential(3)+","+T+","
-  if(setDs()==0) smyEv+=Q+","+D0
-  else smyEv+="-,-"
+  smyEv+="Ds\tT\tQ\tD0\n"
+  smyEv+="nm²/s\tK\teV\tnm²/s\n"
+  smyEv+=Ds.toExponential(3)+"\t"+T+"\t"
+  if(setDs()==0) smyEv+=Q+"\t"+D0
+  else smyEv+="-\t-"
   
-  smyEv+="\n\nStep,Cut Face #,Cut Face,"
-  smyEv+="Atoms,Surface E (eV),dE/dN,Time (s),Accrued Time (min),D{111} (nm),D{002} (nm),D{002}/D{111}"
-  for(k=1;k<=14;k++) smyEv+=",L"+FL[k];
-  for(k=1;k<=14;k++) smyEv+=",S"+FL[k];
+  smyEv+="\n\nStep\tSelected\t"
+  smyEv+="Atoms\tSurface E\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". L"+FL[k];
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". S"+FL[k];
+  smyEv+="\n \t \t \teV\teV\ts\tmin\tnm\tnm\t "
+  for(k=1;k<=14;k++) smyEv+="\tAtom L.";
+  for(k=1;k<=14;k++) smyEv+="\tnm²";
 
   for(var j=0;j<=outEv.length-1;j++) {
     accr_t+=outEv[j].t
-    smyEv+="\n"+j+","+outEv[j].i+",'"+FL[outEv[j].i]+"',"
-    smyEv+=outEv[j].n+","+outEv[j].E.toFixed(4)+","+outEv[j].d.toFixed(4)+","
-    smyEv+=outEv[j].t.toExponential(5)+","+(accr_t/60).toExponential(5)+","
-    smyEv+=(outEv[j].L[15]/sqrt3*a/5).toFixed(3)+","+(outEv[j].L[16]*a/10).toFixed(3)+","+outEv[j].L[17].toFixed(4)
-    for(var k=1;k<=14;k++) {smyEv+=","+outEv[j].L[k]}
-    for(var k=1;k<=14;k++) {smyEv+=","+outEv[j].S[k].toFixed(2)}
+    smyEv+="\n"+j+"\t"+outEv[j].i+". '"+FL[outEv[j].i]+"'\t"
+    smyEv+=outEv[j].n+"\t"+outEv[j].E.toFixed(4)+"\t"+outEv[j].d.toFixed(4)+"\t"
+    smyEv+=outEv[j].t.toExponential(5)+"\t"+(accr_t/60).toExponential(5)+"\t"
+    smyEv+=(outEv[j].L[15]/sqrt3*a/5).toFixed(3)+"\t"
+    smyEv+=(outEv[j].L[16]*a/10).toFixed(3)+"\t"+outEv[j].L[17].toFixed(4)
+    for(var k=1;k<=14;k++) {smyEv+="\t"+outEv[j].L[k]}
+    for(var k=1;k<=14;k++) {smyEv+="\t"+(outEv[j].S[k]*as).toFixed(2)}
   }
   
   return smyEv
@@ -602,10 +614,10 @@ function dispCalc(n,L,S,P) {
 }
 
 function dispSpec(n, L, S) {
-  var NL=2, Sa, Sr, La, E
+  var NL=2, Sa, La, E
   
   for(var i=1; i<=16; i++) {
-    Sr=S[i], Sa=S[i]*as
+    Sa=S[i]*as
     
     if(i<=8 || i==15) {
       La=L[i]*a/sqrt3
@@ -617,7 +629,7 @@ function dispSpec(n, L, S) {
 
     $("dpLr_"+i).innerHTML  =L[i]; 
     $("dpLa_"+i).innerHTML  =La.toFixed(NL); 
-    $("dpSr_"+i).innerHTML  =Sr.toFixed(NL); 
+    $("dpSr_"+i).innerHTML  =S[i].toFixed(NL); 
     $("dpSa_"+i).innerHTML  =Sa.toFixed(NL); 
     $("dpE_"+i).innerHTML =E.toExponential(3)
   }
@@ -891,6 +903,7 @@ function fmtStr(str, fmt) {
   if(str.length<fmt) str += Array(fmt-str.length+1).join(" ")
   return str
 }
+
 </script>
 </body>
 </html>
