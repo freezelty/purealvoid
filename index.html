@@ -17,11 +17,26 @@ var FL=["  ",
   "(002)","(002̅)"];
 </script>
 <style type="text/css">
+div {
+  text-align: justfy;
+  text-justify: distribute;
+}
+
+p {
+  display: inline;
+}
+
+b {
+  display: inline;
+}
+
 .table1 {
   border-collapse: collapse;
   font-size: 10pt;
   font-family: Courier;
   text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid
 }
 
 .table1 td {
@@ -35,43 +50,50 @@ var FL=["  ",
   border-bottom: 1px solid;
 }
 
-.table1 .col1 {
+.table1 col {
   border-right: 1px solid;
+  border-left: 1px solid;
 }
 
-.table1 .col2 {
+.table1 .col1 {
   border-right: 1px dotted;
 }
 
-.table1 .th1 {
-  border: none;
-}
-
 .table2 {
+  padding: 0px 20px;
+}
+
+.table3 {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table3 .td1 {
+  text-align: left;
+}
+
+.table3 th {
+  font-style: italic;
   text-align: center;
-  border: 2px solid;
 }
 
-.table2 td {
-  padding: 5px;
+.table4 {
+  width: 100%;
 }
 
-.table2 .td1 {
-  padding-top: 10px;
-  padding-bottom: 0px;
-  border-top: 1px solid
+.table5{
+  padding: 10px;
 }
 </style>
 <body>
-  <table style="text-align: center">
+  <table style="text-align: left">
     <tbody>
       <tr>
-        <td></td>
-        <td style="text-align: left">
-          <table style="font-size: 12pt">
+        <td>
+          <table style="white-space: nowrap;">
             <tbody>
               <tr>
-                <th style="text-align: center">Distances (atom layers) from centre:</th>
+                <th>Distances (atom layers) from centre</th>
               </tr>
               <tr>
                 <td><table style="text-align: right; text-indent: 5px">
@@ -79,32 +101,32 @@ var FL=["  ",
                       <tr>
                         <td><button type="button" style="font-size: 10pt"
                             onclick="setAllL(0)">Set L{111}</button></td>
-                        <td>1. L(111) = <input style="width: 50px" id="tL111_1"
+                        <td>1. L(111) = <input style="width: 30px" id="tL111_1"
                           value="35" type="text">
                         </td>
-                        <td>2. L(111̅) = <input style="width: 50px" id="tL111_2"
+                        <td>2. L(111̅) = <input style="width: 30px" id="tL111_2"
                           value="35" type="text">
                         </td>
-                        <td>3. L(11̅1) = <input style="width: 50px" id="tL111_3"
+                        <td>3. L(11̅1) = <input style="width: 30px" id="tL111_3"
                           value="35" type="text">
                         </td>
-                        <td>4. L(11̅1̅) = <input style="width: 50px" id="tL111_4"
+                        <td>4. L(11̅1̅) = <input style="width: 30px" id="tL111_4"
                           value="35" type="text">
                         </td>
                       </tr>
                       <tr>
-                        <td style="text-align: center"><input style="width: 50px"
+                        <td style="text-align: center"><input style="width: 30px"
                           id="tL111_all" value="35" type="text"></td>
-                        <td>5. L(1̅11) = <input style="width: 50px" id="tL111_5"
+                        <td>5. L(1̅11) = <input style="width: 30px" id="tL111_5"
                           value="35" type="text">
                         </td>
-                        <td>6. L(1̅11̅) = <input style="width: 50px" id="tL111_6"
+                        <td>6. L(1̅11̅) = <input style="width: 30px" id="tL111_6"
                           value="35" type="text">
                         </td>
-                        <td>7. L(1̅1̅1) = <input style="width: 50px" id="tL111_7"
+                        <td>7. L(1̅1̅1) = <input style="width: 30px" id="tL111_7"
                           value="35" type="text">
                         </td>
-                        <td>8. L(1̅1̅1̅) = <input style="width: 50px" id="tL111_8"
+                        <td>8. L(1̅1̅1̅) = <input style="width: 30px" id="tL111_8"
                           value="35" type="text">
                         </td>
                       </tr>
@@ -115,26 +137,26 @@ var FL=["  ",
                       <tr>
                         <td><button type="button" style="font-size: 10pt"
                             onclick="setAllL(1)">Set L{002}</button></td>
-                        <td>9. L(200) = <input style="width: 50px" id="tL002_1"
+                        <td>9. L(200) = <input style="width: 30px" id="tL002_1"
                           value="43" type="text">
                         </td>
-                        <td>11. L(020) = <input style="width: 50px" id="tL002_3"
+                        <td>11. L(020) = <input style="width: 30px" id="tL002_3"
                           value="43" type="text">
                         </td>
-                        <td>13. L(002) = <input style="width: 50px" id="tL002_5"
+                        <td>13. L(002) = <input style="width: 30px" id="tL002_5"
                           value="43" type="text">
                         </td>
                       </tr>
                       <tr>
-                        <td style="text-align: center"><input style="width: 50px"
+                        <td style="text-align: center"><input style="width: 30px"
                           id="tL002_all" value="43" type="text"></td>
-                        <td>10. L(2̅00) = <input style="width: 50px" id="tL002_2"
+                        <td>10. L(2̅00) = <input style="width: 30px" id="tL002_2"
                           value="43" type="text">
                         </td>
-                        <td>12. L(02̅0) = <input style="width: 50px" id="tL002_4"
+                        <td>12. L(02̅0) = <input style="width: 30px" id="tL002_4"
                           value="43" type="text">
                         </td>
-                        <td>14. L(002̅) = <input style="width: 50px" id="tL002_6"
+                        <td>14. L(002̅) = <input style="width: 30px" id="tL002_6"
                           value="43" type="text">
                         </td>
                       </tr>
@@ -144,81 +166,82 @@ var FL=["  ",
             </tbody>
           </table>
         </td>
-        <td><table class="table2">
+        <td style="vertical-align: top"><table>
             <tr>
-              <td>
-                <button type="button" onclick="OneClickDraw()" style="font-size: 13px">
-                  Calculate &amp; Draw</button>
-              </td>
+              <th colspan='2'>Notes</th>
             </tr>
             <tr>
-              <td class="td1">
-                <button type="button" style="font-size: 12px" onclick="CalcOnly()">Calculate</button>
-                <button type="button" style="font-size: 12px" onclick="loadMol()">Draw</button>
-              </td>
+              <td style="vertical-align: top">1.</td>
+              <td>In the 3D Structure display, vacancies are represented as Al atoms,
+                while emptiness outside the atoms block represents Al matrix.</td>
             </tr>
             <tr>
+              <td>2.</td>
+              <td>The origin is marked with a H atom, whether there should be an Al
+                atom or not.</td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>A text field would not display results if its content is too long;
+                download as text file instead.</td>
             </tr>
           </table></td>
       </tr>
     </tbody>
   </table>
-  <table>
+  <table class='table5'>
     <tr>
-      <td style="vertical-align: top"><table style="text-align: right">
+      <td style="vertical-align: top"><table class="table3">
           <tr>
-            <th><input value="Evolute" onclick="outEv=Evolute();iEv=outEv.length-1"
-              style="font-size: 12pt" type="button"> <select id="iEv_opt"
-              onchange="iEv=dispEv($('iEv_opt').value,outEv)"></select>
-              <button type="button" style="font-size: 12px"
-                onclick="iEv=dispEv(--iEv,outEv)">&lt;</button>
-              <button type="button" style="font-size: 12px"
-                onclick="iEv=dispEv(++iEv,outEv)">&gt;</button></th>
+            <td class='td1'><b>Void Evolution Options</b></td>
+            <td colspan='4'><select id="iEv_opt"
+              onchange="iEv=$('iEv_opt').value;dispEv()"></select>
+              <button type="button" style="font-size: 12px" onclick="--iEv;dispEv()">&lt;</button>
+              <button type="button" style="font-size: 12px" onclick="++iEv;dispEv()">&gt;</button>
           </tr>
           <tr>
-            <td><table id='DsTable' style="text-align: right">
-                <tr>
-                  <td>Temp. Independent Pre-factor</td>
-                  <td style="font-weight: bold; font-style: italic">D&#8320;</td>
-                  <td>=</td>
-                  <td><input style="width: 50px" id="tD0" value="0.73" type="text"
-                    onchange="calcDs()"></td>
-                  <td>nm&sup2;/s</td>
-                </tr>
-                <tr>
-                  <td>Diffusion Activation Energy</td>
-                  <td style="font-weight: bold; font-style: italic">Q</td>
-                  <td>=</td>
-                  <td><input style="width: 50px" id="tQ" value="0.194" type="text"
-                    onchange="calcDs()"></td>
-                  <td>eV</td>
-                </tr>
-                <tr>
-                  <td>Temperature</td>
-                  <td style="font-weight: bold; font-style: italic">T</td>
-                  <td>=</td>
-                  <td><input style="width: 50px" id="tT" value="373" type="text"
-                    onchange="calcDs()"></td>
-                  <td>K</td>
-                </tr>
-                <tr>
-                  <td>Diffusion Coefficient</td>
-                  <td style="font-weight: bold; font-style: italic">D<sub>S</sub></td>
-                  <td>=</td>
-                  <td id="dDs">1.746e-3</td>
-                  <td>nm&sup2;/s</td>
-                </tr>
-                <tr>
-                  <td><input id="setDs_opt" type="checkbox" onclick="setDs()">Set</td>
-                  <td style="font-weight: bold; font-style: italic">D<sub>S</sub></td>
-                  <td>=</td>
-                  <td>1</td>
-                  <td>nm&sup2;/s</td>
-                </tr>
-              </table></td>
+            <td colspan='5'></td>
           </tr>
           <tr>
-            <td>Calculate graphs when <select id="gphEv_opt" style="width: 80px">
+            <td>Temp. Independent Pre-factor</td>
+            <th>D&#8320;</th>
+            <td>=</td>
+            <td><input style="width: 50px" id="tD0" value="0.73" type="text"
+              onchange="calcDs()"></td>
+            <td class='td1'>nm&sup2;/s</td>
+          </tr>
+          <tr>
+            <td>Diffusion Activation Energy</td>
+            <th>Q</th>
+            <td>=</td>
+            <td><input style="width: 50px" id="tQ" value="0.194" type="text"
+              onchange="calcDs()"></td>
+            <td class='td1'>eV</td>
+          </tr>
+          <tr>
+            <td>Temperature</td>
+            <th>T</th>
+            <td>=</td>
+            <td><input style="width: 50px" id="tT" value="373" type="text"
+              onchange="calcDs()"></td>
+            <td class='td1'>K</td>
+          </tr>
+          <tr>
+            <td>Diffusion Coefficient</td>
+            <th>D<sub>S</sub></th>
+            <td>=</td>
+            <td id="dDs">1.746e-3</td>
+            <td class='td1'>nm&sup2;/s</td>
+          </tr>
+          <tr>
+            <td><input id="setDs_opt" type="checkbox" onclick="setDs()"> Set</td>
+            <th>D<sub>S</sub></th>
+            <td>=</td>
+            <td colspan="2" class='td1'>1 nm&sup2;/s</td>
+          </tr>
+          <tr>
+            <td colspan='5'>Calculate graphs when <select id="gphEv_opt"
+              style="width: 80px">
                 <option value="0">Iterate (very slow for voids not small enough)</option>
                 <option value="1">Display (short iteration time, slow display for
                   huge void)</option>
@@ -226,49 +249,71 @@ var FL=["  ",
             </select></td>
           </tr>
           <tr>
-            <td>Evolute <input style="width: 50px" id="tEv" value="1000" type="text">
-              steps
+            <td colspan='5'>Evolute <input style="width: 50px" id="tEv" value="1000"
+              type="text"> steps
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td colspan='5'><input value="Evolute" onclick="Evolute();"
+              style="font-size: 12pt" type="button"></td>
+          </tr>
+        </table> <br />
+        <table class="table4">
+          <tr>
+            <th style="text-align: left;">Evolution Summary</th>
+            <td style="text-align: right;"><input type=button
+              value="Download text file"
+              onclick="download('AlVoidEvolutionSummary',smyEv)" /></td>
           </tr>
           <tr>
-            <td></td>
+            <td colspan='2'><textarea id="field_EvSumm"
+                style="width: 100%; height: 100px"></textarea><br />*Paste to spreadsheet</td>
           </tr>
-        </table> <br /> <b> Evolution Summary </b>(spread sheet)<br /> <textarea
-          id="field_EvSumm" style="width: 350px; height: 100px"></textarea></td>
-      <td style="vertical-align: top"><b>Draw Atoms on </b> <select id="field1_opt"
-        style="font-size: 12px">
-          <option value="0">Solid shape (Slow with large void)</option>
-          <option value="1">Faces only (Relatively fast)</option>
-          <option value="2" selected>Edges only (Fast)</option>
-          <option value="3">Vertices (Fastest)</option>
-      </select><br /> <script>
-          var Canv1=new ChemDoodle.TransformCanvas3D('Canv1-1', 400,400);
-          Canv1.specs.backgroundColor='black';
-          Canv1.specs.set3DRepresentation('Ball and Stick');
-          Canv1.specs.projectionPerspective_3D = false;
-          Canv1.loadMolecule(ChemDoodle.readXYZ(""));
-        </script></td>
-      <td style="vertical-align: top"><table class="table1"
-          style="white-space: nowrap">
+        </table></td>
+      <td style="vertical-align: top"><table class="table2">
+          <tr>
+            <th style="text-align: left;">3D Structure</th>
+            <td style="text-align: right;"><button type="button"
+                onclick="OneClickDraw()" style="font-size: 13px">Calculate &amp;
+                Draw</button>
+              <button type="button" style="font-size: 12px" onclick="CalcOnly()">Calculate</button>
+              <button type="button" style="font-size: 12px" onclick="DrawOnly()">Draw</button></td>
+          </tr>
+          <tr>
+            <td colspan='2' style="text-align: right"><select id="field1_opt"
+              style="font-size: 12px; width: 150px">
+                <option value="0">All vacancies (Slow with large void)</option>
+                <option value="1">Vacancies on face only (Relatively fast)</option>
+                <option value="2" selected>Edge vacancies only (Fast)</option>
+                <option value="3">Vertices only (Fastest)</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td colspan='2'><script>
+              var Canv1=new ChemDoodle.TransformCanvas3D('Canv1-1', 400,400);
+              Canv1.specs.backgroundColor='black';
+              Canv1.specs.set3DRepresentation('Ball and Stick');
+              Canv1.specs.projectionPerspective_3D = false;
+              Canv1.loadMolecule(ChemDoodle.readXYZ(""));
+            </script></td>
+          </tr>
+        </table></td>
+      <td style="vertical-align: top"><b>Void Specifications</b><br /> <br />
+        <table class="table1">
+          <col>
           <col class="col1">
-          <col class="col2">
-          <col class="col1">
-          <col class="col2">
-          <col class="col1">
-          <col class="col1">
+          <col>
+          <col>
+          <col>
           <tr>
             <th rowspan="2">Face</th>
             <th colspan="2">Actual Dist.</th>
-            <th colspan="2">Area</th>
+            <th>Area</th>
             <th>Energy</th>
           </tr>
           <tr>
             <th>L</th>
             <th>&#8491;</th>
-            <th>a&sup2;</th>
             <th>&#8491;&sup2;</th>
             <th>eV</th>
           </tr>
@@ -276,7 +321,6 @@ var FL=["  ",
             <td>1. (111)</td>
             <td id="dpLr_1">0</td>
             <td id="dpLa_1">0</td>
-            <td id="dpSr_1">0</td>
             <td id="dpSa_1">0</td>
             <td id="dpE_1">0</td>
           </tr>
@@ -284,7 +328,6 @@ var FL=["  ",
             <td>2. (111̅)</td>
             <td id="dpLr_2">0</td>
             <td id="dpLa_2">0</td>
-            <td id="dpSr_2">0</td>
             <td id="dpSa_2">0</td>
             <td id="dpE_2">0</td>
           </tr>
@@ -292,7 +335,6 @@ var FL=["  ",
             <td>3. (11̅1)</td>
             <td id="dpLr_3">0</td>
             <td id="dpLa_3">0</td>
-            <td id="dpSr_3">0</td>
             <td id="dpSa_3">0</td>
             <td id="dpE_3">0</td>
           </tr>
@@ -300,7 +342,6 @@ var FL=["  ",
             <td>4. (11̅1̅)</td>
             <td id="dpLr_4">0</td>
             <td id="dpLa_4">0</td>
-            <td id="dpSr_4">0</td>
             <td id="dpSa_4">0</td>
             <td id="dpE_4">0</td>
           </tr>
@@ -308,7 +349,6 @@ var FL=["  ",
             <td>5. (1̅11)</td>
             <td id="dpLr_5">0</td>
             <td id="dpLa_5">0</td>
-            <td id="dpSr_5">0</td>
             <td id="dpSa_5">0</td>
             <td id="dpE_5">0</td>
           </tr>
@@ -316,7 +356,6 @@ var FL=["  ",
             <td>6. (1̅11̅)</td>
             <td id="dpLr_6">0</td>
             <td id="dpLa_6">0</td>
-            <td id="dpSr_6">0</td>
             <td id="dpSa_6">0</td>
             <td id="dpE_6">0</td>
           </tr>
@@ -324,7 +363,6 @@ var FL=["  ",
             <td>7. (1̅1̅1)</td>
             <td id="dpLr_7">0</td>
             <td id="dpLa_7">0</td>
-            <td id="dpSr_7">0</td>
             <td id="dpSa_7">0</td>
             <td id="dpE_7">0</td>
           </tr>
@@ -332,7 +370,6 @@ var FL=["  ",
             <td>8. (1̅1̅1̅)</td>
             <td id="dpLr_8">0</td>
             <td id="dpLa_8">0</td>
-            <td id="dpSr_8">0</td>
             <td id="dpSa_8">0</td>
             <td id="dpE_8">0</td>
           </tr>
@@ -340,7 +377,6 @@ var FL=["  ",
             <td>9. (200)</td>
             <td id="dpLr_9">0</td>
             <td id="dpLa_9">0</td>
-            <td id="dpSr_9">0</td>
             <td id="dpSa_9">0</td>
             <td id="dpE_9">0</td>
           </tr>
@@ -348,7 +384,6 @@ var FL=["  ",
             <td>10. (2̅00)</td>
             <td id="dpLr_10">0</td>
             <td id="dpLa_10">0</td>
-            <td id="dpSr_10">0</td>
             <td id="dpSa_10">0</td>
             <td id="dpE_10">0</td>
           </tr>
@@ -356,7 +391,6 @@ var FL=["  ",
             <td>11. (020)</td>
             <td id="dpLr_11">0</td>
             <td id="dpLa_11">0</td>
-            <td id="dpSr_11">0</td>
             <td id="dpSa_11">0</td>
             <td id="dpE_11">0</td>
           </tr>
@@ -364,7 +398,6 @@ var FL=["  ",
             <td>12. (02̅0)</td>
             <td id="dpLr_12">0</td>
             <td id="dpLa_12">0</td>
-            <td id="dpSr_12">0</td>
             <td id="dpSa_12">0</td>
             <td id="dpE_12">0</td>
           </tr>
@@ -372,7 +405,6 @@ var FL=["  ",
             <td>13. (002)</td>
             <td id="dpLr_13">0</td>
             <td id="dpLa_13">0</td>
-            <td id="dpSr_13">0</td>
             <td id="dpSa_13">0</td>
             <td id="dpE_13">0</td>
           </tr>
@@ -380,20 +412,18 @@ var FL=["  ",
             <td>14. (002̅)</td>
             <td id="dpLr_14">0</td>
             <td id="dpLa_14">0</td>
-            <td id="dpSr_14">0</td>
             <td id="dpSa_14">0</td>
             <td id="dpE_14">0</td>
           </tr>
           <tr>
             <th></th>
             <th colspan="2">Average</th>
-            <th colspan="3">Sum</th>
+            <th colspan="2">Sum</th>
           </tr>
           <tr>
             <td>15. {111}</td>
             <td id="dpLr_15">0</td>
             <td id="dpLa_15">0</td>
-            <td id="dpSr_15">0</td>
             <td id="dpSa_15">0</td>
             <td id="dpE_15">0</td>
           </tr>
@@ -401,65 +431,89 @@ var FL=["  ",
             <td>16. {002}</td>
             <td id="dpLr_16">0</td>
             <td id="dpLa_16">0</td>
-            <td id="dpSr_16">0</td>
             <td id="dpSa_16">0</td>
             <td id="dpE_16">0</td>
           </tr>
           <tr>
             <th></th>
             <th colspan="2">Ratio</th>
-            <th colspan="3">Sum</th>
-            <th>Atoms</th>
+            <th colspan="2">Sum</th>
           </tr>
           <tr>
             <td>17. Total</td>
             <td id="dpLr_17" colspan="2">0</td>
-            <td id="dpSr_17">0</td>
             <td id="dpSa_17">0</td>
             <td id="dpE_17">0</td>
+          </tr>
+        </table>
+        <table class="table1">
+          <col>
+          <tr>
+            <th>Vacancies</th>
+          </tr>
+          <tr>
             <td id="dpN">0</td>
           </tr>
         </table></td>
-      <td></td>
     </tr>
   </table>
   <table>
     <tr style="vertical-align: top">
-      <td><b>Evolution Log</b> <br /> <textarea id="field_EvLog"
-          style="width: 800px; height: 600px"></textarea></td>
-      <td><b>Atom Coordinates</b> (for 3D structure display)<br /> <textarea
-          id="field1" style="width: 400px; height: 600px"></textarea></td>
+      <td><table>
+          <tr>
+            <th style="text-align: left;">Evolution Iteration Log</th>
+            <td style="text-align: right;"><input type=button
+              value="Download text file"
+              onclick="download('AlVoidIterationLog',logEv)" /></td>
+          </tr>
+          <tr>
+            <td colspan='2'><textarea id="field_EvLog"
+                style="width: 800px; height: 600px"></textarea></td>
+          </tr>
+        </table></td>
+      <td><table>
+          <tr>
+            <th style="text-align: left;">Vacancy Coordinates (for 3D display)</th>
+            <td style="text-align: right;"><input type=button
+              value="Download text file"
+              onclick="download('AlVoidAtomCoordinates',textCd)" /></td>
+          </tr>
+          <tr>
+            <td colspan='2'><textarea id="field1" style="width: 400px; height: 600px"></textarea></td>
+          </tr>
+        </table></td>
     </tr>
   </table>
   <script>
   $("field1").value="", $("field_EvSumm").value="", $("field_EvLog").value=""
-  var L=[];
   var a=4.0495, as=a*a, Epa1=0.06552, Epa2=0.06864;
-  var outEv=[], iEv=0, sEvT=0, out, sqrt3=Math.sqrt(3)
+  var outEv=[], iEv=0, out, sqrt3=Math.sqrt(3)
   var omega=0.0164, xi=0.781, kB=8.6173324e-5
+  var smyEv="", logEv="", textCd=""
 
 function Evolute() {
-  sEvT=$('tEv').value
+  outEv=[];
+  var tEv=$('tEv').value
   var gph_opt=$("gphEv_opt").value
   var T=$("tT").value, Ds=calcDs()
-  var outj={}, outEv=[], dMax=0, d=0, i0=1, Li=[], Lu=[]
-  var j=0, logEv="", 
+  var outj={}, dMax=0, d=0, i0=1, Li=[], Lu=[], Lui=[1,-1]
+  var j=0
   
   Li=getAllL()
   outEv[0]=cpEv(EvSubStep(Li))
   
   for(var k=1;k<=14;k++) Lu[k]=0
   
-  logEv+="Step #: Atom, Total Surface Energy; 14 Face distances (atomic layers),  D{002}/D{111}\n"
-  logEv+="   Sub-step. This face to act on: Driving Force; 14 Face distances,  D{002}/D{111}\n"
-  logEv+=" * (This sub-step has the largest driving force so far)\n"
-  logEv+=" *^(Max driving force too, and this face hasn't been updated for too long)\n\n"
-  logEv+=" $ Selected sub-step, Driving Force, Steps since each face been grown (cut)\n"
+  logEv+="Step #: Vacancies, Total Surface Energy; 14 Face distances (atomic layer),  D{002}/D{111}\n\n"
+  logEv+="   Sub-step. This face to act on: ΔE/ΔN; D{002}/D{111}\n"
+  logEv+=" * (This sub-step has the largest ΔE/ΔN so far)\n"
+  logEv+=" *^(Max ΔE/ΔN too, and this face hasn't been updated for too long)\n\n"
+  logEv+=" $ Selected sub-step, ΔE/ΔN, Steps since each face's opposite been grown (cut)\n\n"
   
-  for(j=0; j<=sEvT; j++) {
-    logEv+="\n\nStep "+j+": "+outEv[j].n+", "+outEv[j].E.toExponential(4)+";  "
+  for(j=0; j<=tEv; j++) {
+    logEv+="\nStep "+j+": "+outEv[j].n+", "+outEv[j].E.toExponential(4)+";  "
     for(var k=1;k<=14;k++) {logEv+=outEv[j].L[k]+","}
-    logEv+=" "+outEv[j].L[17].toFixed(3)
+    logEv+=" "+outEv[j].L[17].toFixed(5)+"\n"
 
     if(gph_opt==0) outEv[j].P=genCoor(outEv[j].L);
     dMax=0, i0=1
@@ -472,42 +526,38 @@ function Evolute() {
       if(d>dMax) {
         i0=i, dMax=d
         logEv+="\n * "
-      } else if (d==dMax && Lu[i]>Lu[i0]) {
+      } else if (d==dMax && Lu[i]>Lu[i0]) {//avoid acting only on some faces
         i0=i, dMax=d
         logEv+="\n *^"
       } else logEv+="\n   ";
       
-      logEv+=j+"-"+fmtStr(i+".",3)+FL[i]+": "+d.toExponential(3)+";  "
-      for(var k=1;k<=14;k++) logEv+=Li[k]+",";
-      logEv+=" "+Li[17].toFixed(4)
-    }
-
-    logEv+="\n\n $ "+j+"-"+fmtStr(i0+".",3)+FL[i0]+": "+dMax.toExponential(3)+";  "
-    
-    for(var k=1;k<=14;k++) {
-      // Lu records how long since each face's last cut
-      if(outEv[j].L[k]==outj[i0].L[k]) Lu[k]++;
-      else Lu[k]=0;
-      logEv+=Lu[k]+","
+      logEv+=j+"-"+fmtStr(i+".",3)+FL[i]+": "+d.toExponential(3)+"; "
+      logEv+=Li[17].toFixed(5)
     }
 
     outEv[j+1]=cpEv(outj[i0])
     outEv[j].i=i0, outEv[j].d=dMax
-    outEv[j].t=calcTime(outEv, j, Ds, T)
+    outEv[j].t=calcTime(j, Ds, T)
+    
+    // Lu records how long since the opposite of each face last update
+    for(var k=1;k<=8;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[9-k]++; Lu[k]--;};
+    for(var k=9;k<=14;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[k-Lui[k%2]]++; Lu[k]--;};
+    
+    logEv+="\n\n $ "+j+"-"+fmtStr(i0+".",3)+FL[i0]+": "+dMax.toExponential(3)+";  "
+    for(var k=1;k<=14;k++) logEv+=Lu[k]+",";
     
     if (outEv[j+1].n<=0 || outEv[j+1].E<=0 || outEv[j].t<=0) {j++; break}
   }
   
   outEv.pop()
-  j--
+  tEv=--j
   
-  $("field_EvLog").value=logEv
-  $("field_EvSumm").value=dispEvSmy(outEv)
+  textEvSmy()
+  outputField(logEv,"field_EvLog")
+  outputField(smyEv,"field_EvSumm")
   $("iEv_opt").options.length=0
-  for(var i=0;i<=j;i++) $("iEv_opt").options[i] = new Option(i, i);
-  dispEv(j, outEv)
-  
-  return outEv
+  for(var i=0;i<=tEv;i++) $("iEv_opt").options[i]= new Option(i,i);
+  iEv=tEv; dispEv();
 }
 
 function EvSubStep(L) {
@@ -521,7 +571,7 @@ function cpEv(outi) {
   return {n:outi.n, E:outi.E, L:outi.L, S:outi.S, i:0, d:0, t:0, P:[""]}
 }
 
-function calcTime(outEv,j,Ds,T) {
+function calcTime(j,Ds,T) {
   //Calculate time
   var dn=outEv[j].n-outEv[j+1].n, S_D=0
   
@@ -531,8 +581,8 @@ function calcTime(outEv,j,Ds,T) {
   return t
 }
 
-function dispEvSmy(outEv) {
-  var smyEv="", accr_t=0, Ds=calcDs(), T=$("tT").value, Q=$("tQ").value, D0=$("tD0").value
+function textEvSmy() {
+  smyEv="", accr_t=0, Ds=calcDs(), T=$("tT").value, Q=$("tQ").value, D0=$("tD0").value
   smyEv+="Ds\tT\tQ\tD0\n"
   smyEv+="nm²/s\tK\teV\tnm²/s\n"
   smyEv+=Ds.toExponential(3)+"\t"+T+"\t"
@@ -540,7 +590,7 @@ function dispEvSmy(outEv) {
   else smyEv+="-\t-"
   
   smyEv+="\n\nStep\tSelected\t"
-  smyEv+="Atoms\tSurface E\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
+  smyEv+="Vacancies\tSurface E\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
   for(k=1;k<=14;k++) smyEv+="\t"+k+". L"+FL[k];
   for(k=1;k<=14;k++) smyEv+="\t"+k+". S"+FL[k];
   smyEv+="\n \t \t \teV\teV\ts\tmin\tnm\tnm\t "
@@ -550,67 +600,63 @@ function dispEvSmy(outEv) {
   for(var j=0;j<=outEv.length-1;j++) {
     accr_t+=outEv[j].t
     smyEv+="\n"+j+"\t"+outEv[j].i+". '"+FL[outEv[j].i]+"'\t"
-    smyEv+=outEv[j].n+"\t"+outEv[j].E.toFixed(4)+"\t"+outEv[j].d.toFixed(4)+"\t"
-    smyEv+=outEv[j].t.toExponential(5)+"\t"+(accr_t/60).toExponential(5)+"\t"
-    smyEv+=(outEv[j].L[15]/sqrt3*a/5).toFixed(3)+"\t"
-    smyEv+=(outEv[j].L[16]*a/10).toFixed(3)+"\t"+outEv[j].L[17].toFixed(4)
+    smyEv+=outEv[j].n+"\t"+outEv[j].E.toExponential(15)+"\t"+outEv[j].d.toExponential(15)+"\t"
+    smyEv+=outEv[j].t.toExponential(15)+"\t"+(accr_t/60).toExponential(15)+"\t"
+    smyEv+=(outEv[j].L[15]/sqrt3*a/5).toExponential(15)+"\t"
+    smyEv+=(outEv[j].L[16]*a/10).toExponential(15)+"\t"+outEv[j].L[17].toExponential(15)
     for(var k=1;k<=14;k++) {smyEv+="\t"+outEv[j].L[k]}
-    for(var k=1;k<=14;k++) {smyEv+="\t"+(outEv[j].S[k]*as).toFixed(2)}
+    for(var k=1;k<=14;k++) {smyEv+="\t"+(outEv[j].S[k]*as).toFixed(5)}
   }
-  
-  return smyEv
 }
 
-function dispEv(iEv, outEv) {
-  var sEvT=outEv.length-1, gph_opt=$("gphEv_opt").value
+function dispEv() {
+  var tEv=outEv.length-1, gph_opt=$("gphEv_opt").value
   
-  if(0<=iEv && iEv<=sEvT) {
+  if(0<=iEv && iEv<=tEv) {
     var L=outEv[iEv].L
     var P=outEv[iEv].P
     if(gph_opt==1) P=genCoor(L)
     
-    dispCalc(outEv[iEv].n,L,outEv[iEv].S,P)
-    
-    if($("field1").value!="") loadMol()
+    dispSpec(outEv[iEv].n,L,outEv[iEv].S)
+    draw3D(P)
     
     $('iEv_opt').options[iEv].selected=1
   } else if(iEv<0) iEv=0;
-  else iEv=sEvT
-  
-  return iEv
+  else iEv=tEv
 }
 
 function CalcOnly() {
   var L=getAllL()
-  dispCalc(calcAtom(L),L,calcArea(L),genCoor(L))
+  dispSpec(calcAtom(L),L,calcArea(L))
+}
+
+function DrawOnly() {
+  draw3D(genCoor(getAllL()))
 }
 
 function OneClickDraw() {
   $("field1").value=""
   var L=getAllL()
-  dispCalc(calcAtom(L),L,calcArea(L),genCoor(L))
-  loadMol()
+  dispSpec(calcAtom(L),L,calcArea(L))
+  draw3D(genCoor(L))
 }
 
-function loadMol() {
-  Canv1.loadMolecule(ChemDoodle.readXYZ($('field1').value));
-  Canv1.specs.compass_display = true;
-}
-
-function dispCalc(n,L,S,P) {
-  dispSpec(n,L,S)
+function draw3D(P) {
   var n1=P.length-1, cen=1
   if(n1<1) return 0;
   
-  var ls="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n"
+  textCd="\nAtom    X           Y           Z\nH  "+fmtcdNum([0,0,0],12.5,a)+"\n"
   
   for(i=1; i<=n1; i++) {
     if(P[i][0]==0 && P[i][1]==0 && P[i][2]==0) cen=0;
-    else ls += "Al "+fmtcdNum(P[i],12.5,a)+"\n";
+    else textCd += "Al "+fmtcdNum(P[i],12.5,a)+"\n";
   }
-  ls=(n1+cen)+ls;
+  textCd=(n1+cen)+textCd;
   
-  $('field1').value=ls
+  outputField(textCd,"field1")
+  
+  Canv1.loadMolecule(ChemDoodle.readXYZ($('field1').value));
+  Canv1.specs.compass_display = true;
 }
 
 function dispSpec(n, L, S) {
@@ -629,17 +675,15 @@ function dispSpec(n, L, S) {
 
     $("dpLr_"+i).innerHTML  =L[i]; 
     $("dpLa_"+i).innerHTML  =La.toFixed(NL); 
-    $("dpSr_"+i).innerHTML  =S[i].toFixed(NL); 
-    $("dpSa_"+i).innerHTML  =Sa.toFixed(NL); 
+    $("dpSa_"+i).innerHTML  =Sa.toExponential(NL); 
     $("dpE_"+i).innerHTML =E.toExponential(3)
   }
   
   $("dpLr_15").innerHTML  =L[15].toFixed(NL);
   $("dpLr_16").innerHTML  =L[16].toFixed(NL); 
   
-  $("dpLr_17").innerHTML  =L[17].toFixed(3); 
-  $("dpSr_17").innerHTML  =S[17].toFixed(NL); 
-  $("dpSa_17").innerHTML  =(S[17]*as).toFixed(NL); 
+  $("dpLr_17").innerHTML  =L[17].toFixed(5); 
+  $("dpSa_17").innerHTML  =(S[17]*as).toExponential(NL); 
   $("dpE_17").innerHTML =S[0].toExponential(3); 
   $("dpN").innerHTML=n; 
 }
@@ -854,7 +898,6 @@ function calc111OverlapAtom(x,y,a,b) {
 }
 
 function calc111Atom(x,a,b,c) {
-  
   var l=Math.floor((a+b+c)/2)-x
   if(l<=0) return 0;
   
@@ -884,6 +927,16 @@ function setDs() {
   else $('dDs').style="color:auto"
   
   return o
+}
+
+function outputField(text,field) {
+  if(text.length<1e6) $(field).value=text;
+  else $(field).value="";
+}
+
+function download(ti,text) {
+  var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  saveAs(blob,ti+".txt");
 }
 
 function fmtcdNum(P, fmt, a) {
