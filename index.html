@@ -81,8 +81,14 @@ b {
   width: 100%;
 }
 
-.table5{
+.table5 {
   padding: 10px;
+}
+
+.table6 td {
+  white-space: nowrap;
+  text-align: right;
+  padding: 2px;
 }
 </style>
 <body>
@@ -90,83 +96,74 @@ b {
     <tbody>
       <tr>
         <td>
-          <table style="white-space: nowrap;">
+          <table class='table6'>
             <tbody>
               <tr>
-                <th>Distances (atom layers) from centre</th>
+                <th colspan='5'>Distances (atom layers) from centre</th>
               </tr>
               <tr>
-                <td><table style="text-align: right; text-indent: 5px">
-                    <tbody>
-                      <tr>
-                        <td><button type="button" style="font-size: 10pt"
-                            onclick="setAllL(0)">Set L{111}</button></td>
-                        <td>1. L(111) = <input style="width: 30px" id="tL111_1"
-                          value="35" type="text">
-                        </td>
-                        <td>2. L(111̅) = <input style="width: 30px" id="tL111_2"
-                          value="35" type="text">
-                        </td>
-                        <td>3. L(11̅1) = <input style="width: 30px" id="tL111_3"
-                          value="35" type="text">
-                        </td>
-                        <td>4. L(11̅1̅) = <input style="width: 30px" id="tL111_4"
-                          value="35" type="text">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center"><input style="width: 30px"
-                          id="tL111_all" value="35" type="text"></td>
-                        <td>5. L(1̅11) = <input style="width: 30px" id="tL111_5"
-                          value="35" type="text">
-                        </td>
-                        <td>6. L(1̅11̅) = <input style="width: 30px" id="tL111_6"
-                          value="35" type="text">
-                        </td>
-                        <td>7. L(1̅1̅1) = <input style="width: 30px" id="tL111_7"
-                          value="35" type="text">
-                        </td>
-                        <td>8. L(1̅1̅1̅) = <input style="width: 30px" id="tL111_8"
-                          value="35" type="text">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table style="text-align: right; text-indent: 5px">
-                    <tbody>
-                      <tr>
-                        <td><button type="button" style="font-size: 10pt"
-                            onclick="setAllL(1)">Set L{002}</button></td>
-                        <td>9. L(200) = <input style="width: 30px" id="tL002_1"
-                          value="43" type="text">
-                        </td>
-                        <td>11. L(020) = <input style="width: 30px" id="tL002_3"
-                          value="43" type="text">
-                        </td>
-                        <td>13. L(002) = <input style="width: 30px" id="tL002_5"
-                          value="43" type="text">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: center"><input style="width: 30px"
-                          id="tL002_all" value="43" type="text"></td>
-                        <td>10. L(2̅00) = <input style="width: 30px" id="tL002_2"
-                          value="43" type="text">
-                        </td>
-                        <td>12. L(02̅0) = <input style="width: 30px" id="tL002_4"
-                          value="43" type="text">
-                        </td>
-                        <td>14. L(002̅) = <input style="width: 30px" id="tL002_6"
-                          value="43" type="text">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table></td>
+              <tr>
+                <td><button type="button" style="font-size: 10pt"
+                    onclick="setAllL(0)">Set L{111}</button></td>
+                <td>1. L(111) = <input style="width: 30px" id="tL111_1" value="35"
+                  type="text">
+                </td>
+                <td>2. L(111̅) = <input style="width: 30px" id="tL111_2" value="35"
+                  type="text">
+                </td>
+                <td>3. L(11̅1) = <input style="width: 30px" id="tL111_3" value="35"
+                  type="text">
+                </td>
+                <td>4. L(11̅1̅) = <input style="width: 30px" id="tL111_4" value="35"
+                  type="text">
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center"><input style="width: 30px"
+                  id="tL111_all" value="35" type="text"></td>
+                <td>5. L(1̅11) = <input style="width: 30px" id="tL111_5" value="35"
+                  type="text">
+                </td>
+                <td>6. L(1̅11̅) = <input style="width: 30px" id="tL111_6" value="35"
+                  type="text">
+                </td>
+                <td>7. L(1̅1̅1) = <input style="width: 30px" id="tL111_7" value="35"
+                  type="text">
+                </td>
+                <td>8. L(1̅1̅1̅) = <input style="width: 30px" id="tL111_8" value="35"
+                  type="text">
+                </td>
+              </tr>
+              <tr>
+                <td><button type="button" style="font-size: 10pt"
+                    onclick="setAllL(1)">Set L{002}</button></td>
+                <td>9. L(200) = <input style="width: 30px" id="tL002_1" value="43"
+                  type="text">
+                </td>
+                <td>11. L(020) = <input style="width: 30px" id="tL002_3" value="43"
+                  type="text">
+                </td>
+                <td>13. L(002) = <input style="width: 30px" id="tL002_5" value="43"
+                  type="text">
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align: center"><input style="width: 30px"
+                  id="tL002_all" value="43" type="text"></td>
+                <td>10. L(2̅00) = <input style="width: 30px" id="tL002_2" value="43"
+                  type="text">
+                </td>
+                <td>12. L(02̅0) = <input style="width: 30px" id="tL002_4" value="43"
+                  type="text">
+                </td>
+                <td>14. L(002̅) = <input style="width: 30px" id="tL002_6" value="43"
+                  type="text">
+                </td>
               </tr>
             </tbody>
           </table>
         </td>
-        <td style="vertical-align: top"><table>
+        <td style="vertical-align: top"><table style="padding:0px 5px 5px 30px">
             <tr>
               <th colspan='2'>Notes</th>
             </tr>
@@ -185,6 +182,7 @@ b {
               <td>A text field would not display results if its content is too long;
                 download as text file instead.</td>
             </tr>
+            </tbody>
           </table></td>
       </tr>
     </tbody>
@@ -463,8 +461,7 @@ b {
           <tr>
             <th style="text-align: left;">Evolution Iteration Log</th>
             <td style="text-align: right;"><input type=button
-              value="Download text file"
-              onclick="download('AlVoidIterationLog',logEv)" /></td>
+              value="Download text file" onclick="download('AlVoidIterationLog',logEv)" /></td>
           </tr>
           <tr>
             <td colspan='2'><textarea id="field_EvLog"
