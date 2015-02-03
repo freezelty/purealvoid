@@ -537,9 +537,8 @@ function Evolute() {
       logEv+=Li[17].toFixed(5)
     }
 
-    outEv[j+1]=cpEv(outj[i0])
-    outEv[j].i=i0, outEv[j].d=dMax
-    outEv[j].t=calcTime(j, Ds, T)
+    outEv[j+1]=cpEv(outj[i0]), outEv[j+1].i=i0, 
+    outEv[j].d=dMax, outEv[j].t=calcTime(j, Ds, T)
     
     // Lu records how long since the opposite of each face last update
     for(var k=1;k<=8;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[9-k]++; Lu[k]--;};
