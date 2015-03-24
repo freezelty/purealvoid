@@ -170,23 +170,14 @@ b {
             <tr>
               <td style="vertical-align: top">1.</td>
               <td>In the 3D Structure display, vacancies are represented as Al atoms,
-                while emptiness outside the atoms block represents Al matrix.</td>
+                while emptiness outside the atom block represents Al matrix. The origin is
+                marked with a H atom, whether there should be an Al atom or not.</td>
             </tr>
             <tr>
               <td style="vertical-align: top">2.</td>
-              <td>The origin is marked with a H atom, whether there should be an Al
-                atom or not.</td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top">3.</td>
-              <td>A text field would not display results if its content is too long;
-                download text file instead.</td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top">4.</td>
-              <td>Use Microsoft Excel to open downloaded files may cause display
-                error with special characters, but copy from a text editor would solve the
-                problem.</td>
+              <td>Use Microsoft Excel to open downloaded files may run into display
+                error with special characters, but copy to Excel from a text editor would
+                solve the problem.</td>
             </tr>
           </table></td>
       </tr>
@@ -246,18 +237,17 @@ b {
             <td colspan='5'>Calculate graphs when <select id="gphEv_opt"
               style="width: 80px">
                 <option value="0">Iterate (very slow for voids not small enough)</option>
-                <option value="1">Display (short iteration time, slow display for
-                  huge void)</option>
-                <option value="2" selected>No graph (fastest)</option>
+                <option value="1" selected>Display (short iteration time)</option>
+                <option value="2">No graph (fastest)</option>
             </select></td>
           </tr>
           <tr>
-            <td colspan='5'>Evolute <input style="width: 50px" id="tEv" value="1000"
+            <td colspan='5'>Evolve <input style="width: 50px" id="tEv" value="1000"
               type="text"> steps
             </td>
           </tr>
           <tr>
-            <td colspan='5'><input value="Evolute" onclick="Evolute();"
+            <td colspan='5'><input value="Evolve" onclick="Evolute();"
               style="font-size: 12pt" type="button"></td>
           </tr>
         </table> <br />
@@ -283,10 +273,10 @@ b {
               <button type="button" style="font-size: 12px" onclick="DrawOnly()">Draw</button></td>
           </tr>
           <tr>
-            <td colspan='2' style="text-align: right"><select id="field1_opt"
+            <td colspan='2'>Display option  <select id="field1_opt"
               style="font-size: 12px; width: 150px">
                 <option value="0">All vacancies (Slow with large void)</option>
-                <option value="1">Vacancies on face only (Relatively fast)</option>
+                <option value="1">Vacancies on facet only (Relatively fast)</option>
                 <option value="2" selected>Edge vacancies only (Fast)</option>
                 <option value="3">Vertices only (Fastest)</option>
             </select></td>
@@ -301,7 +291,7 @@ b {
             </script></td>
           </tr>
         </table></td>
-      <td style="vertical-align: top"><b>Void Specifications</b><br /> <br />
+      <td style="vertical-align: top"><b>Void Status</b><br /> <br />
         <table class="table1">
           <col>
           <col class="col1">
@@ -443,7 +433,7 @@ b {
             <th colspan="2">Sum</th>
           </tr>
           <tr>
-            <td>17. Total</td>
+            <td>Total</td>
             <td id="dpLr_17" colspan="2">0</td>
             <td id="dpSa_17">0</td>
             <td id="dpE_17">0</td>
@@ -488,23 +478,25 @@ b {
   </table>
   <script>
   $("field1").value="", $("field_EvSumm").value="", $("field_EvLog").value=""
-  var a=4.0495, as=a*a, Epa1=0.06552, Epa2=0.06864;
-  var outEv=[], iEv=0, out, sqrt3=Math.sqrt(3)
+  var a=4.0495, as=a*a, Epa1=0.06552, Epa2=0.06864
+  var sqrt3=Math.sqrt(3), a_sqrt3=a/sqrt3, a_2=a/2, t21=sqrt3/2/1.0477
   var omega=0.0164, xi=0.781, kB=8.6173324e-5
+  var T=373, Ds=1
+  var outEv=[], iEv=0
   var smyEv="", logEv="", textCd=""
 
 function Evolute() {
   outEv=[];
+  T=$("tT").value, Ds=calcDs()
   var tEv=$('tEv').value
   var gph_opt=$("gphEv_opt").value
-  var T=$("tT").value, Ds=calcDs()
-  var outj={}, dMax=0, d=0, i0=1, Li=[], Lu=[], Lui=[1,-1]
+  var outj1=[], dn=0, fMax=0, f=0, dt=0, tMin=0, i0=1, Li=[], Lu=[], Lui=[1,-1]
   var j=0
+  
+  for(var k=1;k<=14;k++) Lu[k]=0;
   
   Li=getAllL()
   outEv[0]=cpEv(EvSubStep(Li))
-  
-  for(var k=1;k<=14;k++) Lu[k]=0
   
   logEv+="Step #: Vacancies, Total Surface Energy; 14 Face distances (atomic layer),  D{002}/D{111}\n\n"
   logEv+="   Sub-step. This face to act on: ΔE/ΔN; D{002}/D{111}\n"
@@ -515,39 +507,44 @@ function Evolute() {
   for(j=0; j<=tEv; j++) {
     logEv+="\nStep "+j+": "+outEv[j].n+", "+outEv[j].E.toExponential(4)+";  "
     for(var k=1;k<=14;k++) {logEv+=outEv[j].L[k]+","}
-    logEv+=" "+outEv[j].L[17].toFixed(5)+"\n"
+    logEv+=" "+outEv[j].L[0].toFixed(5)+"\n"
 
     if(gph_opt==0) outEv[j].P=genCoor(outEv[j].L);
-    dMax=0, i0=1
+    fMax=0, i0=1
 
     for(var i=1; i<=14; i++) {
       Li=outEv[j].L.slice(), Li[i]--, Li=calcL(Li)
-      outj[i]=EvSubStep(Li)
-      d=(outEv[j].E-outj[i].E)/(outEv[j].n-outj[i].n)
+      outj1[i]=EvSubStep(Li)
+      dn=outEv[j].n-outj1[i].n
+      f=(outEv[j].E-outj1[i].E)/dn
       
-      if(d>dMax) {
-        i0=i, dMax=d
-        logEv+="\n * "
-      } else if (d==dMax && Lu[i]>Lu[i0]) {//avoid acting only on some faces
-        i0=i, dMax=d
-        logEv+="\n *^"
-      } else logEv+="\n   ";
+      if(f>fMax) {
+        i0=i
+        fMax=f
+        logEv+="\n   * "
+      } else if (f==fMax && Lu[i]>Lu[i0]) {//avoid acting only on some faces
+        i0=i
+        fMax=f
+        logEv+="\n   *^"
+      } else logEv+="\n     ";
       
-      logEv+=j+"-"+fmtStr(i+".",3)+FL[i]+": "+d.toExponential(3)+"; "
-      logEv+=Li[17].toFixed(5)
+      logEv+=j+"-"+fmtStr(i+".",3)+FL[i]+": "+f.toExponential(3)+"; "
+      logEv+=Li[0].toFixed(5)
     }
 
-    outEv[j+1]=cpEv(outj[i0]), outEv[j+1].i=i0, 
-    outEv[j].d=dMax, outEv[j].t=calcTime(j, Ds, T)
+    outEv[j].dn=outEv[j].n-outj1[i0].n, outEv[j].f=fMax, outEv[j].i=i0
+    outEv[j].inR=inRatio(outEv[j])
+    outEv[j].dt=calcTime(outEv[j])
+    outEv[j+1]=cpEv(outj1[i0])
     
     // Lu records how long since the opposite of each face last update
     for(var k=1;k<=8;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[9-k]++; Lu[k]--;};
     for(var k=9;k<=14;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[k-Lui[k%2]]++; Lu[k]--;};
     
-    logEv+="\n\n $ "+j+"-"+fmtStr(i0+".",3)+FL[i0]+": "+dMax.toExponential(3)+";  "
+    logEv+="\n\n   $ "+j+"-"+fmtStr(i0+".",3)+FL[i0]+": "+fMax.toExponential(3)+";  "
     for(var k=1;k<=14;k++) logEv+=Lu[k]+",";
-    
-    if (outEv[j+1].n<=0 || outEv[j+1].E<=0 || outEv[j].t<=0) {j++; break}
+
+    if (outEv[j+1].n<=0 || outEv[j+1].E<=0 || outEv[j].dt<=0) {j++; break}
   }
   
   outEv.pop()
@@ -557,33 +554,49 @@ function Evolute() {
   outputField(logEv,"field_EvLog")
   outputField(smyEv,"field_EvSumm")
   $("iEv_opt").options.length=0
-  for(var i=0;i<=tEv;i++) $("iEv_opt").options[i]= new Option(i,i);
+  for(var i=0;i<=tEv;i++) $("iEv_opt").options[i]=new Option(i,i);
   iEv=tEv; dispEv();
 }
 
 function EvSubStep(L) {
   var n=calcAtom(L)
-  var S=calcArea(L)
+  var S=calcS(L)
   
   return {n:n, E:S[0], L:L, S:S}
 }
 
-function cpEv(outi) {
-  return {n:outi.n, E:outi.E, L:outi.L, S:outi.S, i:0, d:0, t:0, P:[""]}
+function cpEv(out) {
+  return {n:out.n, E:out.E, L:out.L, S:out.S, i:0, dn:0, f:0, inR:[], dt:0, P:[""]}
 }
 
-function calcTime(j,Ds,T) {
-  //Calculate time
-  var dn=outEv[j].n-outEv[j+1].n, S_D=0
+function inRatio(out) {
+  var i=out.i, L1=out.L.slice(), inR=[]
   
-  for(var k=1;k<=8;k++) S_D+=outEv[j].S[k]/outEv[j].L[k]*sqrt3
-  for(var k=9;k<=14;k++) S_D+=outEv[j].S[k]/outEv[j].L[k]*2
-  var t=dn/(S_D*a/10*Ds/omega/xi*(Math.exp(outEv[j].d/kB/T)-1))
-  return t
+  for(var k=9;k<=14;k++) L1[k]=Math.round(L1[k]*t21);
+  
+  for(var k=1;k<=14;k++) {
+    if(Math.abs(L1[k]-L1[i])<5) inR[k]="Y";
+    else inR[k]="N";
+  }
+  
+  return inR
+}
+
+function calcTime(out) {
+  //Calculate time
+  var S_D=0, L=out.L, S=out.S, dn=out.dn, f=out.f, inR=out.inR
+
+  for(var k=1;k<=8;k++) {if(inR[k]=="Y") S_D+=S[k]/L[k]*sqrt3;}
+  for(var k=9;k<=14;k++) {if(inR[k]=="Y") S_D+=S[k]/L[k]*2;}
+  
+  var dt=dn/(S_D*a/10*Ds/omega/xi*(Math.exp(f/kB/T)-1))
+  return dt
 }
 
 function textEvSmy() {
-  smyEv="", accr_t=0, Ds=calcDs(), T=$("tT").value, Q=$("tQ").value, D0=$("tD0").value
+  var i=0, dt=0, time=0, inR=[]
+  
+  smyEv="", time=0, Ds=calcDs(), T=$("tT").value, Q=$("tQ").value, D0=$("tD0").value
   smyEv+="Ds\tT\tQ\tD0\n"
   smyEv+="nm²/s\tK\teV\tnm²/s\n"
   smyEv+=Ds.toExponential(3)+"\t"+T+"\t"
@@ -591,23 +604,42 @@ function textEvSmy() {
   else smyEv+="-\t-"
   
   smyEv+="\n\nStep\tSelected\t"
-  smyEv+="Vacancies\tSurface E\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
+  smyEv+="Vacancies\tSurface E\tΔN\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
   for(k=1;k<=14;k++) smyEv+="\t"+k+". L"+FL[k];
   for(k=1;k<=14;k++) smyEv+="\t"+k+". S"+FL[k];
-  smyEv+="\n \t \t \teV\teV\ts\tmin\tnm\tnm\t "
+  smyEv+="\n \t \t \teV\t\teV/vacancy\tmin\tmin\tnm\tnm\t "
   for(k=1;k<=14;k++) smyEv+="\tAtom L.";
   for(k=1;k<=14;k++) smyEv+="\tnm²";
-
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". "+FL[k];
+  
   for(var j=0;j<=outEv.length-1;j++) {
-    accr_t+=outEv[j].t
-    smyEv+="\n"+j+"\t"+outEv[j].i+". '"+FL[outEv[j].i]+"'\t"
-    smyEv+=outEv[j].n+"\t"+outEv[j].E.toExponential(15)+"\t"+outEv[j].d.toExponential(15)+"\t"
-    smyEv+=outEv[j].t.toExponential(15)+"\t"+(accr_t/60).toExponential(15)+"\t"
-    smyEv+=(outEv[j].L[15]/sqrt3*a/5).toExponential(15)+"\t"
-    smyEv+=(outEv[j].L[16]*a/10).toExponential(15)+"\t"+outEv[j].L[17].toExponential(15)
-    for(var k=1;k<=14;k++) {smyEv+="\t"+outEv[j].L[k]}
-    for(var k=1;k<=14;k++) {smyEv+="\t"+(outEv[j].S[k]*as).toFixed(5)}
+    i=outEv[j].i, dt=outEv[j].dt, time+=dt, L=outEv[j].L, inR=outEv[j].inR
+    
+    smyEv+="\n"+j+"\t"+i+". '"+FL[i]+"'\t"
+    smyEv+=outEv[j].n+"\t"+outEv[j].E.toExponential(15)+"\t"+outEv[j].dn+"\t"
+    smyEv+=outEv[j].f.toExponential(15)+"\t"+(dt/60).toExponential(15)+"\t"
+    smyEv+=(time/60).toExponential(15)+"\t"+(outEv[j].L[15]/sqrt3*a/5).toExponential(15)+"\t"
+    smyEv+=(outEv[j].L[16]*a/10).toExponential(15)+"\t"+outEv[j].L[0].toExponential(15)
+    for(var k=1;k<=14;k++) smyEv+="\t"+outEv[j].L[k];
+    for(var k=1;k<=14;k++) smyEv+="\t"+(outEv[j].S[k]*as).toFixed(5);
+    for(var k=1;k<=14;k++) smyEv+="\t"+inR[k];
   }
+}
+
+function calcMaxDif(L) {
+  var L1=L.slice(), max, min
+
+  for(var k=9;k<=14;k++) L1[k]=Math.round(L[k]*t21);
+  
+  max=min=L1[1]
+  for(var k=2;k<=14;k++) {
+    if(L1[k]>max) max=L1[k];
+    else if(L1[k]<min) min=L1[k];
+  }
+  
+  dmax=max-min
+  
+  return dmax
 }
 
 function dispEv() {
@@ -628,7 +660,7 @@ function dispEv() {
 
 function CalcOnly() {
   var L=getAllL()
-  dispSpec(calcAtom(L),L,calcArea(L))
+  dispSpec(calcAtom(L),L,calcS(L))
 }
 
 function DrawOnly() {
@@ -638,7 +670,7 @@ function DrawOnly() {
 function OneClickDraw() {
   $("field1").value=""
   var L=getAllL()
-  dispSpec(calcAtom(L),L,calcArea(L))
+  dispSpec(calcAtom(L),L,calcS(L))
   draw3D(genCoor(L))
 }
 
@@ -683,7 +715,7 @@ function dispSpec(n, L, S) {
   $("dpLr_15").innerHTML  =L[15].toFixed(NL);
   $("dpLr_16").innerHTML  =L[16].toFixed(NL); 
   
-  $("dpLr_17").innerHTML  =L[17].toFixed(5); 
+  $("dpLr_17").innerHTML  =L[0].toFixed(5); 
   $("dpSa_17").innerHTML  =(S[17]*as).toExponential(NL); 
   $("dpE_17").innerHTML =S[0].toExponential(3); 
   $("dpN").innerHTML=n; 
@@ -700,7 +732,7 @@ function genCoor(L) {
           out=FCC(x0,y0,z0,i)
           x=out[0],y=out[1],z=out[2]
 
-          if(  L[1]+0.1>x+y+z && L[5]+0.1>-x+y+z && 
+          if( L[1]+0.1>x+y+z && L[5]+0.1>-x+y+z && 
               L[2]+0.1>x+y-z && L[6]+0.1>-x+y-z && 
               L[3]+0.1>x-y+z && L[7]+0.1>-x-y+z && 
               L[4]+0.1>x-y-z && L[8]+0.1>-x-y-z && 
@@ -755,10 +787,8 @@ function getAllL() {
 }
 
 function calcL(L) {
-  var L1=[]
+  var L1=[], la1=la2=0
 
-  L1[-1]=-1
-  L1[0]=0
   L1[1]=Math.min(L002toL111(9,11,13,L),L[1])
   L1[2]=Math.min(L002toL111(9,11,14,L),L[2])
   L1[3]=Math.min(L002toL111(9,12,13,L),L[3])
@@ -774,18 +804,26 @@ function calcL(L) {
   L1[13]=Math.min(L[1]+L[7], L[3]+L[5], L[13])
   L1[14]=Math.min(L[2]+L[8], L[4]+L[6], L[14])
   
-  var la1=la2=0
-  
-  for(var i=1; i<=14; i++) {
-    if(i<=8) la1+=L1[i]
-    else la2+=L1[i]
-  }
+  for(var i=1; i<=8; i++) la1+=L1[i]; 
+  for(var i=9; i<=14; i++)  la2+=L1[i];
 
   L1[15]=la1/8
   L1[16]=la2/6
-  L1[17]=(L1[16]/2)/(L1[15]/sqrt3)
+  L1[0]=(L1[16]/2)/(L1[15]/sqrt3)
   
   return L1
+}
+
+function calcD(L) {
+  var D=[]
+  
+  for(var i=1; i<=8; i++) D[i]=L[i]*a_sqrt3;
+  for(var i=9; i<=14; i++) D[i]=L[i]*a_2;
+  
+  D[15]=L[15]*a_sqrt3
+  D[16]=L[16]*a_2
+  
+  return D
 }
 
 function L002toL111(a,b,c, L) {
@@ -793,7 +831,7 @@ function L002toL111(a,b,c, L) {
   return Math.floor(x/2)
 }
 
-function calcArea(L) {
+function calcS(L) {
   var MS1=[], MS2=[], S=[], b=sqrt3/8
 
   MS1[1]=L[1]-L[2]-L[3]-L[5]
@@ -848,6 +886,14 @@ function calcArea(L) {
   S[0]=(S[15]*Epa1+S[16]*Epa2)*as
   
   return S
+}
+
+function calcArea(S) {
+  var SA=[]
+  
+  for(var i=1; i<=17; i++) SA[i]=S[i]*as;
+  
+  return SA
 }
 
 function calcAtom(L) {
@@ -932,7 +978,7 @@ function setDs() {
 
 function outputField(text,field) {
   if(text.length<1e6) $(field).value=text;
-  else $(field).value="";
+  else $(field).value="Content is too large to display, please download.";
 }
 
 function download(ti,text) {
