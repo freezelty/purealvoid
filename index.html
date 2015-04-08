@@ -10,7 +10,7 @@
 <script type="text/javascript" src="http://hub.chemdoodle.com/cwc/latest/ChemDoodleWeb.js"></script>
 <script type="text/javascript" src="FileSaver.min.js"></script>
 <script> var $=function(id){return document.getElementById(id)} 
-var FL=["  ",
+var FI=["  ",
   "(111)","(111̅)","(11̅1)","(11̅1̅)",
   "(1̅11)","(1̅11̅)","(1̅1̅1)","(1̅1̅1̅)",
   "(200)","(2̅00)","(020)","(02̅0)",
@@ -104,59 +104,59 @@ b {
               <tr>
               <tr>
                 <td><button type="button" style="font-size: 10pt"
-                    onclick="setAllL(0)">Set L{111}</button></td>
-                <td>1. L(111) = <input style="width: 30px" id="tL111_1" value="35"
+                    onclick="setAllI(0)">Set I{111}</button></td>
+                <td>1. I(111) = <input style="width: 30px" id="tI111_1" value="35"
                   type="text">
                 </td>
-                <td>2. L(111̅) = <input style="width: 30px" id="tL111_2" value="35"
+                <td>2. I(111̅) = <input style="width: 30px" id="tI111_2" value="35"
                   type="text">
                 </td>
-                <td>3. L(11̅1) = <input style="width: 30px" id="tL111_3" value="35"
+                <td>3. I(11̅1) = <input style="width: 30px" id="tI111_3" value="35"
                   type="text">
                 </td>
-                <td>4. L(11̅1̅) = <input style="width: 30px" id="tL111_4" value="35"
+                <td>4. I(11̅1̅) = <input style="width: 30px" id="tI111_4" value="35"
                   type="text">
                 </td>
               </tr>
               <tr>
                 <td style="text-align: center"><input style="width: 30px"
-                  id="tL111_all" value="35" type="text"></td>
-                <td>5. L(1̅11) = <input style="width: 30px" id="tL111_5" value="35"
+                  id="tI111_all" value="35" type="text"></td>
+                <td>5. I(1̅11) = <input style="width: 30px" id="tI111_5" value="35"
                   type="text">
                 </td>
-                <td>6. L(1̅11̅) = <input style="width: 30px" id="tL111_6" value="35"
+                <td>6. I(1̅11̅) = <input style="width: 30px" id="tI111_6" value="35"
                   type="text">
                 </td>
-                <td>7. L(1̅1̅1) = <input style="width: 30px" id="tL111_7" value="35"
+                <td>7. I(1̅1̅1) = <input style="width: 30px" id="tI111_7" value="35"
                   type="text">
                 </td>
-                <td>8. L(1̅1̅1̅) = <input style="width: 30px" id="tL111_8" value="35"
+                <td>8. I(1̅1̅1̅) = <input style="width: 30px" id="tI111_8" value="35"
                   type="text">
                 </td>
               </tr>
               <tr>
                 <td><button type="button" style="font-size: 10pt"
-                    onclick="setAllL(1)">Set L{002}</button></td>
-                <td>9. L(200) = <input style="width: 30px" id="tL002_1" value="43"
+                    onclick="setAllI(1)">Set I{002}</button></td>
+                <td>9. I(200) = <input style="width: 30px" id="tI002_1" value="43"
                   type="text">
                 </td>
-                <td>11. L(020) = <input style="width: 30px" id="tL002_3" value="43"
+                <td>11. I(020) = <input style="width: 30px" id="tI002_3" value="43"
                   type="text">
                 </td>
-                <td>13. L(002) = <input style="width: 30px" id="tL002_5" value="43"
+                <td>13. I(002) = <input style="width: 30px" id="tI002_5" value="43"
                   type="text">
                 </td>
               </tr>
               <tr>
                 <td style="text-align: center"><input style="width: 30px"
-                  id="tL002_all" value="43" type="text"></td>
-                <td>10. L(2̅00) = <input style="width: 30px" id="tL002_2" value="43"
+                  id="tI002_all" value="43" type="text"></td>
+                <td>10. I(2̅00) = <input style="width: 30px" id="tI002_2" value="43"
                   type="text">
                 </td>
-                <td>12. L(02̅0) = <input style="width: 30px" id="tL002_4" value="43"
+                <td>12. I(02̅0) = <input style="width: 30px" id="tI002_4" value="43"
                   type="text">
                 </td>
-                <td>14. L(002̅) = <input style="width: 30px" id="tL002_6" value="43"
+                <td>14. I(002̅) = <input style="width: 30px" id="tI002_6" value="43"
                   type="text">
                 </td>
               </tr>
@@ -171,7 +171,7 @@ b {
               <td style="vertical-align: top">1.</td>
               <td>In the 3D Structure display, vacancies are represented as Al atoms,
                 while emptiness outside the atom block represents Al matrix. The origin is
-                marked with a H atom, whether there should be an Al atom or not.</td>
+                marked with a Pm atom, whether there should be an Al atom or not.</td>
             </tr>
             <tr>
               <td style="vertical-align: top">2.</td>
@@ -200,7 +200,7 @@ b {
             <td>Temp. Independent Pre-factor</td>
             <th>D&#8320;</th>
             <td>=</td>
-            <td><input style="width: 50px" id="tD0" value="0.73" type="text"
+            <td><input style="width: 50px" id="tD0" value="2" type="text"
               onchange="calcDs()"></td>
             <td class='td1'>nm&sup2;/s</td>
           </tr>
@@ -208,7 +208,7 @@ b {
             <td>Diffusion Activation Energy</td>
             <th>Q</th>
             <td>=</td>
-            <td><input style="width: 50px" id="tQ" value="0.194" type="text"
+            <td><input style="width: 50px" id="tQ" value="0.223" type="text"
               onchange="calcDs()"></td>
             <td class='td1'>eV</td>
           </tr>
@@ -224,7 +224,7 @@ b {
             <td>Diffusion Coefficient</td>
             <th>D<sub>S</sub></th>
             <td>=</td>
-            <td id="dDs">1.746e-3</td>
+            <td id="dDs">1.941e-3</td>
             <td class='td1'>nm&sup2;/s</td>
           </tr>
           <tr>
@@ -305,106 +305,106 @@ b {
             <th>Energy</th>
           </tr>
           <tr>
-            <th>L</th>
+            <th>I</th>
             <th>&#8491;</th>
             <th>&#8491;&sup2;</th>
             <th>eV</th>
           </tr>
           <tr>
             <td>1. (111)</td>
-            <td id="dpLr_1">0</td>
-            <td id="dpLa_1">0</td>
+            <td id="dpIr_1">0</td>
+            <td id="dpIa_1">0</td>
             <td id="dpSa_1">0</td>
             <td id="dpE_1">0</td>
           </tr>
           <tr>
             <td>2. (111̅)</td>
-            <td id="dpLr_2">0</td>
-            <td id="dpLa_2">0</td>
+            <td id="dpIr_2">0</td>
+            <td id="dpIa_2">0</td>
             <td id="dpSa_2">0</td>
             <td id="dpE_2">0</td>
           </tr>
           <tr>
             <td>3. (11̅1)</td>
-            <td id="dpLr_3">0</td>
-            <td id="dpLa_3">0</td>
+            <td id="dpIr_3">0</td>
+            <td id="dpIa_3">0</td>
             <td id="dpSa_3">0</td>
             <td id="dpE_3">0</td>
           </tr>
           <tr>
             <td>4. (11̅1̅)</td>
-            <td id="dpLr_4">0</td>
-            <td id="dpLa_4">0</td>
+            <td id="dpIr_4">0</td>
+            <td id="dpIa_4">0</td>
             <td id="dpSa_4">0</td>
             <td id="dpE_4">0</td>
           </tr>
           <tr>
             <td>5. (1̅11)</td>
-            <td id="dpLr_5">0</td>
-            <td id="dpLa_5">0</td>
+            <td id="dpIr_5">0</td>
+            <td id="dpIa_5">0</td>
             <td id="dpSa_5">0</td>
             <td id="dpE_5">0</td>
           </tr>
           <tr>
             <td>6. (1̅11̅)</td>
-            <td id="dpLr_6">0</td>
-            <td id="dpLa_6">0</td>
+            <td id="dpIr_6">0</td>
+            <td id="dpIa_6">0</td>
             <td id="dpSa_6">0</td>
             <td id="dpE_6">0</td>
           </tr>
           <tr>
             <td>7. (1̅1̅1)</td>
-            <td id="dpLr_7">0</td>
-            <td id="dpLa_7">0</td>
+            <td id="dpIr_7">0</td>
+            <td id="dpIa_7">0</td>
             <td id="dpSa_7">0</td>
             <td id="dpE_7">0</td>
           </tr>
           <tr>
             <td>8. (1̅1̅1̅)</td>
-            <td id="dpLr_8">0</td>
-            <td id="dpLa_8">0</td>
+            <td id="dpIr_8">0</td>
+            <td id="dpIa_8">0</td>
             <td id="dpSa_8">0</td>
             <td id="dpE_8">0</td>
           </tr>
           <tr>
             <td>9. (200)</td>
-            <td id="dpLr_9">0</td>
-            <td id="dpLa_9">0</td>
+            <td id="dpIr_9">0</td>
+            <td id="dpIa_9">0</td>
             <td id="dpSa_9">0</td>
             <td id="dpE_9">0</td>
           </tr>
           <tr>
             <td>10. (2̅00)</td>
-            <td id="dpLr_10">0</td>
-            <td id="dpLa_10">0</td>
+            <td id="dpIr_10">0</td>
+            <td id="dpIa_10">0</td>
             <td id="dpSa_10">0</td>
             <td id="dpE_10">0</td>
           </tr>
           <tr>
             <td>11. (020)</td>
-            <td id="dpLr_11">0</td>
-            <td id="dpLa_11">0</td>
+            <td id="dpIr_11">0</td>
+            <td id="dpIa_11">0</td>
             <td id="dpSa_11">0</td>
             <td id="dpE_11">0</td>
           </tr>
           <tr>
             <td>12. (02̅0)</td>
-            <td id="dpLr_12">0</td>
-            <td id="dpLa_12">0</td>
+            <td id="dpIr_12">0</td>
+            <td id="dpIa_12">0</td>
             <td id="dpSa_12">0</td>
             <td id="dpE_12">0</td>
           </tr>
           <tr>
             <td>13. (002)</td>
-            <td id="dpLr_13">0</td>
-            <td id="dpLa_13">0</td>
+            <td id="dpIr_13">0</td>
+            <td id="dpIa_13">0</td>
             <td id="dpSa_13">0</td>
             <td id="dpE_13">0</td>
           </tr>
           <tr>
             <td>14. (002̅)</td>
-            <td id="dpLr_14">0</td>
-            <td id="dpLa_14">0</td>
+            <td id="dpIr_14">0</td>
+            <td id="dpIa_14">0</td>
             <td id="dpSa_14">0</td>
             <td id="dpE_14">0</td>
           </tr>
@@ -415,15 +415,15 @@ b {
           </tr>
           <tr>
             <td>15. {111}</td>
-            <td id="dpLr_15">0</td>
-            <td id="dpLa_15">0</td>
+            <td id="dpIr_15">0</td>
+            <td id="dpIa_15">0</td>
             <td id="dpSa_15">0</td>
             <td id="dpE_15">0</td>
           </tr>
           <tr>
             <td>16. {002}</td>
-            <td id="dpLr_16">0</td>
-            <td id="dpLa_16">0</td>
+            <td id="dpIr_16">0</td>
+            <td id="dpIa_16">0</td>
             <td id="dpSa_16">0</td>
             <td id="dpE_16">0</td>
           </tr>
@@ -434,7 +434,7 @@ b {
           </tr>
           <tr>
             <td>Total</td>
-            <td id="dpLr_17" colspan="2">0</td>
+            <td id="dpIr_17" colspan="2">0</td>
             <td id="dpSa_17">0</td>
             <td id="dpE_17">0</td>
           </tr>
@@ -490,13 +490,13 @@ function Evolute() {
   T=$("tT").value, Ds=calcDs()
   var tEv=$('tEv').value
   var gph_opt=$("gphEv_opt").value
-  var outj1=[], dn=0, fMax=0, f=0, dt=0, tMin=0, i0=1, Li=[], Lu=[], Lui=[1,-1]
+  var outj1=[], dn=0, fMax=0, f=0, dt=0, tMin=0, i0=1, Ii=[], Iu=[], Iui=[1,-1]
   var j=0
   
-  for(var k=1;k<=14;k++) Lu[k]=0;
+  for(var k=1;k<=14;k++) Iu[k]=0;
   
-  Li=getAllL()
-  outEv[0]=cpEv(EvSubStep(Li))
+  Ii=getAllI()
+  outEv[0]=cpEv(EvSubStep(Ii))
   
   logEv+="Step #: Vacancies, Total Surface Energy; 14 Face distances (atomic layer),  D{002}/D{111}\n\n"
   logEv+="   Sub-step. This face to act on: ΔE/ΔN; D{002}/D{111}\n"
@@ -506,15 +506,15 @@ function Evolute() {
   
   for(j=0; j<=tEv; j++) {
     logEv+="\nStep "+j+": "+outEv[j].n+", "+outEv[j].E.toExponential(4)+";  "
-    for(var k=1;k<=14;k++) {logEv+=outEv[j].L[k]+","}
-    logEv+=" "+outEv[j].L[0].toFixed(5)+"\n"
+    for(var k=1;k<=14;k++) {logEv+=outEv[j].I[k]+","}
+    logEv+=" "+outEv[j].I[0].toFixed(5)+"\n"
 
-    if(gph_opt==0) outEv[j].P=genCoor(outEv[j].L);
+    if(gph_opt==0) outEv[j].P=genCoor(outEv[j].I);
     fMax=0, i0=1
 
     for(var i=1; i<=14; i++) {
-      Li=outEv[j].L.slice(), Li[i]--, Li=calcL(Li)
-      outj1[i]=EvSubStep(Li)
+      Ii=outEv[j].I.slice(), Ii[i]--, Ii=calcI(Ii)
+      outj1[i]=EvSubStep(Ii)
       dn=outEv[j].n-outj1[i].n
       f=(outEv[j].E-outj1[i].E)/dn
       
@@ -522,14 +522,14 @@ function Evolute() {
         i0=i
         fMax=f
         logEv+="\n   * "
-      } else if (f==fMax && Lu[i]>Lu[i0]) {//avoid acting only on some faces
+      } else if (f==fMax && Iu[i]>Iu[i0]) {//avoid acting only on some faces
         i0=i
         fMax=f
         logEv+="\n   *^"
       } else logEv+="\n     ";
       
-      logEv+=j+"-"+fmtStr(i+".",3)+FL[i]+": "+f.toExponential(3)+"; "
-      logEv+=Li[0].toFixed(5)
+      logEv+=j+"-"+fmtStr(i+".",3)+FI[i]+": "+f.toExponential(3)+"; "
+      logEv+=Ii[0].toFixed(5)
     }
 
     outEv[j].dn=outEv[j].n-outj1[i0].n, outEv[j].f=fMax, outEv[j].i=i0
@@ -537,12 +537,12 @@ function Evolute() {
     outEv[j].dt=calcTime(outEv[j])
     outEv[j+1]=cpEv(outj1[i0])
     
-    // Lu records how long since the opposite of each face last update
-    for(var k=1;k<=8;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[9-k]++; Lu[k]--;};
-    for(var k=9;k<=14;k++) if(outEv[j].L[k]!=outEv[j+1].L[k]) {Lu[k-Lui[k%2]]++; Lu[k]--;};
+    // Iu records how long since the opposite of each face last update
+    for(var k=1;k<=8;k++) if(outEv[j].I[k]!=outEv[j+1].I[k]) {Iu[9-k]++; Iu[k]--;};
+    for(var k=9;k<=14;k++) if(outEv[j].I[k]!=outEv[j+1].I[k]) {Iu[k-Iui[k%2]]++; Iu[k]--;};
     
-    logEv+="\n\n   $ "+j+"-"+fmtStr(i0+".",3)+FL[i0]+": "+fMax.toExponential(3)+";  "
-    for(var k=1;k<=14;k++) logEv+=Lu[k]+",";
+    logEv+="\n\n   $ "+j+"-"+fmtStr(i0+".",3)+FI[i0]+": "+fMax.toExponential(3)+";  "
+    for(var k=1;k<=14;k++) logEv+=Iu[k]+",";
 
     if (outEv[j+1].n<=0 || outEv[j+1].E<=0 || outEv[j].dt<=0) {j++; break}
   }
@@ -558,24 +558,24 @@ function Evolute() {
   iEv=tEv; dispEv();
 }
 
-function EvSubStep(L) {
-  var n=calcAtom(L)
-  var S=calcS(L)
+function EvSubStep(I) {
+  var n=calcAtom(I)
+  var S=calcS(I)
   
-  return {n:n, E:S[0], L:L, S:S}
+  return {n:n, E:S[0], I:I, S:S}
 }
 
 function cpEv(out) {
-  return {n:out.n, E:out.E, L:out.L, S:out.S, i:0, dn:0, f:0, inR:[], dt:0, P:[""]}
+  return {n:out.n, E:out.E, I:out.I, S:out.S, i:0, dn:0, f:0, inR:[], dt:0, P:[""]}
 }
 
 function inRatio(out) {
-  var i=out.i, L1=out.L.slice(), inR=[]
+  var i=out.i, I1=out.I.slice(), inR=[]
   
-  for(var k=9;k<=14;k++) L1[k]=Math.round(L1[k]*t21);
+  for(var k=9;k<=14;k++) I1[k]=Math.round(I1[k]*t21);
   
   for(var k=1;k<=14;k++) {
-    if(Math.abs(L1[k]-L1[i])<5) inR[k]="Y";
+    if(Math.abs(I1[k]-I1[i])<5) inR[k]="Y";
     else inR[k]="N";
   }
   
@@ -584,10 +584,10 @@ function inRatio(out) {
 
 function calcTime(out) {
   //Calculate time
-  var S_D=0, L=out.L, S=out.S, dn=out.dn, f=out.f, inR=out.inR
+  var S_D=0, I=out.I, S=out.S, dn=out.dn, f=out.f, inR=out.inR
 
-  for(var k=1;k<=8;k++) {if(inR[k]=="Y") S_D+=S[k]/L[k]*sqrt3;}
-  for(var k=9;k<=14;k++) {if(inR[k]=="Y") S_D+=S[k]/L[k]*2;}
+  for(var k=1;k<=8;k++) {if(inR[k]=="Y") S_D+=S[k]/I[k]*sqrt3;}
+  for(var k=9;k<=14;k++) {if(inR[k]=="Y") S_D+=S[k]/I[k]*2;}
   
   var dt=dn/(S_D*a/10*Ds/omega/xi*(Math.exp(f/kB/T)-1))
   return dt
@@ -605,36 +605,36 @@ function textEvSmy() {
   
   smyEv+="\n\nStep\tSelected\t"
   smyEv+="Vacancies\tSurface E\tΔN\tΔE/ΔN\tΔt\tTime\tD{111}\tD{002}\tRatio"
-  for(k=1;k<=14;k++) smyEv+="\t"+k+". L"+FL[k];
-  for(k=1;k<=14;k++) smyEv+="\t"+k+". S"+FL[k];
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". I"+FI[k];
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". S"+FI[k];
   smyEv+="\n \t \t \teV\t\teV/vacancy\tmin\tmin\tnm\tnm\t "
-  for(k=1;k<=14;k++) smyEv+="\tAtom L.";
+  for(k=1;k<=14;k++) smyEv+="\tAtom I.";
   for(k=1;k<=14;k++) smyEv+="\tnm²";
-  for(k=1;k<=14;k++) smyEv+="\t"+k+". "+FL[k];
+  for(k=1;k<=14;k++) smyEv+="\t"+k+". "+FI[k];
   
   for(var j=0;j<=outEv.length-1;j++) {
-    i=outEv[j].i, dt=outEv[j].dt, time+=dt, L=outEv[j].L, inR=outEv[j].inR
+    i=outEv[j].i, dt=outEv[j].dt, time+=dt, I=outEv[j].I, inR=outEv[j].inR
     
-    smyEv+="\n"+j+"\t"+i+". '"+FL[i]+"'\t"
+    smyEv+="\n"+j+"\t"+i+". '"+FI[i]+"'\t"
     smyEv+=outEv[j].n+"\t"+outEv[j].E.toExponential(15)+"\t"+outEv[j].dn+"\t"
     smyEv+=outEv[j].f.toExponential(15)+"\t"+(dt/60).toExponential(15)+"\t"
-    smyEv+=(time/60).toExponential(15)+"\t"+(outEv[j].L[15]/sqrt3*a/5).toExponential(15)+"\t"
-    smyEv+=(outEv[j].L[16]*a/10).toExponential(15)+"\t"+outEv[j].L[0].toExponential(15)
-    for(var k=1;k<=14;k++) smyEv+="\t"+outEv[j].L[k];
+    smyEv+=(time/60).toExponential(15)+"\t"+(outEv[j].I[15]/sqrt3*a/5).toExponential(15)+"\t"
+    smyEv+=(outEv[j].I[16]*a/10).toExponential(15)+"\t"+outEv[j].I[0].toExponential(15)
+    for(var k=1;k<=14;k++) smyEv+="\t"+outEv[j].I[k];
     for(var k=1;k<=14;k++) smyEv+="\t"+(outEv[j].S[k]*as).toFixed(5);
     for(var k=1;k<=14;k++) smyEv+="\t"+inR[k];
   }
 }
 
-function calcMaxDif(L) {
-  var L1=L.slice(), max, min
+function calcMaxDif(I) {
+  var I1=I.slice(), max, min
 
-  for(var k=9;k<=14;k++) L1[k]=Math.round(L[k]*t21);
+  for(var k=9;k<=14;k++) I1[k]=Math.round(I[k]*t21);
   
-  max=min=L1[1]
+  max=min=I1[1]
   for(var k=2;k<=14;k++) {
-    if(L1[k]>max) max=L1[k];
-    else if(L1[k]<min) min=L1[k];
+    if(I1[k]>max) max=I1[k];
+    else if(I1[k]<min) min=I1[k];
   }
   
   dmax=max-min
@@ -646,11 +646,11 @@ function dispEv() {
   var tEv=outEv.length-1, gph_opt=$("gphEv_opt").value
   
   if(0<=iEv && iEv<=tEv) {
-    var L=outEv[iEv].L
+    var I=outEv[iEv].I
     var P=outEv[iEv].P
-    if(gph_opt==1) P=genCoor(L)
+    if(gph_opt==1) P=genCoor(I)
     
-    dispSpec(outEv[iEv].n,L,outEv[iEv].S)
+    dispSpec(outEv[iEv].n,I,outEv[iEv].S)
     draw3D(P)
     
     $('iEv_opt').options[iEv].selected=1
@@ -659,19 +659,19 @@ function dispEv() {
 }
 
 function CalcOnly() {
-  var L=getAllL()
-  dispSpec(calcAtom(L),L,calcS(L))
+  var I=getAllI()
+  dispSpec(calcAtom(I),I,calcS(I))
 }
 
 function DrawOnly() {
-  draw3D(genCoor(getAllL()))
+  draw3D(genCoor(getAllI()))
 }
 
 function OneClickDraw() {
   $("field1").value=""
-  var L=getAllL()
-  dispSpec(calcAtom(L),L,calcS(L))
-  draw3D(genCoor(L))
+  var I=getAllI()
+  dispSpec(calcAtom(I),I,calcS(I))
+  draw3D(genCoor(I))
 }
 
 function draw3D(P) {
@@ -692,69 +692,69 @@ function draw3D(P) {
   Canv1.specs.compass_display = true;
 }
 
-function dispSpec(n, L, S) {
-  var NL=2, Sa, La, E
+function dispSpec(n, I, S) {
+  var NL=2, Sa, Ia, E
   
   for(var i=1; i<=16; i++) {
     Sa=S[i]*as
     
     if(i<=8 || i==15) {
-      La=L[i]*a/sqrt3
+      Ia=I[i]*a/sqrt3
       E=Sa*0.06552
     } else {
-      La=L[i]*a/2; 
+      Ia=I[i]*a/2; 
       E=Sa*0.06864
     }
 
-    $("dpLr_"+i).innerHTML  =L[i]; 
-    $("dpLa_"+i).innerHTML  =La.toFixed(NL); 
+    $("dpIr_"+i).innerHTML  =I[i]; 
+    $("dpIa_"+i).innerHTML  =Ia.toFixed(NL); 
     $("dpSa_"+i).innerHTML  =Sa.toExponential(NL); 
     $("dpE_"+i).innerHTML =E.toExponential(3)
   }
   
-  $("dpLr_15").innerHTML  =L[15].toFixed(NL);
-  $("dpLr_16").innerHTML  =L[16].toFixed(NL); 
+  $("dpIr_15").innerHTML  =I[15].toFixed(NL);
+  $("dpIr_16").innerHTML  =I[16].toFixed(NL); 
   
-  $("dpLr_17").innerHTML  =L[0].toFixed(5); 
+  $("dpIr_17").innerHTML  =I[0].toFixed(5); 
   $("dpSa_17").innerHTML  =(S[17]*as).toExponential(NL); 
   $("dpE_17").innerHTML =S[0].toExponential(3); 
   $("dpN").innerHTML=n; 
 }
 
-function genCoor(L) {
+function genCoor(I) {
   var x, y, z, out=[], fv=$("field1_opt").value
   var nOnF=0, n=0, P=[]
   
-  for(var x0=-Math.ceil(L[10]/2); x0<=L[9]/2; x0++) {
-    for(var y0=-Math.ceil(L[12]/2); y0<=L[11]/2; y0++) {
-      for(var z0=-Math.ceil(L[14]/2); z0<=L[13]/2; z0++) {
+  for(var x0=-Math.ceil(I[10]/2); x0<=I[9]/2; x0++) {
+    for(var y0=-Math.ceil(I[12]/2); y0<=I[11]/2; y0++) {
+      for(var z0=-Math.ceil(I[14]/2); z0<=I[13]/2; z0++) {
         for (var i=0; i<4; i++) {
           out=FCC(x0,y0,z0,i)
           x=out[0],y=out[1],z=out[2]
 
-          if( L[1]+0.1>x+y+z && L[5]+0.1>-x+y+z && 
-              L[2]+0.1>x+y-z && L[6]+0.1>-x+y-z && 
-              L[3]+0.1>x-y+z && L[7]+0.1>-x-y+z && 
-              L[4]+0.1>x-y-z && L[8]+0.1>-x-y-z && 
-              L[ 9]/2+0.1>x  && -L[10]/2-0.1<x  && 
-              L[11]/2+0.1>y  && -L[12]/2-0.1<y  && 
-              L[13]/2+0.1>z  && -L[14]/2-0.1<z)
+          if( I[1]+0.1>x+y+z && I[5]+0.1>-x+y+z && 
+              I[2]+0.1>x+y-z && I[6]+0.1>-x+y-z && 
+              I[3]+0.1>x-y+z && I[7]+0.1>-x-y+z && 
+              I[4]+0.1>x-y-z && I[8]+0.1>-x-y-z && 
+              I[ 9]/2+0.1>x  && -I[10]/2-0.1<x  && 
+              I[11]/2+0.1>y  && -I[12]/2-0.1<y  && 
+              I[13]/2+0.1>z  && -I[14]/2-0.1<z)
           {
             nOnF=0
-            if(L[1]== x+y+z) nOnF++
-            if(L[2]== x+y-z) nOnF++
-            if(L[3]== x-y+z) nOnF++
-            if(L[4]== x-y-z) nOnF++
-            if(L[5]==-x+y+z) nOnF++
-            if(L[6]==-x+y-z) nOnF++
-            if(L[7]==-x-y+z) nOnF++
-            if(L[8]==-x-y-z) nOnF++
-            if(L[ 9]/2== x)  nOnF++
-            if(L[10]/2==-x)  nOnF++
-            if(L[11]/2== y)  nOnF++
-            if(L[12]/2==-y)  nOnF++
-            if(L[13]/2== z)  nOnF++
-            if(L[14]/2==-z)  nOnF++
+            if(I[1]== x+y+z) nOnF++
+            if(I[2]== x+y-z) nOnF++
+            if(I[3]== x-y+z) nOnF++
+            if(I[4]== x-y-z) nOnF++
+            if(I[5]==-x+y+z) nOnF++
+            if(I[6]==-x+y-z) nOnF++
+            if(I[7]==-x-y+z) nOnF++
+            if(I[8]==-x-y-z) nOnF++
+            if(I[ 9]/2== x)  nOnF++
+            if(I[10]/2==-x)  nOnF++
+            if(I[11]/2== y)  nOnF++
+            if(I[12]/2==-y)  nOnF++
+            if(I[13]/2== z)  nOnF++
+            if(I[14]/2==-z)  nOnF++
             
             if(nOnF>=fv) P[++n]=[x,y,z];
           }
@@ -773,88 +773,88 @@ function FCC(x1,y1,z1,i) {
   if(i==3) return [    x1, 0.5+y1, 0.5+z1];
 }
 
-function setAllL(o) {
-  if(o==0) for(i=1;i<=8;i++) $("tL111_"+i).value=$("tL111_all").value
-  else for(i=1;i<=6;i++) $("tL002_"+i).value=$("tL002_all").value
+function setAllI(o) {
+  if(o==0) for(i=1;i<=8;i++) $("tI111_"+i).value=$("tI111_all").value
+  else for(i=1;i<=6;i++) $("tI002_"+i).value=$("tI002_all").value
 }
 
-function getAllL() {
-  var L=[]
-  for(var i=1;i<=8;i++) L[i]=parseInt($("tL111_"+i).value)
-  for(var i=1;i<=6;i++) L[i+8]=parseInt($("tL002_"+i).value)
+function getAllI() {
+  var I=[]
+  for(var i=1;i<=8;i++) I[i]=parseInt($("tI111_"+i).value)
+  for(var i=1;i<=6;i++) I[i+8]=parseInt($("tI002_"+i).value)
   
-  return calcL(L)
+  return calcI(I)
 }
 
-function calcL(L) {
-  var L1=[], la1=la2=0
+function calcI(I) {
+  var I1=[], la1=la2=0
 
-  L1[1]=Math.min(L002toL111(9,11,13,L),L[1])
-  L1[2]=Math.min(L002toL111(9,11,14,L),L[2])
-  L1[3]=Math.min(L002toL111(9,12,13,L),L[3])
-  L1[4]=Math.min(L002toL111(9,12,14,L),L[4])
-  L1[5]=Math.min(L002toL111(10,11,13,L),L[5])
-  L1[6]=Math.min(L002toL111(10,11,14,L),L[6])
-  L1[7]=Math.min(L002toL111(10,12,13,L),L[7])
-  L1[8]=Math.min(L002toL111(10,12,14,L),L[8])
-  L1[9]=Math.min(L[1]+L[4], L[2]+L[3], L[9])
-  L1[10]=Math.min(L[5]+L[8], L[6]+L[7], L[10])
-  L1[11]=Math.min(L[1]+L[6], L[2]+L[5], L[11])
-  L1[12]=Math.min(L[3]+L[8], L[4]+L[7], L[12])
-  L1[13]=Math.min(L[1]+L[7], L[3]+L[5], L[13])
-  L1[14]=Math.min(L[2]+L[8], L[4]+L[6], L[14])
+  I1[1]=Math.min(I002toI111(9,11,13,I),I[1])
+  I1[2]=Math.min(I002toI111(9,11,14,I),I[2])
+  I1[3]=Math.min(I002toI111(9,12,13,I),I[3])
+  I1[4]=Math.min(I002toI111(9,12,14,I),I[4])
+  I1[5]=Math.min(I002toI111(10,11,13,I),I[5])
+  I1[6]=Math.min(I002toI111(10,11,14,I),I[6])
+  I1[7]=Math.min(I002toI111(10,12,13,I),I[7])
+  I1[8]=Math.min(I002toI111(10,12,14,I),I[8])
+  I1[9]=Math.min(I[1]+I[4], I[2]+I[3], I[9])
+  I1[10]=Math.min(I[5]+I[8], I[6]+I[7], I[10])
+  I1[11]=Math.min(I[1]+I[6], I[2]+I[5], I[11])
+  I1[12]=Math.min(I[3]+I[8], I[4]+I[7], I[12])
+  I1[13]=Math.min(I[1]+I[7], I[3]+I[5], I[13])
+  I1[14]=Math.min(I[2]+I[8], I[4]+I[6], I[14])
   
-  for(var i=1; i<=8; i++) la1+=L1[i]; 
-  for(var i=9; i<=14; i++)  la2+=L1[i];
+  for(var i=1; i<=8; i++) la1+=I1[i]; 
+  for(var i=9; i<=14; i++)  la2+=I1[i];
 
-  L1[15]=la1/8
-  L1[16]=la2/6
-  L1[0]=(L1[16]/2)/(L1[15]/sqrt3)
+  I1[15]=la1/8
+  I1[16]=la2/6
+  I1[0]=(I1[16]/2)/(I1[15]/sqrt3)
   
-  return L1
+  return I1
 }
 
-function calcD(L) {
+function calcD(I) {
   var D=[]
   
-  for(var i=1; i<=8; i++) D[i]=L[i]*a_sqrt3;
-  for(var i=9; i<=14; i++) D[i]=L[i]*a_2;
+  for(var i=1; i<=8; i++) D[i]=I[i]*a_sqrt3;
+  for(var i=9; i<=14; i++) D[i]=I[i]*a_2;
   
-  D[15]=L[15]*a_sqrt3
-  D[16]=L[16]*a_2
+  D[15]=I[15]*a_sqrt3
+  D[16]=I[16]*a_2
   
   return D
 }
 
-function L002toL111(a,b,c, L) {
-  var x=L[a]+L[b]+L[c];
+function I002toI111(a,b,c, I) {
+  var x=I[a]+I[b]+I[c];
   return Math.floor(x/2)
 }
 
-function calcS(L) {
+function calcS(I) {
   var MS1=[], MS2=[], S=[], b=sqrt3/8
 
-  MS1[1]=L[1]-L[2]-L[3]-L[5]
-  MS1[2]=L[2]-L[1]-L[4]-L[6]
-  MS1[3]=L[3]-L[1]-L[4]-L[7]
-  MS1[4]=L[4]-L[2]-L[3]-L[8]
-  MS1[5]=L[5]-L[1]-L[6]-L[7]
-  MS1[6]=L[6]-L[2]-L[5]-L[8]
-  MS1[7]=L[7]-L[3]-L[5]-L[8]
-  MS1[8]=L[8]-L[4]-L[6]-L[7]
+  MS1[1]=I[1]-I[2]-I[3]-I[5]
+  MS1[2]=I[2]-I[1]-I[4]-I[6]
+  MS1[3]=I[3]-I[1]-I[4]-I[7]
+  MS1[4]=I[4]-I[2]-I[3]-I[8]
+  MS1[5]=I[5]-I[1]-I[6]-I[7]
+  MS1[6]=I[6]-I[2]-I[5]-I[8]
+  MS1[7]=I[7]-I[3]-I[5]-I[8]
+  MS1[8]=I[8]-I[4]-I[6]-I[7]
   
-  MS2[1]=L[9]-L[1]-L[4]
-  MS2[2]=L[9]-L[2]-L[3]
-  MS2[3]=L[10]-L[5]-L[8]
-  MS2[4]=L[10]-L[6]-L[7]
-  MS2[5]=L[11]-L[1]-L[6]
-  MS2[6]=L[11]-L[2]-L[5]
-  MS2[7]=L[12]-L[3]-L[8]
-  MS2[8]=L[12]-L[4]-L[7]
-  MS2[9]=L[13]-L[1]-L[7]
-  MS2[10]=L[13]-L[3]-L[5]
-  MS2[11]=L[14]-L[2]-L[8]
-  MS2[12]=L[14]-L[4]-L[6]
+  MS2[1]=I[9]-I[1]-I[4]
+  MS2[2]=I[9]-I[2]-I[3]
+  MS2[3]=I[10]-I[5]-I[8]
+  MS2[4]=I[10]-I[6]-I[7]
+  MS2[5]=I[11]-I[1]-I[6]
+  MS2[6]=I[11]-I[2]-I[5]
+  MS2[7]=I[12]-I[3]-I[8]
+  MS2[8]=I[12]-I[4]-I[7]
+  MS2[9]=I[13]-I[1]-I[7]
+  MS2[10]=I[13]-I[3]-I[5]
+  MS2[11]=I[14]-I[2]-I[8]
+  MS2[12]=I[14]-I[4]-I[6]
   
   S[9]=MS2[1]*MS2[2]/2
   S[10]=MS2[3]*MS2[4]/2
@@ -863,8 +863,8 @@ function calcS(L) {
   S[13]=MS2[9]*MS2[10]/2
   S[14]=MS2[11]*MS2[12]/2
 
-  for(var i=1;i<=8;i++) MS1[i]=MS1[i]*MS1[i];
-  for(var i=1;i<=12;i++) MS2[i]=MS2[i]*MS2[i];
+  for(var i=1;i<=8;i++) MS1[i]*=MS1[i];
+  for(var i=1;i<=12;i++) MS2[i]*=MS2[i];
   
   S[1]=(MS1[1]-MS2[2]-MS2[6]-MS2[10])*b
   S[2]=(MS1[2]-MS2[1]-MS2[5]-MS2[12])*b
@@ -896,10 +896,10 @@ function calcArea(S) {
   return SA
 }
 
-function calcAtom(L) {
+function calcAtom(I) {
   var n=0, n0=0, np=1, ns=0, n1=0, n2=0, oe=[]
-  n0=(L[9]+L[10]+1)*(L[11]+L[12]+1)*(L[13]+L[14]+1)/2
-  for(var i=9;i<=14;i++) {oe[i]=L[i]%2; if(oe[i]==1) np=0}
+  n0=(I[9]+I[10]+1)*(I[11]+I[12]+1)*(I[13]+I[14]+1)/2
+  for(var i=9;i<=14;i++) {oe[i]=I[i]%2; if(oe[i]==1) np=0}
   if(np==0) {
     for(var i=9;i<=14;i++) ns+=oe[i];
     if(ns==4) {
@@ -910,27 +910,27 @@ function calcAtom(L) {
   
   n0=Math.floor(n0)+np
   
-  n1+=calc111Atom(L[1],L[9],L[11],L[13])
-  n1+=calc111Atom(L[2],L[9],L[11],L[14])
-  n1+=calc111Atom(L[3],L[9],L[12],L[13])
-  n1+=calc111Atom(L[4],L[9],L[12],L[14])
-  n1+=calc111Atom(L[5],L[10],L[11],L[13])
-  n1+=calc111Atom(L[6],L[10],L[11],L[14])
-  n1+=calc111Atom(L[7],L[10],L[12],L[13])
-  n1+=calc111Atom(L[8],L[10],L[12],L[14])
+  n1+=calc111Atom(I[1],I[9],I[11],I[13])
+  n1+=calc111Atom(I[2],I[9],I[11],I[14])
+  n1+=calc111Atom(I[3],I[9],I[12],I[13])
+  n1+=calc111Atom(I[4],I[9],I[12],I[14])
+  n1+=calc111Atom(I[5],I[10],I[11],I[13])
+  n1+=calc111Atom(I[6],I[10],I[11],I[14])
+  n1+=calc111Atom(I[7],I[10],I[12],I[13])
+  n1+=calc111Atom(I[8],I[10],I[12],I[14])
   
-  n2+=calc111OverlapAtom(L[1],L[2],L[9],L[11])
-  n2+=calc111OverlapAtom(L[1],L[3],L[9],L[13])
-  n2+=calc111OverlapAtom(L[1],L[5],L[11],L[13])
-  n2+=calc111OverlapAtom(L[2],L[4],L[9],L[14])
-  n2+=calc111OverlapAtom(L[2],L[6],L[11],L[14])
-  n2+=calc111OverlapAtom(L[3],L[4],L[9],L[12])
-  n2+=calc111OverlapAtom(L[3],L[7],L[12],L[13])
-  n2+=calc111OverlapAtom(L[4],L[8],L[12],L[14])
-  n2+=calc111OverlapAtom(L[5],L[6],L[10],L[11])
-  n2+=calc111OverlapAtom(L[5],L[7],L[10],L[13])
-  n2+=calc111OverlapAtom(L[6],L[8],L[10],L[14])
-  n2+=calc111OverlapAtom(L[7],L[8],L[10],L[12])
+  n2+=calc111OverlapAtom(I[1],I[2],I[9],I[11])
+  n2+=calc111OverlapAtom(I[1],I[3],I[9],I[13])
+  n2+=calc111OverlapAtom(I[1],I[5],I[11],I[13])
+  n2+=calc111OverlapAtom(I[2],I[4],I[9],I[14])
+  n2+=calc111OverlapAtom(I[2],I[6],I[11],I[14])
+  n2+=calc111OverlapAtom(I[3],I[4],I[9],I[12])
+  n2+=calc111OverlapAtom(I[3],I[7],I[12],I[13])
+  n2+=calc111OverlapAtom(I[4],I[8],I[12],I[14])
+  n2+=calc111OverlapAtom(I[5],I[6],I[10],I[11])
+  n2+=calc111OverlapAtom(I[5],I[7],I[10],I[13])
+  n2+=calc111OverlapAtom(I[6],I[8],I[10],I[14])
+  n2+=calc111OverlapAtom(I[7],I[8],I[10],I[12])
   
   n=n0-n1+n2
   
