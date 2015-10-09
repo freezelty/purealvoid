@@ -145,7 +145,7 @@ b {
                 value="43" type="text">
               </td>
               <td rowspan="2" style="vertical-align: middle; text-align: center">Extra
-                layers<br /> <input style="width: 30px" id="xAL" value="0"
+                layers<br /> <input style="width: 30px" id="xAL" value="1"
                 type="text">
               </td>
             </tr>
@@ -180,6 +180,12 @@ b {
               <td>The origin is always marked with a H atom, whether there
                 was an Al atom or not.</td>
             </tr>
+            <tr>
+              <td style="vertical-align: top">3.</td>
+              <td>"Extra layers" adds atom outside the void and will be
+                listed the "Atom Coordinates"; Only visible in Display option
+                "Atoms as atoms". Too many extra layers will slow down calculations.</td>
+            </tr>
           </table>
         </td>
       </tr>
@@ -191,7 +197,8 @@ b {
         <table class="table3">
           <tr>
             <td class='td1'><b></b><input value="Evolve"
-              style="font-size: 12pt" onclick="Evolute();" type="button"></td>
+              style="font-size: 12pt; color: blue" onclick="Evolute();"
+              type="button"></td>
             <td style="text-align: right">Step <select id="iEv_opt"
               onchange="iEv=$('iEv_opt').value;dispEv()"></select> <input
               type="button" style="font-size: 12px" onclick="--iEv;dispEv()"
@@ -266,7 +273,8 @@ b {
                       <option value="0">Iterates (Slow for large voids)</option>
                       <option value="1" selected>Displays (Short
                         iteration time)</option>
-                        <option value="-1">Never (Fastest, no display/atom coordinates)</option>
+                      <option value="-1">Never (Fastest, no
+                        display/atom coordinates)</option>
                   </select>
                   </td>
                 </tr>
@@ -291,7 +299,8 @@ b {
       <td style="vertical-align: top"><table class="table2">
           <tr>
             <th style="text-align: left;"><input type="button"
-              style="font-size: 12pt" onclick="OneClickDraw()" value="Display"></th>
+              style="font-size: 12pt; color: limegreen" onclick="OneClickDraw()"
+              value="Display"></th>
             <td style="text-align: right;">Display option <select
               id="3d_opt" style="font-size: 12px; width: 150px">
                 <option value="0">All vacancies (Very slow)</option>
@@ -529,6 +538,7 @@ b {
       href="https://github.com/eligrey/FileSaver.js">FileSaver.js</a>.
   </p>
   <script>
+
       $("field_AtomCd").value = ""
       $("field_EvSumm").value = ""
       $("field_EvLog").value = "";
