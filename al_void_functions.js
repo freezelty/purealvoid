@@ -260,7 +260,7 @@ function draw3D(P) {
 
   textVc =
       "\nAtom    X           Y           Z\nH  "
-          + fmtcdNum([ 0, 0, 0 ], 12.5, a) + "\n"
+          + fmtcdNum([ 0, 0, 0 ], 12.5, a) + "\n";
 
   for (i = 1; i <= n1; i++) {
     if (Vc[i][0] == 0 && Vc[i][1] == 0 && Vc[i][2] == 0) cen = 0;
@@ -271,32 +271,33 @@ function draw3D(P) {
   Canv1.loadMolecule(ChemDoodle.readXYZ(textVc));
   Canv1.specs.compass_display = true;
 
-  textCd = ""
+  textCd = "";
 
-  var xl = 0, yl = 0, zl = 0, xh = 0, yh = 0, zh = 0, x, y, z
+  var xl = 0, yl = 0, zl = 0, xh = 0, yh = 0, zh = 0, x, y, z;
   for (i = 1; i <= n2; i++) {
-    x = Cd[i][0] * a, y = Cd[i][1] * a, z = Cd[i][2] * a
+    x = Cd[i][0] * a, y = Cd[i][1] * a, z = Cd[i][2] * a;
     textCd += i + " 1 " + fmtcdNum(Cd[i], ".5") + "\n";
 
-    if (x < xl) xl = x
-    if (x > xh) xh = x
+    if (x < xl) xl = x;
+    if (x > xh) xh = x;
 
-    if (y < yl) yl = y
-    if (y > yh) yh = y
+    if (y < yl) yl = y;
+    if (y > yh) yh = y;
 
-    if (z < zl) zl = z
-    if (z > zh) zh = z
+    if (z < zl) zl = z;
+    if (z > zh) zh = z;
   }
 
-  textCd1 = "# Atom coordinates (NOT vacancies) for LAMMPS\n"
-  textCd1 += n2 + " atoms\n"
-  textCd1 += "1 atom types\n"
-  textCd1 += xl.toFixed(5) + " " + xh.toFixed(5) + " xlo xhi\n"
-  textCd1 += yl.toFixed(5) + " " + yh.toFixed(5) + " ylo yhi\n"
-  textCd1 += zl.toFixed(5) + " " + zh.toFixed(5) + " zlo zhi\n"
-  textCd1 += "\nAtoms\n\n" + textCd
+  textCd1 = "# Atom coordinates (NOT vacancies) for LAMMPS\n";
+  textCd1 += n2 + " atoms\n";
+  textCd1 += "1 atom types\n";
+  textCd1 += xl.toFixed(5) + " " + xh.toFixed(5) + " xlo xhi\n";
+  textCd1 += yl.toFixed(5) + " " + yh.toFixed(5) + " ylo yhi\n";
+  textCd1 += zl.toFixed(5) + " " + zh.toFixed(5) + " zlo zhi\n";
+  textCd1 += "\nAtoms\n\n";
+  textCd = textCd1 + textCd;
 
-  outputField(textCd1, "field_AtomCd")
+  outputField(textCd, "field_AtomCd")
 }
 
 function dispSpec(n, I, S) {
@@ -329,11 +330,12 @@ function dispSpec(n, I, S) {
 }
 
 function genCoor(I) {
-  var x, y, z, out = [], fv = $("3d_opt").value, xAL = Number($("xAL").value)
+  var x, y, z, out = [], fv = $("3d_opt").value, matrixL =
+      Number($("matrixL").value);
   var nOnF = 0, n = 0, Vc = [], Cd = [], n_Cd = 0;
-  var x1 = -(I[10] + xAL) / 2, x2 = (I[9] + xAL) / 2
-  var y1 = -(I[12] + xAL) / 2, y2 = (I[11] + xAL) / 2
-  var z1 = -(I[14] + xAL) / 2, z2 = (I[13] + xAL) / 2
+  var x1 = -Math.max(I[10], matrixL) / 2, x2 = Math.max(I[9], matrixL) / 2;
+  var y1 = -Math.max(I[12], matrixL) / 2, y2 = Math.max(I[11], matrixL) / 2;
+  var z1 = -Math.max(I[14], matrixL) / 2, z2 = Math.max(I[13], matrixL) / 2;
 
   for (var x = x1; x <= x2; x += .5) {
     for (var y = y1; y <= y2; y += .5) {

@@ -83,8 +83,14 @@ b {
   text-align: right;
   padding: 2px;
 }
+
+.div1 {
+  text-align: center;
+  font: bold 20px Sans-serif;
+}
 </style>
 <body>
+  <div class="div1">Void Evolution in Pure Aluminum</div>
   <table style="text-align: left">
     <tbody>
       <tr>
@@ -96,35 +102,33 @@ b {
             </tr>
             <tr>
               <td><input type="button"
-                style="font-family: sans; font-size: 11pt" value="Set I{111}"
-                onclick="setAllI(0)" /></td>
-              <td>1. I(111) = <input style="width: 30px" id="tI_1"
-                value="35" type="text">
+                style="font-family: sans; font-size: 11pt" onclick="setAllI(1)"
+                value="Set I{002}" /></td>
+              <td>I(200) = <input style="width: 30px" id="tI_9" value="43"
+                type="text">
               </td>
-              <td>3. I(1̅11) = <input style="width: 30px" id="tI_3"
-                value="35" type="text">
+              <td>I(020) = <input style="width: 30px" id="tI_11" value="43"
+                type="text">
               </td>
-              <td>5. I(11̅1) = <input style="width: 30px" id="tI_5"
-                value="35" type="text">
+              <td>I(002) = <input style="width: 30px" id="tI_13" value="43"
+                type="text">
               </td>
-              <td>7. I(111̅) = <input style="width: 30px" id="tI_7"
-                value="35" type="text">
+              <td rowspan="2" style="vertical-align: middle; text-align: center">Matrix
+                size<br /> (<input style="width: 35px; text-align: right"
+                id="matrixL" value="50" type="text">×2+1)³
               </td>
             </tr>
             <tr>
               <td style="text-align: center"><input style="width: 30px"
-                id="tI1_all" value="35" type="text"></td>
-              <td>2. I(1̅1̅1̅) = <input style="width: 30px" id="tI_2"
-                value="35" type="text">
+                id="tI2_all" value="43" type="text"></td>
+              <td>I(2̅00) = <input style="width: 30px" id="tI_10"
+                value="43" type="text">
               </td>
-              <td>4. I(11̅1̅) = <input style="width: 30px" id="tI_4"
-                value="35" type="text">
+              <td>I(02̅0) = <input style="width: 30px" id="tI_12"
+                value="43" type="text">
               </td>
-              <td>6. I(1̅11̅) = <input style="width: 30px" id="tI_6"
-                value="35" type="text">
-              </td>
-              <td>8. I(1̅1̅1) = <input style="width: 30px" id="tI_8"
-                value="35" type="text">
+              <td>I(002̅) = <input style="width: 30px" id="tI_14"
+                value="43" type="text">
               </td>
             </tr>
             <tr>
@@ -133,33 +137,35 @@ b {
             </tr>
             <tr>
               <td><input type="button"
-                style="font-family: sans; font-size: 11pt" onclick="setAllI(1)"
-                value="Set I{002}" /></td>
-              <td>9. I(200) = <input style="width: 30px" id="tI_9"
-                value="43" type="text">
+                style="font-family: sans; font-size: 11pt" value="Set I{111}"
+                onclick="setAllI(0)" /></td>
+              <td>I(111) = <input style="width: 30px" id="tI_1" value="35"
+                type="text">
               </td>
-              <td>11. I(020) = <input style="width: 30px" id="tI_11"
-                value="43" type="text">
+              <td>I(1̅11) = <input style="width: 30px" id="tI_3" value="35"
+                type="text">
               </td>
-              <td>13. I(002) = <input style="width: 30px" id="tI_13"
-                value="43" type="text">
+              <td>I(11̅1) = <input style="width: 30px" id="tI_5" value="35"
+                type="text">
               </td>
-              <td rowspan="2" style="vertical-align: middle; text-align: center">Extra
-                layers<br /> <input style="width: 30px" id="xAL" value="1"
+              <td>I(111̅) = <input style="width: 30px" id="tI_7" value="35"
                 type="text">
               </td>
             </tr>
             <tr>
               <td style="text-align: center"><input style="width: 30px"
-                id="tI2_all" value="43" type="text"></td>
-              <td>10. I(2̅00) = <input style="width: 30px" id="tI_10"
-                value="43" type="text">
+                id="tI1_all" value="35" type="text"></td>
+              <td>I(1̅1̅1̅) = <input style="width: 30px" id="tI_2"
+                value="35" type="text">
               </td>
-              <td>12. I(02̅0) = <input style="width: 30px" id="tI_12"
-                value="43" type="text">
+              <td>I(11̅1̅) = <input style="width: 30px" id="tI_4"
+                value="35" type="text">
               </td>
-              <td>14. I(002̅) = <input style="width: 30px" id="tI_14"
-                value="43" type="text">
+              <td>I(1̅11̅) = <input style="width: 30px" id="tI_6"
+                value="35" type="text">
+              </td>
+              <td>I(1̅1̅1) = <input style="width: 30px" id="tI_8"
+                value="35" type="text">
               </td>
             </tr>
           </table>
@@ -172,8 +178,7 @@ b {
             <tr>
               <td style="vertical-align: top">1.</td>
               <td>For better 3D structure visualisation, vacancies are
-                represented as Al atoms by default, while emptiness outside the
-                cluster represents the matrix.</td>
+                represented as Al atoms by default.</td>
             </tr>
             <tr>
               <td style="vertical-align: top">2.</td>
@@ -182,10 +187,15 @@ b {
             </tr>
             <tr>
               <td style="vertical-align: top">3.</td>
-              <td>"Extra layers" adds atom outside the void and will be
-                listed the "Atom Coordinates"; Only visible in Display option
-                "Atoms as atoms". Too many extra layers will slow down
-                calculations.</td>
+              <td>"Matrix size" will define a cubic matrix of volume = (2<i>d</i>
+                + 1)³, where <i>d</i> is the number of atomic layers from cubic
+                facets to the origin. I{002} that are larger than <i>d</i> will
+                redefine the matrix to a cuboid.
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">4.</td>
+              <td>Matrix volume larger than</td>
             </tr>
           </table>
         </td>
@@ -221,7 +231,8 @@ b {
             <td colspan="2" style="text-align: center"></td>
           </tr>
           <tr>
-            <td colspan='2' bgcolor="#ececec" align="center">
+            <td colspan='2' bgcolor="#ececec" align="center"><b>Evolution
+                options</b>
               <table>
                 <tr>
                   <td align="right">Temp. Independent Pre-factor</td>
@@ -271,9 +282,10 @@ b {
                   <td colspan="5" style="text-align: center">Calculate
                     coordinates when <br /> <select id="gphEv_opt"
                     style="width: 200px">
-                      <option value="0">Iterates (Slow for large voids)</option>
+                      <option value="0">Iterates (Slow for large
+                        Void/Matrix)</option>
                       <option value="1" selected>Displays (Short
-                        iteration time)</option>
+                        iteration time, longer display delay)</option>
                       <option value="-1">Never (Fastest, no
                         display/atom coordinates)</option>
                   </select>
@@ -302,13 +314,18 @@ b {
             <th style="text-align: left;"><input type="button"
               style="font-size: 12pt; color: Teal" onclick="OneClickDraw()"
               value="Display"></th>
-            <td style="text-align: right;">Display option <select
-              id="3d_opt" style="font-size: 12px; width: 150px">
-                <option value="0">All vacancies (Very slow)</option>
-                <option value="1">Facets only (Slow)</option>
-                <option value="2" selected>Edges only (Fast)</option>
-                <option value="3">Vertices only (Very fast)</option>
-                <option value="4">Atoms as atoms (Super slow)</option>
+            <td style="text-align: right;"><select id="3d_opt"
+              style="font-size: 12px; width: 300px">
+                <option value="0">Atoms as Vacancies, Very Slow when
+                  Void > 50³</option>
+                <option value="1">Atoms as Vacancies on Facets only,
+                  Slow when Void > 100³</option>
+                <option value="2" selected>Atoms as Vacancies on Edges
+                  only, Fast</option>
+                <option value="3">Atoms as Vacancies on Vertices only,
+                  Fastest</option>
+                <option value="4">Atoms as Atoms, Super Slow when
+                  Matrix > 50³</option>
             </select></td>
           </tr>
           <tr>
