@@ -254,6 +254,7 @@ function OneClickDraw() {
 }
 
 function draw3D(P) {
+  var t0 = performance.now()
   var Vc = P[0], Cd = P[1]
   if ($("3d_opt").value == 4) Vc = Cd.slice()
   var n1 = Vc.length - 1, cen = 1, n2 = Cd.length - 1
@@ -298,6 +299,8 @@ function draw3D(P) {
   textCd = textCd1 + textCd;
 
   outputField(textCd, "field_AtomCd")
+  var t1 = performance.now() - t0
+  console.log(t1.toFixed(0))
 }
 
 function dispSpec(n, I, S) {

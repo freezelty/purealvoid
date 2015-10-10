@@ -187,15 +187,11 @@ b {
             </tr>
             <tr>
               <td style="vertical-align: top">3.</td>
-              <td>"Matrix size" will define a cubic matrix of volume = (2<i>d</i>
-                + 1)³, where <i>d</i> is the number of atomic layers from cubic
-                facets to the origin. I{002} that are larger than <i>d</i> will
+              <td>"Matrix size" will define a cubic matrix of volume = (2<b><i>d</i></b>
+                + 1)³, where <b><i>d</i></b> is the number of atomic layers from cubic
+                facets to the origin. I{002} that are larger than <b><i>d</i></b> will
                 redefine the matrix to a cuboid.
               </td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top">4.</td>
-              <td>Matrix volume larger than</td>
             </tr>
           </table>
         </td>
@@ -316,15 +312,15 @@ b {
               value="Display"></th>
             <td style="text-align: right;"><select id="3d_opt"
               style="font-size: 12px; width: 300px">
-                <option value="0">Atoms as Vacancies, Very Slow when
+                <option value="0">Atoms for Vacancies, Very Slow when
                   Void > 50³</option>
-                <option value="1">Atoms as Vacancies on Facets only,
+                <option value="1">Atoms for Vacancies on Facets only,
                   Slow when Void > 100³</option>
-                <option value="2" selected>Atoms as Vacancies on Edges
+                <option value="2" selected>Atoms for Vacancies on Edges
                   only, Fast</option>
-                <option value="3">Atoms as Vacancies on Vertices only,
+                <option value="3">Atoms for Vacancies on Vertices only,
                   Fastest</option>
-                <option value="4">Atoms as Atoms, Super Slow when
+                <option value="4">Atoms for Atoms, Super Slow when
                   Matrix > 50³</option>
             </select></td>
           </tr>
