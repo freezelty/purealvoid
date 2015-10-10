@@ -188,9 +188,9 @@ b {
             <tr>
               <td style="vertical-align: top">3.</td>
               <td>"Matrix size" will define a cubic matrix of volume = (2<b><i>d</i></b>
-                + 1)³, where <b><i>d</i></b> is the number of atomic layers from cubic
-                facets to the origin. I{002} that are larger than <b><i>d</i></b> will
-                redefine the matrix to a cuboid.
+                + 1)³, where <b><i>d</i></b> is the number of atomic layers from
+                cubic facets to the origin. I{002} that are larger than <b><i>d</i></b>
+                will redefine the matrix to a cuboid.
               </td>
             </tr>
           </table>
@@ -519,10 +519,13 @@ b {
       <td><table>
           <tr>
             <th style="text-align: left">Atom Coordinates</th>
-            <td style="text-align: center"></td>
-            <td style="text-align: right;"><input type=button
-              value="Download"
-              onclick="download('AlVoidAtomCoordinates',textCd)" /></td>
+            <td style="text-align: right;"> <input type=button
+              value="Matrix w/ Void"
+              onclick="download('MatrixWithVoid',textCd)" /><input
+              type=button value="Matrix w/o Void"
+              onclick="download('Matrix',textCdVc)" /><input
+              type="button" value="Void"
+              onclick="download('Void',textVc)"></td>
           </tr>
           <tr>
             <td colspan='3'><textarea id="field_AtomCd"
@@ -568,7 +571,8 @@ b {
       var a = 4.0495, as = a * a, Epa1 = 0.06552, Epa2 = 0.06864, sqrt3 =
           Math.sqrt(3), a_sqrt3 = a / sqrt3, a_2 = a / 2, t21 =
           sqrt3 / 2 / 1.0477, omega = 0.0166, xi = 0.781, kB = 8.6173324e-5, T =
-          373, Ds = 1, outEv = [], iEv = 0, smyEv = "", logEv = "", textCd = ""
+          373, Ds = 1, outEv = [], iEv = 0, smyEv = "", logEv = "", textCd = "", textVc =
+          "", textCdVc = ""
     </script>
 </body>
 </html>

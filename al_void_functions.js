@@ -255,27 +255,31 @@ function OneClickDraw() {
 
 function draw3D(P) {
   var t0 = performance.now()
-  var Vc = P[0], Cd = P[1]
-  if ($("3d_opt").value == 4) Vc = Cd.slice()
-  var n1 = Vc.length - 1, cen = 1, n2 = Cd.length - 1
+  var Vc = P[0], Cd = P[1], D3 = []
+  var n_D3, cen = 1, n_Cd = Cd.length - 1, n_Vc = Vc.length - 1
 
-  textVc =
+  if ($("3d_opt").value == 4) D3 = Cd.concat(), n_D3 = n_Cd
+  else D3 = Vc.concat(), n_D3 = n_Vc
+
+  var textD3 =
       "\nAtom    X           Y           Z\nH  "
           + fmtcdNum([ 0, 0, 0 ], 12.5, a) + "\n";
 
-  for (i = 1; i <= n1; i++) {
-    if (Vc[i][0] == 0 && Vc[i][1] == 0 && Vc[i][2] == 0) cen = 0;
-    else textVc += "Al " + fmtcdNum(Vc[i], 12.5, a) + "\n";
+  for (i = 1; i <= n_D3; i++) {
+    if (D3[i][0] == 0 && D3[i][1] == 0 && D3[i][2] == 0) cen = 0;
+    else textD3 += "Al " + fmtcdNum(D3[i], 12.5, a) + "\n";
   }
-  textVc = (n1 + cen) + textVc;
 
-  Canv1.loadMolecule(ChemDoodle.readXYZ(textVc));
+  textD3 = (n_D3 + cen) + textD3;
+
+  Canv1.loadMolecule(ChemDoodle.readXYZ(textD3));
   Canv1.specs.compass_display = true;
 
-  textCd = "";
+  textVc = textCdVc = textCd = "";
 
-  var xl = 0, yl = 0, zl = 0, xh = 0, yh = 0, zh = 0, x, y, z;
-  for (i = 1; i <= n2; i++) {
+  var xl = yl = zl = xh = yh = zh = 0, x, y, z, i = j = 0
+
+  for (i = 1; i <= n_Cd; i++) {
     x = Cd[i][0] * a, y = Cd[i][1] * a, z = Cd[i][2] * a;
     textCd += i + " 1 " + fmtcdNum(Cd[i], ".5") + "\n";
 
@@ -289,16 +293,33 @@ function draw3D(P) {
     if (z > zh) zh = z;
   }
 
-  textCd1 = "# Atom coordinates (NOT vacancies) for LAMMPS\n";
-  textCd1 += n2 + " atoms\n";
-  textCd1 += "1 atom types\n";
-  textCd1 += xl.toFixed(5) + " " + (xh + a).toFixed(5) + " xlo xhi\n";
-  textCd1 += yl.toFixed(5) + " " + (yh + a).toFixed(5) + " ylo yhi\n";
-  textCd1 += zl.toFixed(5) + " " + (zh + a).toFixed(5) + " zlo zhi\n";
-  textCd1 += "\nAtoms\n\n";
-  textCd = textCd1 + textCd;
+  var textHead = "1 atom types\n";
+  textHead += xl.toFixed(5) + " " + (xh + a / 2).toFixed(5) + " xlo xhi\n";
+  textHead += yl.toFixed(5) + " " + (yh + a / 2).toFixed(5) + " ylo yhi\n";
+  textHead += zl.toFixed(5) + " " + (zh + a / 2).toFixed(5) + " zlo zhi\n";
+  textHead += "\nAtoms\n\n";
+
+  var textVc0 = ""
+  textCdVc = textCd
+
+  for (j = 1; j <= n_Vc; j++, i++) {
+    textVc0 = " 1 " + fmtcdNum(Vc[j], ".5") + "\n";
+    textVc += j + textVc0;
+    textCdVc += i + textVc0
+  }
+
+  textCd = textHead + textCd;
+  textCd = n_Cd + " atoms\n" + textCd;
+  textCd = "# Matrix with Void coordinates for LAMMPS\n" + textCd;
+  textVc = textHead + textVc;
+  textVc = n_Vc + " atoms\n" + textVc;
+  textVc = "# Void coordinates for LAMMPS\n" + textVc;
+  textCdVc = textHead + textCdVc;
+  textCdVc = (n_Cd + n_Vc) + " atoms\n" + textCdVc;
+  textCdVc = "# Matrix (without Void) coordinates for LAMMPS\n" + textCdVc;
 
   outputField(textCd, "field_AtomCd")
+
   var t1 = performance.now() - t0
   console.log(t1.toFixed(0))
 }
