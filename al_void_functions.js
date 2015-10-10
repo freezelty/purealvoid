@@ -340,9 +340,9 @@ function genCoor(I) {
   var y1 = -Math.max(I[12], matrixL) / 2, y2 = Math.max(I[11], matrixL) / 2;
   var z1 = -Math.max(I[14], matrixL) / 2, z2 = Math.max(I[13], matrixL) / 2;
 
-  for (var x = x1; x <= x2; x += .5) {
-    for (var y = y1; y <= y2; y += .5) {
-      for (var z = z1; z <= z2; z += .5) {
+  for (var x = x1; x < x2; x += .5) {
+    for (var y = y1; y < y2; y += .5) {
+      for (var z = z1; z < z2; z += .5) {
         if ((x % 1 + y % 1 + z % 1) % 1 === 0) {
           if (I[9] / 2 >= x && I[10] / 2 >= -x && I[11] / 2 >= y
               && I[12] / 2 >= -y && I[13] / 2 >= z && I[14] / 2 >= -z
