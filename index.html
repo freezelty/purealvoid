@@ -189,8 +189,8 @@ b {
               <td style="vertical-align: top">3.</td>
               <td>"Matrix size" will define a cubic matrix of volume = (2<b><i>d</i></b>
                 + 1)³, where <b><i>d</i></b> is the number of atomic layers from
-                cubic facets to the origin. I{002} that are larger than <b><i>d</i></b>
-                will redefine the matrix to a cuboid.
+                cubic facets to the origin. The program will automatically
+                increase the Matrix size to cover the void.
               </td>
             </tr>
           </table>
@@ -312,16 +312,13 @@ b {
               value="Display"></th>
             <td style="text-align: right;"><select id="3d_opt"
               style="font-size: 12px; width: 300px">
-                <option value="0">Atoms for Vacancies, Very Slow when
-                  Void > 50³</option>
-                <option value="1">Atoms for Vacancies on Facets only,
-                  Slow when Void > 100³</option>
-                <option value="2" selected>Atoms for Vacancies on Edges
-                  only, Fast</option>
-                <option value="3">Atoms for Vacancies on Vertices only,
-                  Fastest</option>
-                <option value="4">Atoms for Atoms, Super Slow when
-                  Matrix > 50³</option>
+                <option value="0">Void (All Vacancies, very slow when
+                  Void > 50³)</option>
+                <option value="1">Void Facets (Slow when Void > 100³)</option>
+                <option value="2" selected>Void Edges (Fast)</option>
+                <option value="3">Void Vertices (Fastest)</option>
+                <option value="4">Matrix with Void (Super slow when
+                  Matrix > 50³)</option>
             </select></td>
           </tr>
           <tr>
@@ -519,13 +516,11 @@ b {
       <td><table>
           <tr>
             <th style="text-align: left">Atom Coordinates</th>
-            <td style="text-align: right;"> <input type=button
-              value="Matrix w/ Void"
-              onclick="download('MatrixWithVoid',textCd)" /><input
+            <td style="text-align: right;"><input type=button
+              value="Matrix w/ Void" onclick="download('MatrixWithVoid',textCd)" /><input
               type=button value="Matrix w/o Void"
-              onclick="download('Matrix',textCdVc)" /><input
-              type="button" value="Void"
-              onclick="download('Void',textVc)"></td>
+              onclick="download('Matrix',textCdVc)" /><input type="button"
+              value="Void" onclick="download('Void',textVd)"></td>
           </tr>
           <tr>
             <td colspan='3'><textarea id="field_AtomCd"
@@ -571,7 +566,7 @@ b {
       var a = 4.0495, as = a * a, Epa1 = 0.06552, Epa2 = 0.06864, sqrt3 =
           Math.sqrt(3), a_sqrt3 = a / sqrt3, a_2 = a / 2, t21 =
           sqrt3 / 2 / 1.0477, omega = 0.0166, xi = 0.781, kB = 8.6173324e-5, T =
-          373, Ds = 1, outEv = [], iEv = 0, smyEv = "", logEv = "", textCd = "", textVc =
+          373, Ds = 1, outEv = [], iEv = 0, smyEv = "", logEv = "", textCd = "", textVd =
           "", textCdVc = ""
     </script>
 </body>

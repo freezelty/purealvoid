@@ -255,11 +255,57 @@ function OneClickDraw() {
 
 function draw3D(P) {
   var t0 = performance.now()
-  var Vc = P[0], Cd = P[1], D3 = []
-  var n_D3, cen = 1, n_Cd = Cd.length - 1, n_Vc = Vc.length - 1
+  var Vc = P[0], Cd = P[1], Vd = P[2], D3 = [], lh = P[3]
+  var n_D3, cen = 1, n_Cd = Cd.length - 1, n_Vc = Vc.length - 1, n_Vd =
+      Vd.length - 1, n_Cd1 = n_Vd1 = 0
+  var xl = yl = zl = xh = yh = zh = 0, x, y, z, i = j = 0
+  textVd = textCdVd = textCd = "";
 
-  if ($("3d_opt").value == 4) D3 = Cd.concat(), n_D3 = n_Cd
-  else D3 = Vc.concat(), n_D3 = n_Vc
+   xl = lh[0], xh = lh[1], yl = lh[2], yh = lh[3], zl = lh[4], zh = lh[5];
+
+  for (i = 1; i <= n_Cd; i++) {
+    if (Cd[i][0] < xh && Cd[i][1] < yh && Cd[i][2] < zh)
+      textCd += ++n_Cd1 + " 1 " + fmtcdNum(Cd[i], ".5") + "\n";
+  }
+
+  textCdVd = textCd
+  var textVd0 = ""
+
+  for (i = 1; i <= n_Vd; i++) {
+    if (Vd[i][0] < xh && Vd[i][1] < yh && Vd[i][2] < zh) {
+      textVd0 = " 1 " + fmtcdNum(Vd[i], ".5") + "\n";
+      textVd += ++n_Vd1 + textVd0;
+      textCdVd += (n_Vd1 + n_Cd1) + textVd0
+    }
+  }
+
+  xl *= a, xh = (xh) * a, yl *= a, yh = (yh) * a, zl *= a, zh = (zh) * a
+
+  var textHead = "1 atom types\n";
+  textHead += xl.toFixed(5) + " " + xh.toFixed(5) + " xlo xhi\n";
+  textHead += yl.toFixed(5) + " " + yh.toFixed(5) + " ylo yhi\n";
+  textHead += zl.toFixed(5) + " " + zh.toFixed(5) + " zlo zhi\n";
+  textHead += "\nAtoms\n\n";
+
+  textCd = textHead + textCd;
+  textCd = n_Cd1 + " atoms\n" + textCd;
+  textCd = "# Matrix with Void coordinates for LAMMPS\n" + textCd;
+  textVd = textHead + textVd;
+  textVd = n_Vd1 + " atoms\n" + textVd;
+  textVd = "# Void coordinates for LAMMPS\n" + textVd;
+  textCdVd = textHead + textCdVd;
+  textCdVd = (n_Cd1 + n_Vd1) + " atoms\n" + textCdVd;
+  textCdVd = "# Matrix (without Void) coordinates for LAMMPS\n" + textCdVd;
+
+  outputField(textCd, "field_AtomCd")
+
+  if ($("3d_opt").value == 4) {
+    D3 = Cd.concat()
+    n_D3 = n_Cd
+  } else {
+    D3 = Vc.concat()
+    n_D3 = n_Vc
+  }
 
   var textD3 =
       "\nAtom    X           Y           Z\nH  "
@@ -272,53 +318,25 @@ function draw3D(P) {
 
   textD3 = (n_D3 + cen) + textD3;
 
-  Canv1.loadMolecule(ChemDoodle.readXYZ(textD3));
+  var mol = ChemDoodle.readXYZ(textD3)
+
+  var unitCell = new ChemDoodle.structures.d3.UnitCell({
+    o : [ xl, yl, zl ],
+    x : [ xh, yl, zl ],
+    y : [ xl, yh, zl ],
+    z : [ xl, yl, zh ],
+    xy : [ xh, yh, zl ],
+    xz : [ xh, yl, zh ],
+    yz : [ xl, yh, zh ],
+    xyz : [ xh, yh, zh ]
+  });
+
+  Canv1.clear();
+  Canv1.addShape(unitCell);
+  Canv1.addMolecule(ChemDoodle.readXYZ(textD3));
   Canv1.specs.compass_display = true;
-
-  textVc = textCdVc = textCd = "";
-
-  var xl = yl = zl = xh = yh = zh = 0, x, y, z, i = j = 0
-
-  for (i = 1; i <= n_Cd; i++) {
-    x = Cd[i][0] * a, y = Cd[i][1] * a, z = Cd[i][2] * a;
-    textCd += i + " 1 " + fmtcdNum(Cd[i], ".5") + "\n";
-
-    if (x < xl) xl = x;
-    if (x > xh) xh = x;
-
-    if (y < yl) yl = y;
-    if (y > yh) yh = y;
-
-    if (z < zl) zl = z;
-    if (z > zh) zh = z;
-  }
-
-  var textHead = "1 atom types\n";
-  textHead += xl.toFixed(5) + " " + (xh + a / 2).toFixed(5) + " xlo xhi\n";
-  textHead += yl.toFixed(5) + " " + (yh + a / 2).toFixed(5) + " ylo yhi\n";
-  textHead += zl.toFixed(5) + " " + (zh + a / 2).toFixed(5) + " zlo zhi\n";
-  textHead += "\nAtoms\n\n";
-
-  var textVc0 = ""
-  textCdVc = textCd
-
-  for (j = 1; j <= n_Vc; j++, i++) {
-    textVc0 = " 1 " + fmtcdNum(Vc[j], ".5") + "\n";
-    textVc += j + textVc0;
-    textCdVc += i + textVc0
-  }
-
-  textCd = textHead + textCd;
-  textCd = n_Cd + " atoms\n" + textCd;
-  textCd = "# Matrix with Void coordinates for LAMMPS\n" + textCd;
-  textVc = textHead + textVc;
-  textVc = n_Vc + " atoms\n" + textVc;
-  textVc = "# Void coordinates for LAMMPS\n" + textVc;
-  textCdVc = textHead + textCdVc;
-  textCdVc = (n_Cd + n_Vc) + " atoms\n" + textCdVc;
-  textCdVc = "# Matrix (without Void) coordinates for LAMMPS\n" + textCdVc;
-
-  outputField(textCd, "field_AtomCd")
+  Canv1.specs.shapes_color = '#fff';
+  Canv1.specs.text_color = '#fff';
 
   var t1 = performance.now() - t0
   console.log(t1.toFixed(0))
@@ -356,20 +374,26 @@ function dispSpec(n, I, S) {
 function genCoor(I) {
   var x, y, z, out = [], fv = $("3d_opt").value, matrixL =
       Number($("matrixL").value);
-  var nOnF = 0, n = 0, Vc = [], Cd = [], n_Cd = 0;
-  var x1 = -Math.max(I[10], matrixL) / 2, x2 = Math.max(I[9], matrixL) / 2;
-  var y1 = -Math.max(I[12], matrixL) / 2, y2 = Math.max(I[11], matrixL) / 2;
-  var z1 = -Math.max(I[14], matrixL) / 2, z2 = Math.max(I[13], matrixL) / 2;
-
-  for (var x = x1; x <= x2; x += .5) {
-    for (var y = y1; y <= y2; y += .5) {
-      for (var z = z1; z <= z2; z += .5) {
+  var nOnF = 0, n = 0, Vc = [], Cd = [], n_Cd = 0, Vd = [], n_Vd = 0;
+  // var xl = -Math.max(I[10], matrixL) / 2, xh = Math.max(I[9], matrixL) / 2;
+  // var yl = -Math.max(I[12], matrixL) / 2, yh = Math.max(I[11], matrixL) / 2;
+  // var zl = -Math.max(I[14], matrixL) / 2, zh = Math.max(I[13], matrixL) / 2;
+  var mL = Math.max(I[9], I[10], I[11], I[12], I[13], I[14])
+  if (mL >= matrixL) mL++
+  else mL = matrixL
+  mL /= 2
+  xl = yl = zl = -mL, xh = yh = zh = mL
+  var lh = [ xl, xh, yl, yh, zl, zh ];
+  for (var x = xl; x <= xh; x += .5) {
+    for (var y = yl; y <= yh; y += .5) {
+      for (var z = zl; z <= zh; z += .5) {
         if ((x % 1 + y % 1 + z % 1) % 1 === 0) {
           if (I[9] / 2 >= x && I[10] / 2 >= -x && I[11] / 2 >= y
               && I[12] / 2 >= -y && I[13] / 2 >= z && I[14] / 2 >= -z
               && I[1] >= +x + y + z && I[2] >= -x - y - z && I[3] >= -x + y + z
               && I[4] >= +x - y - z && I[5] >= +x - y + z && I[6] >= -x + y - z
               && I[7] >= +x + y - z && I[8] >= -x - y + z) {
+            Vd[++n_Vd] = [ x, y, z ];
             nOnF = 0
             if (I[1] == x + y + z) nOnF++
             if (I[2] == -x - y - z) nOnF++
@@ -393,7 +417,7 @@ function genCoor(I) {
     }
   }
 
-  return [ Vc, Cd ]
+  return [ Vc, Cd, Vd, lh ]
 }
 
 function setAllI(o) {
