@@ -612,8 +612,7 @@ function outputField(text, field) {
 
 function atomButton(filename, text) {
   if ($("dl_chk").checked == true) download(filename, text);
-
-  $('field_AtomCd').value = text;
+  else $('field_AtomCd').value = text;
 }
 
 function download(filename, text) {
