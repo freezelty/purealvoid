@@ -4,13 +4,34 @@
 <meta charset="UTF-8">
 <title>Void Evolution in Pure Aluminum</title>
 </head>
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<link rel="stylesheet" href="Plugins/ChemDoodleWeb.css" type="text/css">
+<script>
+  // Global Variables
 
-<script type="text/javascript" src="Plugins/ChemDoodleWeb.js"></script>
-<script type="text/javascript" src="Plugins/FileSaver.min.js"></script>
-<script type="text/javascript" src="al_void_functions.js"></script>
+  var FI =
+      [ "  ", "(111)", "(1̅1̅1̅)", "(1̅11)", "(11̅1̅)", "(11̅1)", "(1̅11̅)",
+          "(111̅)", "(1̅1̅1)", "(200)", "(2̅00)", "(020)", "(02̅0)", "(002)",
+          "(002̅)" ];
+
+  var omega = 0.0166, xi = 0.781, kB = 8.6173324e-5, T = 373, Ds = 1;
+  var a = 4.0495, as = a * a, Epa1 = 0.06552, Epa2 = 0.06864, a_sqrt3 =
+      a / sqrt3, a_2 = a / 2;
+  var sqrt3 = Math.sqrt(3), t21 = sqrt3 / 2 / 1.0477;
+  var outEv = [], iEv = 0, smyEv = "", logEv = "", textMtx = "", textVd = "", textMtxVd =
+      "", mL0 = a, P = [];
+</script>
+<script type="text/javascript" src="js/three.min.js"></script>
+<script type="text/javascript" src="js/Detector.js"></script>
+<script type="text/javascript" src="js/OrthographicTrackballControls.js"></script>
+<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/void_3d.js"></script>
+<script type="text/javascript" src="js/void_main.js"></script>
 <style type="text/css">
+body {
+  /*     margin: 0px; */
+  /*     padding: 0px; */
+  
+}
+
 div {
   text-align: justfy;
   text-justify: distribute;
@@ -87,6 +108,31 @@ b {
 .div1 {
   text-align: center;
   font: bold 20px Sans-serif;
+}
+
+#container {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 400px;
+  height: 400px;
+}
+
+#3d {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 400px;
+  height: 400px;
+}
+
+#compass {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
 </style>
 <body>
@@ -177,20 +223,17 @@ b {
             </tr>
             <tr>
               <td style="vertical-align: top">1.</td>
-              <td>For better 3D structure visualisation, vacancies are
-                represented as Al atoms by default.</td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top">2.</td>
-              <td>The origin is always marked with a H atom, whether there
-                was an Al atom or not.</td>
-            </tr>
-            <tr>
-              <td style="vertical-align: top">3.</td>
               <td>"Matrix size" will define a cubic matrix of volume = (2<b><i>d</i></b>
                 + 1)³, where <b><i>d</i></b> is the number of atomic layers from
                 cubic facets to the origin. The program will automatically
                 increase the Matrix size to cover the void.
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">2.</td>
+              <td>3D controls: Left-click-drag to Rotate; Wheel for Zoom;
+                Right-click-drag to Pan.<br />Alternatively, Left-click-drag
+                with: [S] pressed to Rotate; [D] pressed to Pan.
               </td>
             </tr>
           </table>
@@ -301,36 +344,31 @@ b {
                 style="width: 100%; height: 100px"></textarea></td>
           </tr>
           <tr>
-            <td colspan='2'>*Tabulated results</td>
+            <td colspan='2'>*Tabulated text</td>
           </tr>
         </table>
       </td>
       <td style="vertical-align: top"><table class="table2">
           <tr>
             <th style="text-align: left;"><input type="button"
-              style="font-size: 12pt; color: Teal" onclick="OneClickDraw()"
+              style="font-size: 12pt; color: Teal" onclick="Display()"
               value="Display"></th>
-            <td style="text-align: right;"><select id="3d_opt"
-              style="font-size: 12px; width: 300px">
-                <option value="0">Void (All Vacancies, very slow when
-                  Void > 50³)</option>
-                <option value="1">Void Facets (Slow when Void > 100³)</option>
-                <option value="2" selected>Void Edges (Fast)</option>
-                <option value="3">Void Vertices (Fastest)</option>
-                <option value="4">Matrix with Void (Super slow when
-                  Matrix > 50³)</option>
+            <td style="text-align: right;"><input type="button"
+              style="font-size: 12px" onclick="resetCam()" value="Reset" /> <select
+              id="3d_opt" style="font-size: 12px; width: 120px"
+              onchange="if(P.length>0) draw3D(P)">
+                <option value=1>Void</option>
+                <option value=2>Void Facets</option>
+                <option value=3 selected>Void Edges</option>
+                <option value=4>Void Vertices</option>
+                <option value=0>Hollow Matrix</option>
             </select></td>
           </tr>
           <tr>
-            <td colspan='2'><script>
-                          var Canv1 =
-                              new ChemDoodle.TransformCanvas3D('Canv1-1', 400,
-                                  400);
-                          Canv1.specs.backgroundColor = 'black';
-                          Canv1.specs.set3DRepresentation('Ball and Stick');
-                          Canv1.specs.projectionPerspective_3D = false;
-                          Canv1.loadMolecule(ChemDoodle.readXYZ(""));
-                        </script></td>
+            <td style="width: 400px" colspan="2"><div id="container">
+                <div id="3d"></div>
+                <div id="compass"></div>
+              </div></td>
           </tr>
         </table></td>
       <td style="vertical-align: top"><table>
@@ -515,16 +553,19 @@ b {
         </table></td>
       <td><table>
           <tr>
-            <th style="text-align: left">Atom Coordinates</th>
-            <td style="text-align: right;"><input type=button
-              value="Matrix w/ Void" onclick="download('MatrixWithVoid',textCd)" /><input
-              type=button value="Matrix w/o Void"
-              onclick="download('Matrix',textCdVc)" /><input type="button"
-              value="Void" onclick="download('Void',textVd)"></td>
+            <th style="text-align: left">Atom Coordinates<input
+              id="atomCd_chk" type=checkbox checked /> </th>
+            <td style="text-align: right;"> <input type=button
+              value="Hollow Matrix" onclick="atomButton('MatrixWithVoid',textMtx)" /><input
+              type="button" value="Void" onclick="atomButton('Void',textVd)"><input
+              type="button" value="Matrix"
+              onclick="atomButton('Matrix',textMtxVd)"><input
+              id="dl_chk" type=checkbox />
+              <p style="font-size: 12px">Download</p></td>
           </tr>
           <tr>
             <td colspan='3'><textarea id="field_AtomCd"
-                style="width: 400px; height: 600px"></textarea></td>
+                style="width: 420px; height: 600px"></textarea></td>
           </tr>
         </table></td>
     </tr>
@@ -536,7 +577,7 @@ b {
     Department of Materials Science and Engineering, Monash University. <br />This
     online tool is coded and maintained by <a
       href="mailto:tianyu.liu@monash.edu">Tianyu Liu</a>. <br />Source files
-    are on <a href="https://github.com/tianyu-liu/purealvoid">GitHub</a>.
+    can be found at <a href="https://github.com/tianyu-liu/purealvoid">GitHub</a>.
   </p>
   <br />
   <br />
@@ -545,8 +586,8 @@ b {
     on atom coordinate generating coding. Please check his <a
       href="http://jerkwin.github.io/2014/12/15/%E5%85%AB%E9%9D%A2%E4%BD%93%E4%B8%8E%E6%88%AA%E8%A7%92%E5%85%AB%E9%9D%A2%E4%BD%93%E5%9B%A2%E7%B0%87%E5%9C%A8%E7%BA%BF%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7/">
       online atomic cluster (truncated) octahedron generation tool</a> (in Chinese).
-    <br />3D modular display is powered by <a href="http://web.chemdoodle.com/">ChemDoodle
-      Web Components</a>. <br />File download function is powered by <a
+    <br />3D modular display is powered by <a href="http://threejs.org/">Three.js</a>.
+    <br />File download function is powered by <a
       href="https://github.com/eligrey/FileSaver.js">FileSaver.js</a>.
   </p>
   <script>
@@ -554,20 +595,8 @@ b {
       $("field_EvSumm").value = ""
       $("field_EvLog").value = "";
 
-      //
-      // Global Variables
-      //
-
-      var FI =
-          [ "  ", "(111)", "(1̅1̅1̅)", "(1̅11)", "(11̅1̅)", "(11̅1)",
-              "(1̅11̅)", "(111̅)", "(1̅1̅1)", "(200)", "(2̅00)", "(020)",
-              "(02̅0)", "(002)", "(002̅)" ];
-
-      var a = 4.0495, as = a * a, Epa1 = 0.06552, Epa2 = 0.06864, sqrt3 =
-          Math.sqrt(3), a_sqrt3 = a / sqrt3, a_2 = a / 2, t21 =
-          sqrt3 / 2 / 1.0477, omega = 0.0166, xi = 0.781, kB = 8.6173324e-5, T =
-          373, Ds = 1, outEv = [], iEv = 0, smyEv = "", logEv = "", textCd = "", textVd =
-          "", textCdVc = ""
+      if (!Detector.webgl) Detector.addGetWebGLMessage();
+      init();
     </script>
 </body>
 </html>

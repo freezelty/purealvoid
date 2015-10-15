@@ -1,9 +1,9 @@
-//
-// Javascript functions for Void Evolution in Pure Aluminum
-//
+// Void Evolution in Pure Aluminum
+// Javascript functions 
+// Tianyu Liu
 
 var $ = function(id) {
-  return document.getElementById(id)
+  return document.getElementById(id);
 }
 
 function Evolute() {
@@ -230,116 +230,82 @@ function dispEv() {
   var tEv = outEv.length - 1
 
   if (0 <= iEv && iEv <= tEv) {
-    var I = outEv[iEv].I
-    var P = outEv[iEv].P
+    var I = outEv[iEv].I;
+    P = outEv[iEv].P;
 
-    Canv1.loadMolecule(ChemDoodle.readXYZ(""));
     outputField("", "field_AtomCd")
 
     dispSpec(outEv[iEv].n, I, outEv[iEv].S)
-    if ($("gphEv_opt").value == 1) P = genCoor(I)
-    draw3D(P)
+    if ($("gphEv_opt").value == 1) P = genCoor(I);
+
+    if ($('atomCd_chk').checked == true) dispCoor(P);
+    draw3D(P);
 
     $('iEv_opt').options[iEv].selected = 1
   } else if (iEv < 0) iEv = 0;
   else iEv = tEv
 }
 
-function OneClickDraw() {
-  var I = getAllI()
-  dispSpec(calcAtom(I), I, calcS(I))
-  Canv1.loadMolecule(ChemDoodle.readXYZ(""));
-  outputField("", "field_AtomCd")
-  if ($("3d_opt").value != -1) draw3D(genCoor(I))
+function Display() {
+  var rt = [ performance.now() ];
+
+  var I = getAllI();
+  rt[1] = performance.now();
+  dispSpec(calcAtom(I), I, calcS(I));
+  rt[2] = performance.now();
+  P = genCoor(I);
+  rt[3] = performance.now();
+  if ($('atomCd_chk').checked == true) dispCoor(P);
+  rt[4] = performance.now();
+  draw3D(P);
+  rt[5] = performance.now();
+  rt[6] = (rt[5] - rt[0]).toFixed(3);
+
+  for (var i = 0; i < 5; i++)
+    rt[i] = (rt[i + 1] - rt[i]).toFixed(3);
+  console.log("Display finished in ", +rt[6], " ms: getAllI ", +rt[0],
+      ", dispSpec ", +rt[1], ", genCoor ", +rt[2], ", dispCoor ", +rt[3],
+      ", draw3D ", +rt[4]);
 }
 
-function draw3D(P) {
-  var t0 = performance.now()
-  var Vc = P[0], Cd = P[1], Vd = P[2], D3 = [], lh = P[3]
-  var n_D3, cen = 1, n_Cd = Cd.length - 1, n_Vc = Vc.length - 1, n_Vd =
-      Vd.length - 1, n_Cd1 = n_Vd1 = 0
-  var xl = yl = zl = xh = yh = zh = 0, x, y, z, i = j = 0
-  textVd = textCdVd = textCd = "";
+function dispCoor(P) {
+  var Cd = P[0], CdN = P[1], mL = P[2];
+  var i = j = 0, n_Vd = 0, n_Mtx = CdN[0];
+  textVd = textMtxVd = textMtx = "";
 
-   xl = lh[0], xh = lh[1], yl = lh[2], yh = lh[3], zl = lh[4], zh = lh[5];
+  for (i = 0; i < n_Mtx; i++)
+    if (Cd[0][i][0] !== mL && Cd[0][i][1] !== mL && Cd[0][i][2] !== mL)
+      textMtx += (i + 1) + " 1 " + fmtcdNum(Cd[0][i], ".5") + "\n";
 
-  for (i = 1; i <= n_Cd; i++) {
-    if (Cd[i][0] < xh && Cd[i][1] < yh && Cd[i][2] < zh)
-      textCd += ++n_Cd1 + " 1 " + fmtcdNum(Cd[i], ".5") + "\n";
-  }
+  textMtxVd = textMtx;
+  var texti = "";
 
-  textCdVd = textCd
-  var textVd0 = ""
-
-  for (i = 1; i <= n_Vd; i++) {
-    if (Vd[i][0] < xh && Vd[i][1] < yh && Vd[i][2] < zh) {
-      textVd0 = " 1 " + fmtcdNum(Vd[i], ".5") + "\n";
-      textVd += ++n_Vd1 + textVd0;
-      textCdVd += (n_Vd1 + n_Cd1) + textVd0
+  for (j = 1; j < 16; j++)
+    for (i = 0; i < CdN[j]; i++) {
+      texti = " 1 " + fmtcdNum(Cd[j][i], ".5") + "\n";
+      textVd += ++n_Vd + texti;
+      textMtxVd += (n_Vd + n_Mtx) + texti
     }
-  }
 
-  xl *= a, xh = (xh) * a, yl *= a, yh = (yh) * a, zl *= a, zh = (zh) * a
+  mL = (mL * a).toFixed(5);
 
   var textHead = "1 atom types\n";
-  textHead += xl.toFixed(5) + " " + xh.toFixed(5) + " xlo xhi\n";
-  textHead += yl.toFixed(5) + " " + yh.toFixed(5) + " ylo yhi\n";
-  textHead += zl.toFixed(5) + " " + zh.toFixed(5) + " zlo zhi\n";
+  textHead += mL + " " + mL + " xlo xhi\n";
+  textHead += mL + " " + mL + " ylo yhi\n";
+  textHead += mL + " " + mL + " zlo zhi\n";
   textHead += "\nAtoms\n\n";
 
-  textCd = textHead + textCd;
-  textCd = n_Cd1 + " atoms\n" + textCd;
-  textCd = "# Matrix with Void coordinates for LAMMPS\n" + textCd;
+  textMtx = textHead + textMtx;
+  textMtx = n_Mtx + " atoms\n" + textMtx;
+  textMtx = "# Matrix (with Void) coordinates for LAMMPS\n" + textMtx;
   textVd = textHead + textVd;
-  textVd = n_Vd1 + " atoms\n" + textVd;
+  textVd = n_Vd + " atoms\n" + textVd;
   textVd = "# Void coordinates for LAMMPS\n" + textVd;
-  textCdVd = textHead + textCdVd;
-  textCdVd = (n_Cd1 + n_Vd1) + " atoms\n" + textCdVd;
-  textCdVd = "# Matrix (without Void) coordinates for LAMMPS\n" + textCdVd;
+  textMtxVd = textHead + textMtxVd;
+  textMtxVd = (n_Mtx + n_Vd) + " atoms\n" + textMtxVd;
+  textMtxVd = "# Matrix without Void coordinates for LAMMPS\n" + textMtxVd;
 
-  outputField(textCd, "field_AtomCd")
-
-  if ($("3d_opt").value == 4) {
-    D3 = Cd.concat()
-    n_D3 = n_Cd
-  } else {
-    D3 = Vc.concat()
-    n_D3 = n_Vc
-  }
-
-  var textD3 =
-      "\nAtom    X           Y           Z\nH  "
-          + fmtcdNum([ 0, 0, 0 ], 12.5, a) + "\n";
-
-  for (i = 1; i <= n_D3; i++) {
-    if (D3[i][0] == 0 && D3[i][1] == 0 && D3[i][2] == 0) cen = 0;
-    else textD3 += "Al " + fmtcdNum(D3[i], 12.5, a) + "\n";
-  }
-
-  textD3 = (n_D3 + cen) + textD3;
-
-  var mol = ChemDoodle.readXYZ(textD3)
-
-  var unitCell = new ChemDoodle.structures.d3.UnitCell({
-    o : [ xl, yl, zl ],
-    x : [ xh, yl, zl ],
-    y : [ xl, yh, zl ],
-    z : [ xl, yl, zh ],
-    xy : [ xh, yh, zl ],
-    xz : [ xh, yl, zh ],
-    yz : [ xl, yh, zh ],
-    xyz : [ xh, yh, zh ]
-  });
-
-  Canv1.clear();
-  Canv1.addShape(unitCell);
-  Canv1.addMolecule(ChemDoodle.readXYZ(textD3));
-  Canv1.specs.compass_display = true;
-  Canv1.specs.shapes_color = '#fff';
-  Canv1.specs.text_color = '#fff';
-
-  var t1 = performance.now() - t0
-  console.log(t1.toFixed(0))
+  outputField(textMtx, "field_AtomCd")
 }
 
 function dispSpec(n, I, S) {
@@ -372,52 +338,51 @@ function dispSpec(n, I, S) {
 }
 
 function genCoor(I) {
-  var x, y, z, out = [], fv = $("3d_opt").value, matrixL =
-      Number($("matrixL").value);
-  var nOnF = 0, n = 0, Vc = [], Cd = [], n_Cd = 0, Vd = [], n_Vd = 0;
-  // var xl = -Math.max(I[10], matrixL) / 2, xh = Math.max(I[9], matrixL) / 2;
-  // var yl = -Math.max(I[12], matrixL) / 2, yh = Math.max(I[11], matrixL) / 2;
-  // var zl = -Math.max(I[14], matrixL) / 2, zh = Math.max(I[13], matrixL) / 2;
-  var mL = Math.max(I[9], I[10], I[11], I[12], I[13], I[14])
-  if (mL >= matrixL) mL++
-  else mL = matrixL
-  mL /= 2
-  xl = yl = zl = -mL, xh = yh = zh = mL
-  var lh = [ xl, xh, yl, yh, zl, zh ];
-  for (var x = xl; x <= xh; x += .5) {
-    for (var y = yl; y <= yh; y += .5) {
-      for (var z = zl; z <= zh; z += .5) {
+  var x, y, z, matrixL = Number($("matrixL").value);
+  var Cd = [], Cdi = 0, n = 0, CdN = [];
+  var mL = Math.max(I[9], I[10], I[11], I[12], I[13], I[14]);
+
+  for (var i = 0; i < 16; i++)
+    Cd[i] = [], CdN[i] = 0;
+
+  if (mL >= matrixL) mL = ++mL / 2;
+  else mL = matrixL / 2;
+
+  for (x = -mL; x <= mL; x += .5) {
+    for (y = -mL; y <= mL; y += .5) {
+      for (z = -mL; z <= mL; z += .5) {
         if ((x % 1 + y % 1 + z % 1) % 1 === 0) {
+          Cdi = 0;
           if (I[9] / 2 >= x && I[10] / 2 >= -x && I[11] / 2 >= y
               && I[12] / 2 >= -y && I[13] / 2 >= z && I[14] / 2 >= -z
               && I[1] >= +x + y + z && I[2] >= -x - y - z && I[3] >= -x + y + z
               && I[4] >= +x - y - z && I[5] >= +x - y + z && I[6] >= -x + y - z
               && I[7] >= +x + y - z && I[8] >= -x - y + z) {
-            Vd[++n_Vd] = [ x, y, z ];
-            nOnF = 0
-            if (I[1] == x + y + z) nOnF++
-            if (I[2] == -x - y - z) nOnF++
-            if (I[3] == -x + y + z) nOnF++
-            if (I[4] == x - y - z) nOnF++
-            if (I[5] == x - y + z) nOnF++
-            if (I[6] == -x + y - z) nOnF++
-            if (I[7] == x + y - z) nOnF++
-            if (I[8] == -x - y + z) nOnF++
-            if (I[9] / 2 == x) nOnF++
-            if (I[10] / 2 == -x) nOnF++
-            if (I[11] / 2 == y) nOnF++
-            if (I[12] / 2 == -y) nOnF++
-            if (I[13] / 2 == z) nOnF++
-            if (I[14] / 2 == -z) nOnF++
+            Cdi++;
+            if (I[1] === x + y + z) Cdi++;
+            if (I[2] === -x - y - z) Cdi++;
+            if (I[3] === -x + y + z) Cdi++;
+            if (I[4] === x - y - z) Cdi++;
+            if (I[5] === x - y + z) Cdi++;
+            if (I[6] === -x + y - z) Cdi++;
+            if (I[7] === x + y - z) Cdi++;
+            if (I[8] === -x - y + z) Cdi++;
+            if (I[9] / 2 === x) Cdi++;
+            if (I[10] / 2 === -x) Cdi++;
+            if (I[11] / 2 === y) Cdi++;
+            if (I[12] / 2 === -y) Cdi++;
+            if (I[13] / 2 === z) Cdi++;
+            if (I[14] / 2 === -z) Cdi++;
+            // console.log(Cdi, x, y, z)
+          }
 
-            if (nOnF >= fv) Vc[++n] = [ x, y, z ];
-          } else Cd[++n_Cd] = [ x, y, z ];
+          Cd[Cdi][CdN[Cdi]++] = [ x, y, z ];
         }
       }
     }
   }
 
-  return [ Vc, Cd, Vd, lh ]
+  return [ Cd, CdN, mL ];
 }
 
 function setAllI(o) {
@@ -645,11 +610,17 @@ function outputField(text, field) {
   else $(field).value = "Content is too large to display, please download.";
 }
 
-function download(ti, text) {
+function atomButton(filename, text) {
+  if ($("dl_chk").checked == true) download(filename, text);
+
+  $('field_AtomCd').value = text;
+}
+
+function download(filename, text) {
   var blob = new Blob([ text ], {
     type : "text/plain;charset=utf-8"
   });
-  saveAs(blob, ti + ".txt");
+  saveAs(blob, filename + ".txt");
 }
 
 function fmtcdNum(Cdi, fmt) {
