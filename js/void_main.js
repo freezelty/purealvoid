@@ -270,12 +270,12 @@ function Display() {
 
 function dispCoor(P) {
   var Cd = P[0], CdN = P[1], mL = P[2];
-  var i = j = 0, n_Vd = 0, n_Mtx = CdN[0];
+  var i = j = 0, n_Vd = 0, n_Mtx = 0, n_Mtx0 = CdN[0];
   textVd = textMtxVd = textMtx = "";
 
-  for (i = 0; i < n_Mtx; i++)
+  for (i = 0; i < n_Mtx0; i++)
     if (Cd[0][i][0] !== mL && Cd[0][i][1] !== mL && Cd[0][i][2] !== mL)
-      textMtx += (i + 1) + " 1 " + fmtcdNum(Cd[0][i], ".5") + "\n";
+      textMtx += ++n_Mtx + " 1 " + fmtcdNum(Cd[0][i], ".5") + "\n";
 
   textMtxVd = textMtx;
   var texti = "";
@@ -290,19 +290,21 @@ function dispCoor(P) {
   mL = (mL * a).toFixed(5);
 
   var textHead = "1 atom types\n";
-  textHead += mL + " " + mL + " xlo xhi\n";
-  textHead += mL + " " + mL + " ylo yhi\n";
-  textHead += mL + " " + mL + " zlo zhi\n";
+  textHead += -mL + " " + mL + " xlo xhi\n";
+  textHead += -mL + " " + mL + " ylo yhi\n";
+  textHead += -mL + " " + mL + " zlo zhi\n";
   textHead += "\nAtoms\n\n";
 
   textMtx = textHead + textMtx;
   textMtx = n_Mtx + " atoms\n" + textMtx;
+  textMtx = "# Actual number of atoms: " + n_Mtx0 + "\n" + textMtx;
   textMtx = "# Matrix (with Void) coordinates for LAMMPS\n" + textMtx;
   textVd = textHead + textVd;
   textVd = n_Vd + " atoms\n" + textVd;
   textVd = "# Void coordinates for LAMMPS\n" + textVd;
   textMtxVd = textHead + textMtxVd;
   textMtxVd = (n_Mtx + n_Vd) + " atoms\n" + textMtxVd;
+  textMtxVd = "# Actual number of atoms: " + (n_Mtx0 + n_Vd) + "\n" + textMtxVd;
   textMtxVd = "# Matrix without Void coordinates for LAMMPS\n" + textMtxVd;
 
   outputField(textMtx, "field_AtomCd")
